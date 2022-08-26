@@ -9,9 +9,9 @@ import lombok.Builder;
 @Entity
 public class DentistUser extends User 
 {
-    @Column(name = "registration", nullable = false)
+    @Column(nullable = false)
     private String registration;
 
-    @Column(name = "isAdmin")
-    private Boolean isAdminBoolean;
+    @Column(nullable = false)
+    private Boolean isAdmin;
 }

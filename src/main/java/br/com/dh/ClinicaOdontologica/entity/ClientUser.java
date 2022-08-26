@@ -11,10 +11,10 @@ import lombok.Builder;
 @Entity
 public class ClientUser extends User 
 {
-    @Column(name = "rg", nullable = false)
+    @Column(nullable = false)
     private String rg;
 
-    @Column(name = "address")
+    @Column(nullable = false)
     private String address;
 
     @Column(name = "medical_discharge_date")

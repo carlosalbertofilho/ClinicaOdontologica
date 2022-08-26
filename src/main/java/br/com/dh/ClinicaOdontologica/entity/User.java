@@ -20,15 +20,15 @@ public abstract class User implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "login", nullable = false)
+    @Column(nullable = false)
     private String login;
 
-    @Column(name = "senha", nullable = false)
+    @Column(nullable = false)
     private String password;
 }
