@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 
-public abstract class User implements Serializable{
+public abstract class User implements Serializable
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

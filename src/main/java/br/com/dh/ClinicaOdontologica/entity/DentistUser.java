@@ -7,7 +7,11 @@ import lombok.Builder;
 
 @Builder
 @Entity
-public class DentistUser extends User {
+public class DentistUser extends User 
+{
     @Column(name = "registration", nullable = false)
     private String registration;
+
+    @Column(name = "seAdmin")
+    private Boolean isAdminBoolean;
 }
