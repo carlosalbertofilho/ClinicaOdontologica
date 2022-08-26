@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class DentistUser 
+public class Dentist 
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
