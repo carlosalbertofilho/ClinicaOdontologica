@@ -23,9 +23,9 @@ public class Consultation
     private Long id;
 
     @ManyToOne
-    private DentistUser dentist;
+    private Dentist dentist;
 
     @ManyToOne
-    private ClientUser user;
+    private Client user;
 
 }
