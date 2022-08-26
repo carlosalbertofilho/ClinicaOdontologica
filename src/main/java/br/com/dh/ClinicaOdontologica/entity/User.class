@@ -1,0 +1,15 @@
+package br.com.dh.ClinicaOdontologica.entity;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity 
+abstract class User
+{
+    private Integer id;
+    private String nome;
+    private String sobreNome;
+    private String login;
+    private String password;
+}
