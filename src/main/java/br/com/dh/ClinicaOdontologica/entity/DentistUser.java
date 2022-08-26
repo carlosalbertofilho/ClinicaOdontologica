@@ -12,6 +12,6 @@ public class DentistUser extends User
     @Column(name = "registration", nullable = false)
     private String registration;
 
-    @Column(name = "seAdmin")
+    @Column(name = "isAdmin")
     private Boolean isAdminBoolean;
 }

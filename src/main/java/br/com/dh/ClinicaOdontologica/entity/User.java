@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public abstract class User implements Serializable
 {
     @Id
@@ -25,7 +23,7 @@ public abstract class User implements Serializable
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(name = "login", nullable = false)
