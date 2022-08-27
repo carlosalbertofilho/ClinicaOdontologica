@@ -15,7 +15,7 @@ public class DentistService
     @Autowired
     private DentistRepository dentistRepository;   
     
-    public Dentist save (Dentist dentist)
+    public Dentist save(Dentist dentist)
     {
         return dentistRepository.save(dentist);
     }
