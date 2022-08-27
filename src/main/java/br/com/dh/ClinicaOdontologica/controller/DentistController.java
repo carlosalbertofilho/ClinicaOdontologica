@@ -20,7 +20,7 @@ import br.com.dh.ClinicaOdontologica.entity.Dentist;
 import br.com.dh.ClinicaOdontologica.service.DentistService;
 
 @RestController
-@RequestMapping("/Dentista")
+@RequestMapping("/dentista")
 public class DentistController 
 {
     @Autowired
@@ -73,6 +73,7 @@ public class DentistController
         dentistService.findById(id)
             .map(foundOnBase -> {
                 modelMapper.map(dentist, foundOnBase);
+                dentistService.save(dentist);
                 return Void.TYPE;
             }).orElseThrow(() -> 
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Dentist not found")
