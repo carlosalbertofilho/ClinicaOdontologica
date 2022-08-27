@@ -1,12 +1,16 @@
 package br.com.dh.ClinicaOdontologica.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,10 +28,17 @@ public class Consultation  implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+   
     @ManyToOne
     private Dentist dentist;
 
+    
     @ManyToOne
     private Client user;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    private LocalDate createdAt;
+
+    @DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
+    private LocalDate scheduledTime;
 }
