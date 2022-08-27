@@ -1,5 +1,7 @@
 package br.com.dh.ClinicaOdontologica.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Consultation 
+public class Consultation  implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

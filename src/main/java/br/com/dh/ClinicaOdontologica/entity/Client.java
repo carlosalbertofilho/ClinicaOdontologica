@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Client 
+public class Client implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
