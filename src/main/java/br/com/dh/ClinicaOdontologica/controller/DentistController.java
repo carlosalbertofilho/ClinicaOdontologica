@@ -61,8 +61,7 @@ public class DentistController
                 dentistService.deleteById(id);
                 return Void.TYPE;
             }).orElseThrow(() -> 
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Dentist not found")
-            );
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Dentist not found"));
     }
 
     @PutMapping("/{id}")
