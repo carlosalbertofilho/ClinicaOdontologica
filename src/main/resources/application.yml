@@ -10,6 +10,16 @@ spring:
     console:
       enabled: true
       path: /h2
-      
+
+logging:
+  file: 
+    name: logs/application-debug.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    "[org.springframework.web]": ERROR
+    "[org.hibernate]": ERROR
+    "[br.com.dh.ClinicaOdotologica]": DEBUG
 
     
