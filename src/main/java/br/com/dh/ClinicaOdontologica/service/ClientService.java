@@ -17,11 +17,11 @@ public class ClientService
     @Autowired
     private ClientRepository clientRepository;
 
-    private static Logger log = LogManager.getLogger(ClientRepository.class.getName());
+    private static final Logger log = LogManager.getLogger(ClientRepository.class.getName());
 
     public Client save(Client client)
     {
-        log.info("Creating User: %s".formatted(client.getLogin()));
+        log.info("Creating Client: %s".formatted(client.getLogin()));
         return clientRepository.save(client);
     }
     public List<Client> FindAll()
