@@ -27,16 +27,17 @@ public class Consultation  implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-   
     @ManyToOne
     private Dentist dentist;
-
     
     @ManyToOne
     private Client user;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate createdAt;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    private LocalDate updateAt;
 
     @DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
     private LocalDate scheduledTime;
