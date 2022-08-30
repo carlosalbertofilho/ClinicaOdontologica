@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.GenerationTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
