@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenerationTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -43,6 +46,6 @@ public class Client implements Serializable
     @Column(nullable = false)
     private String address;
 
-    @Column(name = "medical_discharge_date")
-    private LocalDate medicalDischargeDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    private LocalDate createdAt;
 }

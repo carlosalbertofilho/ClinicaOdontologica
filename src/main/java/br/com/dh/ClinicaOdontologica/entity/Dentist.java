@@ -1,12 +1,15 @@
 package br.com.dh.ClinicaOdontologica.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,4 +44,7 @@ public class Dentist implements Serializable
 
     @Column(nullable = false)
     private Boolean isAdmin;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    private LocalDate createdAt;
 }

@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class ClientService
     public Client save(Client client)
     {
         log.info("Creating Client: %s".formatted(client.getLogin()));
+        client.setCreatedAt(LocalDate.now());
         return clientRepository.save(client);
     }
     public List<Client> FindAll()
