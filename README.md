@@ -18,6 +18,7 @@ atendidos são os seguintes:
   hora.
 
 ## Autor
-Carlos Alberto Filho 
+Carlos Alberto Filho
+Eduardo Ananias da silva
 
 Turma 07 - DH - CTD 2022
