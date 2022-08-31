@@ -1,6 +1,5 @@
 package br.com.dh.ClinicaOdontologica.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +12,7 @@ import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 
 @Service
-public class ClientService 
+public class ClientService
 {
     @Autowired
     private ClientRepository clientRepository;
@@ -22,8 +21,6 @@ public class ClientService
 
     public Client save(Client client)
     {
-        log.info("Creating Client: %s".formatted(client.getLogin()));
-        client.setCreatedAt(LocalDate.now());
         return clientRepository.save(client);
     }
     public List<Client> FindAll()

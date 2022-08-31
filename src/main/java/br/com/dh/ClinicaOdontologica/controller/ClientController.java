@@ -1,9 +1,12 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,10 +34,14 @@ public class ClientController
     @Autowired
     private ModelMapper modelMapper;
 
+    private static final Logger log = LogManager.getLogger(ModelMapper.class.getName());
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client save(@Valid @RequestBody Client client)
     {
+        log.info("Creating Client: %s".formatted(client.getLogin()));
+        client.setCreatedAt(LocalDate.now());
         return clientService.save(client);
     }
 

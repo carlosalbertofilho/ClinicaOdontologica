@@ -48,7 +48,6 @@ public class Client implements Serializable
 
     @NotBlank(message = "Password is mandatory to fill")
     @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
-
     @Column(nullable = false)
     private String password;
 
