@@ -2,6 +2,8 @@ package br.com.dh.ClinicaOdontologica.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ import br.com.dh.ClinicaOdontologica.service.DentistService;
 
 @RestController
 @RequestMapping("/dentista")
-public class DentistController 
+public class DentistController
 {
     @Autowired
     private DentistService dentistService;
@@ -31,7 +33,7 @@ public class DentistController
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Dentist save(@RequestBody Dentist dentist)
+    public Dentist save(@Valid @RequestBody Dentist dentist)
     {
         return dentistService.save(dentist);
     }
@@ -48,7 +50,7 @@ public class DentistController
     public Dentist findDentistById(@PathVariable("id") Long id)
     {
         return dentistService.findById(id)
-                .orElseThrow(() ->  
+                .orElseThrow(() ->
                     new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -60,21 +62,21 @@ public class DentistController
             .map(dentist -> {
                 dentistService.deleteById(id);
                 return Void.TYPE;
-            }).orElseThrow(() -> 
+            }).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Dentist not found"));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateDentist(@PathVariable("id") Long id,
-                              @RequestBody Dentist dentist)
+                              @Valid @RequestBody Dentist dentist)
     {
         dentistService.findById(id)
             .map(foundOnBase -> {
                 modelMapper.map(dentist, foundOnBase);
                 dentistService.save(dentist);
                 return Void.TYPE;
-            }).orElseThrow(() -> 
+            }).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Dentist not found")
         );
     }

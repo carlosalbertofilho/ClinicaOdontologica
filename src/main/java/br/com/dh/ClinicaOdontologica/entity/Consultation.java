@@ -1,6 +1,7 @@
 package br.com.dh.ClinicaOdontologica.entity;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -8,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,24 +30,26 @@ public class Consultation  implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Dentist is mandatory to fill")
     @ManyToOne
     private Dentist dentist;
 
-    @NotBlank(message = "Client is mandatory to fill")
     @ManyToOne
     private Client client;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate updateAt;
 
-    @NotBlank(message = "ScheduledTime is mandatory to fill")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDate scheduledTime;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate scheduledDate;
+
+    @JsonFormat(pattern="HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private Time scheduledTime;
 }

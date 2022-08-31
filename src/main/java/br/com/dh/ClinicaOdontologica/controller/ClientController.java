@@ -2,6 +2,8 @@ package br.com.dh.ClinicaOdontologica.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,17 +23,17 @@ import br.com.dh.ClinicaOdontologica.service.ClientService;
 
 @RestController
 @RequestMapping("/cliente")
-public class ClientController 
+public class ClientController
 {
     @Autowired
-    private ClientService clientService;    
+    private ClientService clientService;
 
     @Autowired
     private ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client client)
+    public Client save(@Valid @RequestBody Client client)
     {
         return clientService.save(client);
     }
@@ -48,7 +50,7 @@ public class ClientController
     public Client findClientById(@PathVariable("id") Long id)
     {
         return clientService.findById(id)
-            .orElseThrow(() -> 
+            .orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND)
             );
     }
@@ -61,21 +63,21 @@ public class ClientController
             .map(client -> {
                 clientService.deleteById(id);
                 return Void.TYPE;
-            }).orElseThrow(() -> 
+            }).orElseThrow(() ->
             new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateClient(@PathVariable("id") Long id,
-                             @RequestBody Client client)
+                             @Valid @RequestBody Client client)
     {
         clientService.findById(id)
             .map(foundOnBase -> {
                 modelMapper.map(client, foundOnBase);
                 clientService.deleteById(id);
                 return Void.TYPE;
-            }).orElseThrow(() -> 
+            }).orElseThrow(() ->
             new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
     }
 }

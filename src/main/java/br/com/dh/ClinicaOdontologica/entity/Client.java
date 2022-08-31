@@ -15,8 +15,6 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,6 +48,7 @@ public class Client implements Serializable
 
     @NotBlank(message = "Password is mandatory to fill")
     @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
+
     @Column(nullable = false)
     private String password;
 
@@ -63,7 +62,6 @@ public class Client implements Serializable
     private String address;
 
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 }

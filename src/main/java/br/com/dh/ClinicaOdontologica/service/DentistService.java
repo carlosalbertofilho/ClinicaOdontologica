@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,16 +13,17 @@ import br.com.dh.ClinicaOdontologica.entity.Dentist;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
 
 @Service
-public class DentistService 
+public class DentistService
 {
     @Autowired
     private DentistRepository dentistRepository;
-    
+
     private static final Logger log = LogManager.getLogger(DentistRepository.class.getName());
-    
+
     public Dentist save(Dentist dentist)
     {
         log.info("Creating Dentist: %s".formatted(dentist.getLogin()));
+        dentist.setCreatedAt(LocalDate.now());
         return dentistRepository.save(dentist);
     }
     public List<Dentist> findAll()

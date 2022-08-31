@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,16 +13,17 @@ import br.com.dh.ClinicaOdontologica.entity.Consultation;
 import br.com.dh.ClinicaOdontologica.repository.ConsultationRepository;
 
 @Service
-public class ConsultationService 
+public class ConsultationService
 {
     @Autowired
     private ConsultationRepository consultationRepository;
 
     private static final Logger log = LogManager.getLogger(ConsultationRepository.class.getName());
-    
+
     public Consultation save(Consultation consultation)
     {
         log.info("Creating Consultation");
+        consultation.setCreatedAt(LocalDate.now());
         return consultationRepository.save(consultation);
     }
     public List<Consultation> findAll()
