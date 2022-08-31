@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,27 +27,36 @@ import lombok.NoArgsConstructor;
 public class Client implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Client name is mandatory to fill!")
     @Column(nullable = false)
     private String name;
 
+    @NotBlank(message = "Client last name is mandatory to fill")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @NotBlank(message = "Login is mandatory to fill")
+    @Email(message = "Email invalid!")
     @Column(nullable = false)
     private String login;
 
+    @NotBlank(message = "Password is mandatory to fill")
     @Column(nullable = false)
     private String password;
 
+    @NotBlank(message = "RG is mandatory to fill")
+    @Pattern(regexp = "(^\\d{1,2}).?(\\d{3}).?(\\d{3})-?(\\d{1}|X|x$)")
     @Column(nullable = false)
     private String rg;
 
+    @NotBlank(message = "Address is mandatory to fill")
     @Column(nullable = false)
     private String address;
 
+    
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate createdAt;
 }

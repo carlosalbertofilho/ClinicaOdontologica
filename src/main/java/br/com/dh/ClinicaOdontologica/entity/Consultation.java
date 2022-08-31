@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Consultation  implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -39,6 +39,6 @@ public class Consultation  implements Serializable
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate updateAt;
 
-    @DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate scheduledTime;
 }
