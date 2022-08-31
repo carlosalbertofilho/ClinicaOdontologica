@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,14 +38,16 @@ public class Consultation  implements Serializable
     @ManyToOne
     private Client client;
 
-
+    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
     @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
     private LocalDate createdAt;
 
+    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
     @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
     private LocalDate updateAt;
 
     @NotBlank(message = "ScheduledTime is mandatory to fill")
+    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
     @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
     private LocalDate scheduledTime;
 }
