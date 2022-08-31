@@ -65,7 +65,7 @@ public class Client implements Serializable
     private String address;
 
 
-    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
-    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate createdAt;
 }
