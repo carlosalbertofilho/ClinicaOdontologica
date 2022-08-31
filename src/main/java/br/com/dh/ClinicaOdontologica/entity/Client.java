@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,10 +32,12 @@ public class Client implements Serializable
     private Long id;
 
     @NotBlank(message = "Client name is mandatory to fill!")
+    @Size(min = 2, max = 50, message = "Client Name accepts only upto 50 character and minimun 2 character")
     @Column(nullable = false)
     private String name;
 
     @NotBlank(message = "Client last name is mandatory to fill")
+    @Size(min = 2, max = 50, message = "Client lastName accepts only upto 50 character and minimun 2 character")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
@@ -44,6 +47,9 @@ public class Client implements Serializable
     private String login;
 
     @NotBlank(message = "Password is mandatory to fill")
+    @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]$"
+            ,message = "Password accepts only at least one uppercase letter, one lowercase letter and one number and one special character")
     @Column(nullable = false)
     private String password;
 
@@ -56,7 +62,7 @@ public class Client implements Serializable
     @Column(nullable = false)
     private String address;
 
-    
+
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate createdAt;
 }
