@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -63,6 +65,7 @@ public class Client implements Serializable
     private String address;
 
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
+    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
     private LocalDate createdAt;
 }
