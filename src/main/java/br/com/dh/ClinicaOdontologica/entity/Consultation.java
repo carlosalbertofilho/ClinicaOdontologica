@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,18 +28,22 @@ public class Consultation  implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Dentist is mandatory to fill")
     @ManyToOne
     private Dentist dentist;
-    
-    @ManyToOne
-    private Client user;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @NotBlank(message = "Client is mandatory to fill")
+    @ManyToOne
+    private Client client;
+
+
+    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
     private LocalDate createdAt;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
     private LocalDate updateAt;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @NotBlank(message = "ScheduledTime is mandatory to fill")
+    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
     private LocalDate scheduledTime;
 }
