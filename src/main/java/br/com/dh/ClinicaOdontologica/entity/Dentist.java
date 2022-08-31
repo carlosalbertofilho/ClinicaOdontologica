@@ -50,11 +50,8 @@ public class Dentist implements Serializable
 
     @Column(nullable = false)
     @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]$"
-            ,message = "Password accepts only at least one uppercase letter, one lowercase letter and one number and one special character")
     private String password;
 
-    @CPF
     @Column(nullable = false)
     private String registration;
 

@@ -50,8 +50,6 @@ public class Client implements Serializable
 
     @NotBlank(message = "Password is mandatory to fill")
     @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]$"
-            ,message = "Password accepts only at least one uppercase letter, one lowercase letter and one number and one special character")
     @Column(nullable = false)
     private String password;
 
