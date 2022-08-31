@@ -38,16 +38,16 @@ public class Consultation  implements Serializable
     @ManyToOne
     private Client client;
 
-    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
-    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate createdAt;
 
-    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
-    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate updateAt;
 
     @NotBlank(message = "ScheduledTime is mandatory to fill")
-    @JsonFormat(pattern="dd-MM-yyyy h:mm a")
-    @DateTimeFormat(pattern = "dd-MM-yyyy h:mm a")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate scheduledTime;
 }
