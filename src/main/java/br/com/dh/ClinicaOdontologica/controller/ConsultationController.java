@@ -1,9 +1,12 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,59 +28,71 @@ import br.com.dh.ClinicaOdontologica.service.ConsultationService;
 @RequestMapping("/consulta")
 public class ConsultationController
 {
-    @Autowired
-    private ConsultationService consultationService;
+  @Autowired
+  private ConsultationService consultationService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired
+  private ModelMapper modelMapper;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Consultation save(@Valid @RequestBody Consultation consultation)
-    {
-        return consultationService.save(consultation);
-    }
+  private static final Logger log =
+    LogManager.getLogger(ConsultationController.class.getName());
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Consultation> listConsultations()
-    {
-        return consultationService.findAll();
-    }
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public Consultation save(@Valid @RequestBody Consultation consultation)
+  {
+    log.info("Creating Consultation");
+    consultation.setCreatedAt(LocalDate.now());
+    return consultationService.save(consultation);
+  }
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Consultation findConsultationById(@PathVariable Long id)
-    {
-        return consultationService.findById(id)
-            .orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
+  public List<Consultation> listConsultations()
+  {
+    log.info("Find all Constations");
+    return consultationService.findAll();
+  }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteConsultation(@PathVariable("id") Long id)
-    {
-        consultationService.findById(id)
-            .map(consultation -> {
-                consultationService.deleteById(id);
-                return Void.TYPE;
-            }).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Consultation not found"));
-    }
+  @GetMapping("/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public Consultation findConsultationById(@PathVariable Long id)
+  {
+    log.info("Find consultation by id: %d".formatted(id));
+    return consultationService.findById(id)
+      .orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND));
+  }
 
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateConsultation(@PathVariable("id") Long id,
-                                  @Valid @RequestBody Consultation consultation)
-    {
-        consultationService.findById(id)
-            .map(foundOnBase -> {
-                modelMapper.map(consultation, foundOnBase);
-                consultationService.save(consultation);
-                return Void.TYPE;
-            }).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Consultation not found")
-            );
-    }
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteConsultation(@PathVariable("id") Long id)
+  {
+    log.info("Deleting consultation by id: %d".formatted(id));
+    consultationService.findById(id)
+      .map(consultation -> {
+        consultationService.deleteById(id);
+        return Void.TYPE;
+      }).orElseThrow(() ->
+          new ResponseStatusException(HttpStatus.NOT_FOUND
+            , "Consultation not found"));
+  }
+
+  @PutMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void updateConsultation(@PathVariable("id") Long id,
+                                @Valid @RequestBody Consultation consultation)
+  {
+    log.info("Update consultation by id: %d".formatted(id));
+    consultation.setUpdateAt(LocalDate.now());
+    consultationService.findById(id)
+      .map(foundOnBase -> {
+        modelMapper.map(consultation, foundOnBase);
+        consultationService.save(consultation);
+        return Void.TYPE;
+      }).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND
+          , "Consultation not found")
+      );
+  }
 }
