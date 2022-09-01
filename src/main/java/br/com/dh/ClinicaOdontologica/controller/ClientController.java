@@ -34,7 +34,8 @@ public class ClientController
     @Autowired
     private ModelMapper modelMapper;
 
-    private static final Logger log = LogManager.getLogger(ModelMapper.class.getName());
+    private static final Logger log =
+      LogManager.getLogger(ModelMapper.class.getName());
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,9 +60,9 @@ public class ClientController
     {
       log.info("Find Client by ID: %d".formatted(id));
       return clientService.findById(id)
-          .orElseThrow(() ->
-              new ResponseStatusException(HttpStatus.NOT_FOUND)
-          );
+        .orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
     }
 
     @DeleteMapping("/{id}")
@@ -70,11 +71,12 @@ public class ClientController
     {
       log.info("Delete Client by ID: %d".formatted(id));
       clientService.findById(id)
-          .map(client -> {
-              clientService.deleteById(id);
-              return Void.TYPE;
-          }).orElseThrow(() ->
-          new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+        .map(client -> {
+          clientService.deleteById(id);
+          return Void.TYPE;
+        }).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND
+          , "Client not found"));
     }
 
     @PutMapping("/{id}")
@@ -84,11 +86,12 @@ public class ClientController
     {
       log.info("Update Client by ID: %d".formatted(id));
       clientService.findById(id)
-          .map(foundOnBase -> {
-              modelMapper.map(client, foundOnBase);
-              clientService.deleteById(id);
-              return Void.TYPE;
-          }).orElseThrow(() ->
-          new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+        .map(foundOnBase -> {
+          modelMapper.map(client, foundOnBase);
+          clientService.deleteById(id);
+          return Void.TYPE;
+        }).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND
+          , "Client not found"));
     }
 }

@@ -1,9 +1,12 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,39 +34,48 @@ public class DentistController
     @Autowired
     private ModelMapper modelMapper;
 
+    private static final Logger  log =
+      LogManager.getLogger(DentistController.class.getName());
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Dentist save(@Valid @RequestBody Dentist dentist)
     {
-        return dentistService.save(dentist);
+      log.info("Creating Dentist: %s".formatted(dentist.getLogin()));
+      dentist.setCreatedAt(LocalDate.now());
+      return dentistService.save(dentist);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Dentist> listDentists()
     {
-        return dentistService.findAll();
+      log.info("Find All Dentists");
+      return dentistService.findAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Dentist findDentistById(@PathVariable("id") Long id)
     {
-        return dentistService.findById(id)
-                .orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND));
+      log.info("Find Dentist by ID: %d".formatted(id));
+      return dentistService.findById(id)
+        .orElseThrow(() ->
+          new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDentist(@PathVariable("id") Long id)
     {
-        dentistService.findById(id)
-            .map(dentist -> {
-                dentistService.deleteById(id);
-                return Void.TYPE;
-            }).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Dentist not found"));
+      log.info("Delete Dentist by ID: %d".formatted(id));
+      dentistService.findById(id)
+        .map(dentist -> {
+          dentistService.deleteById(id);
+          return Void.TYPE;
+        }).orElseThrow(() ->
+          new ResponseStatusException(HttpStatus.NOT_FOUND
+          , "Dentist not found"));
     }
 
     @PutMapping("/{id}")
@@ -71,13 +83,15 @@ public class DentistController
     public void updateDentist(@PathVariable("id") Long id,
                               @Valid @RequestBody Dentist dentist)
     {
-        dentistService.findById(id)
-            .map(foundOnBase -> {
-                modelMapper.map(dentist, foundOnBase);
-                dentistService.save(dentist);
-                return Void.TYPE;
-            }).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Dentist not found")
-        );
+      log.info("Update Dentist by ID: %d".formatted(id));
+      dentistService.findById(id)
+        .map(foundOnBase -> {
+            modelMapper.map(dentist, foundOnBase);
+            dentistService.save(dentist);
+            return Void.TYPE;
+        }).orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND
+            , "Dentist not found")
+      );
     }
 }
