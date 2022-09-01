@@ -26,30 +26,30 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Consultation  implements Serializable
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne
-    private Dentist dentist;
+  @ManyToOne
+  private Dentist dentist;
 
-    @ManyToOne
-    private Client client;
+  @ManyToOne
+  private Client client;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createdAt;
+  @JsonFormat(pattern="yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate createdAt;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate updateAt;
+  @JsonFormat(pattern="yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate updateAt;
 
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate scheduledDate;
+  @JsonFormat(pattern="yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate scheduledDate;
 
-    @JsonFormat(pattern="HH:mm:ss")
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private Time scheduledTime;
+  @JsonFormat(pattern="HH:mm:ss")
+  @DateTimeFormat(pattern = "HH:mm:ss")
+  private Time scheduledTime;
 }
