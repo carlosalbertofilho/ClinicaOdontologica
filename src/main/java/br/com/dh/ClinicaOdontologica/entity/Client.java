@@ -27,40 +27,40 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Client implements Serializable
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotBlank(message = "Client name is mandatory to fill!")
-    @Size(min = 2, max = 50, message = "Client Name accepts only upto 50 character and minimun 2 character")
-    @Column(nullable = false)
-    private String name;
+  @NotBlank(message = "Client name is mandatory to fill!")
+  @Size(min = 2, max = 50, message = "Client Name accepts only upto 50 character and minimun 2 character")
+  @Column(nullable = false)
+  private String name;
 
-    @NotBlank(message = "Client last name is mandatory to fill")
-    @Size(min = 2, max = 50, message = "Client lastName accepts only upto 50 character and minimun 2 character")
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+  @NotBlank(message = "Client last name is mandatory to fill")
+  @Size(min = 2, max = 50, message = "Client lastName accepts only upto 50 character and minimun 2 character")
+  @Column(name = "last_name", nullable = false)
+  private String lastName;
 
-    @NotBlank(message = "Login is mandatory to fill")
-    @Email(message = "Email invalid!")
-    @Column(nullable = false)
-    private String login;
+  @NotBlank(message = "Login is mandatory to fill")
+  @Email(message = "Email invalid!")
+  @Column(nullable = false)
+  private String login;
 
-    @NotBlank(message = "Password is mandatory to fill")
-    @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
-    @Column(nullable = false)
-    private String password;
+  @NotBlank(message = "Password is mandatory to fill")
+  @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
+  @Column(nullable = false)
+  private String password;
 
-    @NotBlank(message = "RG is mandatory to fill")
-    @Pattern(regexp = "(^\\d{1,2}).?(\\d{3}).?(\\d{3})-?(\\d{1}|X|x$)")
-    @Column(nullable = false)
-    private String rg;
+  @NotBlank(message = "RG is mandatory to fill")
+  @Pattern(regexp = "(^\\d{1,2}).?(\\d{3}).?(\\d{3})-?(\\d{1}|X|x$)")
+  @Column(nullable = false)
+  private String rg;
 
-    @NotBlank(message = "Address is mandatory to fill")
-    @Column(nullable = false)
-    private String address;
+  @NotBlank(message = "Address is mandatory to fill")
+  @Column(nullable = false)
+  private String address;
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createdAt;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate createdAt;
 }
