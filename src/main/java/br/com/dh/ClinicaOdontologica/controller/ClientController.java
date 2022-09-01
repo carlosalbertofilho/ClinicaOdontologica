@@ -40,38 +40,41 @@ public class ClientController
     @ResponseStatus(HttpStatus.CREATED)
     public Client save(@Valid @RequestBody Client client)
     {
-        log.info("Creating Client: %s".formatted(client.getLogin()));
-        client.setCreatedAt(LocalDate.now());
-        return clientService.save(client);
+      log.info("Creating Client: %s".formatted(client.getLogin()));
+      client.setCreatedAt(LocalDate.now());
+      return clientService.save(client);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Client> listClients()
     {
-        return clientService.FindAll();
+      log.info("Find All Clients");
+      return clientService.FindAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Client findClientById(@PathVariable("id") Long id)
     {
-        return clientService.findById(id)
-            .orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND)
-            );
+      log.info("Find Client by ID: %d".formatted(id));
+      return clientService.findById(id)
+          .orElseThrow(() ->
+              new ResponseStatusException(HttpStatus.NOT_FOUND)
+          );
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteClient(@PathVariable("id") Long id)
     {
-        clientService.findById(id)
-            .map(client -> {
-                clientService.deleteById(id);
-                return Void.TYPE;
-            }).orElseThrow(() ->
-            new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+      log.info("Delete Client by ID: %d".formatted(id));
+      clientService.findById(id)
+          .map(client -> {
+              clientService.deleteById(id);
+              return Void.TYPE;
+          }).orElseThrow(() ->
+          new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
     }
 
     @PutMapping("/{id}")
@@ -79,12 +82,13 @@ public class ClientController
     public void updateClient(@PathVariable("id") Long id,
                              @Valid @RequestBody Client client)
     {
-        clientService.findById(id)
-            .map(foundOnBase -> {
-                modelMapper.map(client, foundOnBase);
-                clientService.deleteById(id);
-                return Void.TYPE;
-            }).orElseThrow(() ->
-            new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+      log.info("Update Client by ID: %d".formatted(id));
+      clientService.findById(id)
+          .map(foundOnBase -> {
+              modelMapper.map(client, foundOnBase);
+              clientService.deleteById(id);
+              return Void.TYPE;
+          }).orElseThrow(() ->
+          new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
     }
 }
