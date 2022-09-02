@@ -61,7 +61,8 @@ public class ClientController
     log.info("Find Client by ID: %d".formatted(id));
     return clientService.findById(id)
       .orElseThrow(() ->
-          new ResponseStatusException(HttpStatus.NOT_FOUND)
+          new ResponseStatusException(HttpStatus.NOT_FOUND,
+            "Client not found")
       );
   }
 
