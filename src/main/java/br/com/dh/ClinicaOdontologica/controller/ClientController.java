@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +21,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/cliente")
 public class ClientController
@@ -33,9 +33,6 @@ public class ClientController
 
   @Autowired
   private ModelMapper modelMapper;
-
-  private static final Logger log =
-    LogManager.getLogger(ModelMapper.class.getName());
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
