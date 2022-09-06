@@ -1,0 +1,34 @@
+package br.com.dh.ClinicaOdontologica.dto;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DentistDTO
+{
+  @NotBlank(message = "Dentist name is mandatory to fill!")
+  @Size(min = 2, max = 50, message = "Dentist Name accepts only upto 50 character and minimun 2 character")
+  private String name;
+
+  @NotBlank(message = "Dentist last name is mandatory to fill")
+  @Size(min = 2, max = 50, message = "Dentist lastName accepts only upto 50 character and minimun 2 character")
+  private String lastName;
+
+  @Email(message = "Email invalid!")
+  private String login;
+
+  @Size(min = 6, max = 12, message = "Client password accepts only upto 12 character and minimun 6 character")
+  private String password;
+
+  @NotBlank(message = "Registration is mandatory to fill")
+  private String registration;
+
+  private Boolean isAdmin;
+}

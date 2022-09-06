@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
-import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -81,12 +80,12 @@ public class ClientController
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void updateClient(@PathVariable("id") Long id,
-                            @Valid @RequestBody Client client)
+                            @Valid @RequestBody ClientDTO clientDTO)
   {
     log.info("Update Client by ID: %d".formatted(id));
     clientService.findById(id)
       .map(foundOnBase -> {
-        modelMapper.map(client, foundOnBase);
+        modelMapper.map(clientDTO, foundOnBase);
         clientService.deleteById(id);
         return Void.TYPE;
       }).orElseThrow(() ->
