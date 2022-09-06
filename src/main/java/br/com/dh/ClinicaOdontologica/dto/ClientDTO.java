@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientRequest
+public class ClientDTO
 {
 
   @NotBlank(message = "Client name is mandatory to fill!")
