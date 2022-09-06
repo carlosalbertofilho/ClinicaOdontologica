@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -37,19 +35,14 @@ public class Consultation  implements Serializable
   private Client client;
 
   @JsonFormat(pattern="yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate createdAt;
 
   @JsonFormat(pattern="yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate updateAt;
 
-
   @JsonFormat(pattern="yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate scheduledDate;
 
   @JsonFormat(pattern="HH:mm:ss")
-  @DateTimeFormat(pattern = "HH:mm:ss")
   private Time scheduledTime;
 }

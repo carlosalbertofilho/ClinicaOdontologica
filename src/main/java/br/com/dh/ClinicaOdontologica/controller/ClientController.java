@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -39,6 +40,7 @@ public class ClientController
   public ClientDTO save(@Valid @RequestBody ClientDTO clientDTO)
   {
     log.info("Creating Client: %s".formatted(clientDTO.getLogin()));
+    clientDTO.setCreatedAt(LocalDate.now());
     return clientService.save(clientDTO);
   }
 
@@ -83,6 +85,7 @@ public class ClientController
                             @Valid @RequestBody ClientDTO clientDTO)
   {
     log.info("Update Client by ID: %d".formatted(id));
+    clientDTO.setUpdateAt(LocalDate.now());
     clientService.findById(id)
       .map(foundOnBase -> {
         modelMapper.map(clientDTO, foundOnBase);

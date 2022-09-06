@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -39,6 +40,7 @@ public class DentistController
     public DentistDTO save(@Valid @RequestBody DentistDTO dentistDTO)
     {
       log.info("Creating Dentist: %s".formatted(dentistDTO.getLogin()));
+      dentistDTO.setCreatedAt(LocalDate.now());
       return dentistService.save(dentistDTO);
     }
 
@@ -81,6 +83,7 @@ public class DentistController
                               @Valid @RequestBody DentistDTO dentistDTO)
     {
       log.info("Update Dentist by ID: %d".formatted(id));
+      dentistDTO.setUpdateAt(LocalDate.now());
       dentistService.findById(id)
         .map(foundOnBase -> {
             modelMapper.map(dentistDTO, foundOnBase);
