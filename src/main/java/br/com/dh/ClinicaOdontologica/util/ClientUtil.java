@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 
+@Component
 public class ClientUtil
 {
 

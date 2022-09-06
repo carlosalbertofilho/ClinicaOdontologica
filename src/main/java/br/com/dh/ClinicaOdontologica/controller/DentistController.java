@@ -1,6 +1,5 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,8 +18,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.dh.ClinicaOdontologica.entity.Dentist;
+import br.com.dh.ClinicaOdontologica.dto.DentistDTO;
 import br.com.dh.ClinicaOdontologica.service.DentistService;
+import br.com.dh.ClinicaOdontologica.util.DentistUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,16 +36,15 @@ public class DentistController
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Dentist save(@Valid @RequestBody Dentist dentist)
+    public DentistDTO save(@Valid @RequestBody DentistDTO dentistDTO)
     {
-      log.info("Creating Dentist: %s".formatted(dentist.getLogin()));
-      dentist.setCreatedAt(LocalDate.now());
-      return dentistService.save(dentist);
+      log.info("Creating Dentist: %s".formatted(dentistDTO.getLogin()));
+      return dentistService.save(dentistDTO);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Dentist> listDentists()
+    public List<DentistDTO> listDentists()
     {
       log.info("Find All Dentists");
       return dentistService.findAll();
@@ -53,10 +52,11 @@ public class DentistController
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Dentist findDentistById(@PathVariable("id") Long id)
+    public DentistDTO findDentistById(@PathVariable("id") Long id)
     {
       log.info("Find Dentist by ID: %d".formatted(id));
       return dentistService.findById(id)
+        .map(DentistUtil::convertToDTO)
         .orElseThrow(() ->
           new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -78,13 +78,13 @@ public class DentistController
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateDentist(@PathVariable("id") Long id,
-                              @Valid @RequestBody Dentist dentist)
+                              @Valid @RequestBody DentistDTO dentistDTO)
     {
       log.info("Update Dentist by ID: %d".formatted(id));
       dentistService.findById(id)
         .map(foundOnBase -> {
-            modelMapper.map(dentist, foundOnBase);
-            dentistService.save(dentist);
+            modelMapper.map(dentistDTO, foundOnBase);
+            dentistService.save(dentistDTO);
             return Void.TYPE;
         }).orElseThrow(() ->
             new ResponseStatusException(HttpStatus.NOT_FOUND
