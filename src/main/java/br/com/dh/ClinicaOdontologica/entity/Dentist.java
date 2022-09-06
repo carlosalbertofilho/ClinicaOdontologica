@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,6 +45,9 @@ public class Dentist implements Serializable
   @Column(nullable = false)
   private Boolean isAdmin;
 
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern="yyyy-MM-dd")
   private LocalDate createdAt;
+
+  @JsonFormat(pattern="yyyy-MM-dd")
+  private LocalDate updateAt;
 }

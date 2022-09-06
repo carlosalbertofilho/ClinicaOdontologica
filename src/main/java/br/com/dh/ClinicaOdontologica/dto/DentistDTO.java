@@ -1,8 +1,12 @@
 package br.com.dh.ClinicaOdontologica.dto;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +17,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DentistDTO
 {
+
+  private Long id;
+
   @NotBlank(message = "Dentist name is mandatory to fill!")
   @Size(min = 2, max = 50, message = "Dentist Name accepts only upto 50 character and minimun 2 character")
   private String name;
@@ -31,4 +38,10 @@ public class DentistDTO
   private String registration;
 
   private Boolean isAdmin;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate createdAt;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate updateAt;
 }

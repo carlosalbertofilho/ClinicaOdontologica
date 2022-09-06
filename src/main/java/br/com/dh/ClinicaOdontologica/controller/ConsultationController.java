@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.dh.ClinicaOdontologica.entity.Consultation;
+import br.com.dh.ClinicaOdontologica.dto.ConsultationDTO;
 import br.com.dh.ClinicaOdontologica.service.ConsultationService;
+import br.com.dh.ClinicaOdontologica.util.ConsultationUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,16 +37,16 @@ public class ConsultationController
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Consultation save(@Valid @RequestBody Consultation consultation)
+  public ConsultationDTO save(@Valid @RequestBody ConsultationDTO consultationDTO)
   {
     log.info("Creating Consultation");
-    consultation.setCreatedAt(LocalDate.now());
-    return consultationService.save(consultation);
+    consultationDTO.setCreatedAt(LocalDate.now());
+    return consultationService.save(consultationDTO);
   }
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<Consultation> listConsultations()
+  public List<ConsultationDTO> listConsultations()
   {
     log.info("Find all Constations");
     return consultationService.findAll();
@@ -53,10 +54,11 @@ public class ConsultationController
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Consultation findConsultationById(@PathVariable Long id)
+  public ConsultationDTO findConsultationById(@PathVariable Long id)
   {
     log.info("Find consultation by id: %d".formatted(id));
     return consultationService.findById(id)
+      .map(ConsultationUtil::convertToDTO)
       .orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND
           , "Consultation not found"));
@@ -79,14 +81,14 @@ public class ConsultationController
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void updateConsultation(@PathVariable("id") Long id,
-                                @Valid @RequestBody Consultation consultation)
+                                @Valid @RequestBody ConsultationDTO consultationDTO)
   {
     log.info("Update consultation by id: %d".formatted(id));
-    consultation.setUpdateAt(LocalDate.now());
+    consultationDTO.setUpdateAt(LocalDate.now());
     consultationService.findById(id)
       .map(foundOnBase -> {
-        modelMapper.map(consultation, foundOnBase);
-        consultationService.save(consultation);
+        modelMapper.map(consultationDTO, foundOnBase);
+        consultationService.save(consultationDTO);
         return Void.TYPE;
       }).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND
