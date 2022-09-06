@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.dh.ClinicaOdontologica.dto.ClientRequest;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,11 +37,14 @@ public class ClientController
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Client save(@Valid @RequestBody Client client)
+  public Client save(@Valid @RequestBody ClientRequest client)
   {
     log.info("Creating Client: %s".formatted(client.getLogin()));
-    client.setCreatedAt(LocalDate.now());
-    return clientService.save(client);
+    return clientService.save(
+      new Client(Long.parseLong("1"),client.getName(),
+      client.getLastName(), client.getLogin(),
+      client.getPassword(), client.getRg(),
+      client.getAddress(), LocalDate.now() ));
   }
 
   @GetMapping
