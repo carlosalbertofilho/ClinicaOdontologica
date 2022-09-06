@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/consulta")
+@RequestMapping("/api/consulta")
 public class ConsultationController
 {
   @Autowired
