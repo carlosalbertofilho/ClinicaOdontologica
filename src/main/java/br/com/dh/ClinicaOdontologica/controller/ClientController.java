@@ -1,6 +1,5 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,9 +18,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.dh.ClinicaOdontologica.dto.ClientRequest;
+import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
+import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -37,19 +37,15 @@ public class ClientController
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Client save(@Valid @RequestBody ClientRequest client)
+  public ClientDTO save(@Valid @RequestBody ClientDTO clientDTO)
   {
-    log.info("Creating Client: %s".formatted(client.getLogin()));
-    return clientService.save(
-      new Client(Long.parseLong("1"),client.getName(),
-      client.getLastName(), client.getLogin(),
-      client.getPassword(), client.getRg(),
-      client.getAddress(), LocalDate.now() ));
+    log.info("Creating Client: %s".formatted(clientDTO.getLogin()));
+    return clientService.save(clientDTO);
   }
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<Client> listClients()
+  public List<ClientDTO> listClients()
   {
     log.info("Find All Clients");
     return clientService.FindAll();
@@ -57,10 +53,11 @@ public class ClientController
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Client findClientById(@PathVariable("id") Long id)
+  public ClientDTO findClientById(@PathVariable("id") Long id)
   {
     log.info("Find Client by ID: %d".formatted(id));
     return clientService.findById(id)
+      .map(ClientUtil::convertToDTO)
       .orElseThrow(() ->
           new ResponseStatusException(HttpStatus.NOT_FOUND,
             "Client not found")
