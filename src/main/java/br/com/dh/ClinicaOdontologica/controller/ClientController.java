@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.dh.ClinicaOdontologica.entity.Client;
+import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
+import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/api/cliente")
 public class ClientController
 {
   @Autowired
@@ -36,16 +37,16 @@ public class ClientController
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Client save(@Valid @RequestBody Client client)
+  public ClientDTO save(@Valid @RequestBody ClientDTO clientDTO)
   {
-    log.info("Creating Client: %s".formatted(client.getLogin()));
-    client.setCreatedAt(LocalDate.now());
-    return clientService.save(client);
+    log.info("Creating Client: %s".formatted(clientDTO.getLogin()));
+    clientDTO.setCreatedAt(LocalDate.now());
+    return clientService.save(clientDTO);
   }
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<Client> listClients()
+  public List<ClientDTO> listClients()
   {
     log.info("Find All Clients");
     return clientService.FindAll();
@@ -53,10 +54,11 @@ public class ClientController
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Client findClientById(@PathVariable("id") Long id)
+  public ClientDTO findClientById(@PathVariable("id") Long id)
   {
     log.info("Find Client by ID: %d".formatted(id));
     return clientService.findById(id)
+      .map(ClientUtil::convertToDTO)
       .orElseThrow(() ->
           new ResponseStatusException(HttpStatus.NOT_FOUND,
             "Client not found")
@@ -80,12 +82,13 @@ public class ClientController
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void updateClient(@PathVariable("id") Long id,
-                            @Valid @RequestBody Client client)
+                            @Valid @RequestBody ClientDTO clientDTO)
   {
     log.info("Update Client by ID: %d".formatted(id));
+    clientDTO.setUpdateAt(LocalDate.now());
     clientService.findById(id)
       .map(foundOnBase -> {
-        modelMapper.map(client, foundOnBase);
+        modelMapper.map(clientDTO, foundOnBase);
         clientService.deleteById(id);
         return Void.TYPE;
       }).orElseThrow(() ->
