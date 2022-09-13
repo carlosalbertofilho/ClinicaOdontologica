@@ -2,7 +2,6 @@ package br.com.dh.ClinicaOdontologica.service;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
-import br.com.dh.ClinicaOdontologica.service.ClientService;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +30,7 @@ public class ClientServiceTest {
       client.setLastName("Souza");
       client.setLogin("antonio.souza");
       client.setPassword("as1234");
-      client.setAddress("Rua vinte, 10");
+      client.setAddress("Rua 1");
       client.setCreatedAt(LocalDate.now());
       client.setUpdateAt(LocalDate.now());
   }
@@ -50,7 +49,6 @@ public class ClientServiceTest {
 
   @Test
   void findAllClient(){
-    ClientDTO clientSave = service.save(ClientUtil.convertToDTO(client));
     List<ClientDTO> resultList = service.FindAll();
     Assertions.assertNotNull(resultList);
 
@@ -58,7 +56,6 @@ public class ClientServiceTest {
 
   @Test
   void findAClient(){
-    ClientDTO clientSave = service.save(ClientUtil.convertToDTO(client));
     Optional<Client> resultList = service.findById(1L);
     Assertions.assertNotNull(resultList);
 
