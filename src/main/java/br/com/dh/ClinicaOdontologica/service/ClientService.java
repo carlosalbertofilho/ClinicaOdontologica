@@ -12,13 +12,15 @@ import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 
+import javax.validation.Valid;
+
 @Service
 public class ClientService
 {
   @Autowired
   private ClientRepository clientRepository;
 
-  public ClientDTO save(ClientDTO clientDTO)
+  public ClientDTO save(@Valid ClientDTO clientDTO)
   {
       Client client = clientRepository
         .save(ClientUtil.convertToEntity(clientDTO));
