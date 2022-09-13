@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +35,9 @@ public class ClientServiceTest {
       client.setLastName("Souza");
       client.setLogin("antonio.souza");
       client.setPassword("as1234");
-      client.getCreatedAt();
-      client.getUpdateAt();
+      client.setAddress("Rua vinte, 10");
+      client.setCreatedAt(LocalDate.now());
+      client.setUpdateAt(LocalDate.now());
   }
 
   @Test
