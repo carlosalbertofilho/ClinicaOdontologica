@@ -1,15 +1,11 @@
 package br.com.dh.ClinicaOdontologica;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
-import br.com.dh.ClinicaOdontologica.dto.DentistDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
-import br.com.dh.ClinicaOdontologica.entity.Dentist;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
-import br.com.dh.ClinicaOdontologica.util.DentistUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
