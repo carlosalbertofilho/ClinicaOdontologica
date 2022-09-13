@@ -15,6 +15,7 @@ import br.com.dh.ClinicaOdontologica.util.DentistUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -26,47 +27,54 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ConsultationServiceTest {
 
   @Autowired
   ConsultationService service;
 
+  @Autowired
+  DentistService dentistService;
 
+  @Autowired
+  ClientService clientService;
 
+  Consultation consultation;
+  Client client;
+  Dentist dentist;
 
-  static Consultation consultation;
-  static Client client;
-  static Dentist dentist;
 
   @BeforeAll
-  static void doBefore(){
+  void doBefore(){
     consultation = new Consultation();
-    ClientService clientService = new ClientService();
-    client = new Client();
-    client.setRg("11111111-1");
-    client.setName("Antonio");
-    client.setLastName("Souza");
-    client.setLogin("antonio.souza");
-    client.setPassword("as1234");
-    client.setAddress("Rua vinte, 10");
-    client.setCreatedAt(LocalDate.now());
-    client.setUpdateAt(LocalDate.now());
+    this.client = new Client();
+    this.client.setRg("11111111-1");
+    this.client.setName("Antonio");
+    this.client.setLastName("Souza");
+    this.client.setLogin("antonio.souza");
+    this.client.setPassword("as1234");
+    this.client.setAddress("Rua vinte, 10");
+    this.client.setCreatedAt(LocalDate.now());
+    this.client.setUpdateAt(LocalDate.now());
     clientService.save(ClientUtil.convertToDTO(client));
 
-    DentistService dentistService = new DentistService();
-    dentist = new Dentist();
-    dentist.setRegistration("111111");
-    dentist.setName("Claudio");
-    dentist.setLastName("Duarte");
-    dentist.setLogin("claudio.duarte");
-    dentist.setPassword("cd1234");
-    dentist.setIsAdmin(true);
+    this.dentist = new Dentist();
+    this.dentist.setRegistration("111111");
+    this.dentist.setName("Claudio");
+    this.dentist.setLastName("Duarte");
+    this.dentist.setLogin("claudio.duarte");
+    this.dentist.setPassword("cd1234");
+    this.dentist.setIsAdmin(true);
+    this.dentist.setCreatedAt(LocalDate.now());
+    this.dentist.setUpdateAt(LocalDate.now());
     dentistService.save(DentistUtil.convertToDTO(dentist));
 
     consultation.setClient(client);
     consultation.setDentist(dentist);
     consultation.setScheduledDate(LocalDate.now());
     consultation.setScheduledTime(Time.valueOf(LocalTime.now()));
+    consultation.setCreatedAt(LocalDate.now());
+    consultation.setUpdateAt(LocalDate.now());
 
 
   }
@@ -85,7 +93,6 @@ public class ConsultationServiceTest {
 
   @Test
   void findAllDentist(){
-    ConsultationDTO consultationSave = service.save(ConsultationUtil.convertToDTO(consultation));
     List<ConsultationDTO> resultList = service.findAll();
     Assertions.assertNotNull(resultList);
 
@@ -93,7 +100,6 @@ public class ConsultationServiceTest {
 
   @Test
   void findADentist(){
-    ConsultationDTO consultationSave = service.save(ConsultationUtil.convertToDTO(consultation));
     Optional<Consultation> resultList = service.findById(1L);
     Assertions.assertNotNull(resultList);
 

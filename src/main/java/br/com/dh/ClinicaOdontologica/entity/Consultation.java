@@ -4,11 +4,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -28,10 +24,10 @@ public class Consultation  implements Serializable
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   private Dentist dentist;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   private Client client;
 
   @JsonFormat(pattern="yyyy-MM-dd")
