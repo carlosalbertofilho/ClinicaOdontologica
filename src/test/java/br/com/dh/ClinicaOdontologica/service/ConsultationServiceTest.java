@@ -1,15 +1,11 @@
 package br.com.dh.ClinicaOdontologica.service;
 
-import br.com.dh.ClinicaOdontologica.dto.ConsultationDTO;
-import br.com.dh.ClinicaOdontologica.entity.Client;
-import br.com.dh.ClinicaOdontologica.entity.Consultation;
-import br.com.dh.ClinicaOdontologica.entity.Dentist;
-import br.com.dh.ClinicaOdontologica.service.ClientService;
-import br.com.dh.ClinicaOdontologica.service.ConsultationService;
-import br.com.dh.ClinicaOdontologica.service.DentistService;
-import br.com.dh.ClinicaOdontologica.util.ClientUtil;
-import br.com.dh.ClinicaOdontologica.util.ConsultationUtil;
-import br.com.dh.ClinicaOdontologica.util.DentistUtil;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,11 +13,13 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-import java.util.Optional;
+import br.com.dh.ClinicaOdontologica.dto.ConsultationDTO;
+import br.com.dh.ClinicaOdontologica.entity.Client;
+import br.com.dh.ClinicaOdontologica.entity.Consultation;
+import br.com.dh.ClinicaOdontologica.entity.Dentist;
+import br.com.dh.ClinicaOdontologica.util.ClientUtil;
+import br.com.dh.ClinicaOdontologica.util.ConsultationUtil;
+import br.com.dh.ClinicaOdontologica.util.DentistUtil;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
