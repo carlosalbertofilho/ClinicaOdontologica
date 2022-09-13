@@ -1,4 +1,4 @@
-package br.com.dh.ClinicaOdontologica;
+package br.com.dh.ClinicaOdontologica.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
