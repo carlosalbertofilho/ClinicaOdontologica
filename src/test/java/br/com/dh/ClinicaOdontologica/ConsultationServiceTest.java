@@ -1,8 +1,6 @@
 package br.com.dh.ClinicaOdontologica;
 
-import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.dto.ConsultationDTO;
-import br.com.dh.ClinicaOdontologica.dto.DentistDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.entity.Consultation;
 import br.com.dh.ClinicaOdontologica.entity.Dentist;
@@ -21,7 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
