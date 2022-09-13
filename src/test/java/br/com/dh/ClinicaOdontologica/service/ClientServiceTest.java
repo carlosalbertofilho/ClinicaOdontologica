@@ -1,4 +1,4 @@
-package br.com.dh.ClinicaOdontologica;
+package br.com.dh.ClinicaOdontologica.service;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
