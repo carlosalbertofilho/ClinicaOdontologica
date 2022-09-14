@@ -62,12 +62,14 @@ main {
             margin: 0 32px;
             opacity: 0;
             transition: 0.6s;
+            z-index: 0;
         }
 
         .show_cadastrar_cliente {
 
             transition: 0.6s;
             opacity: 1;
+            z-index: 1;
         }
 
         h2 {
@@ -105,6 +107,7 @@ main {
             gap: 32px;
             transition: 0.6s;
             opacity: 0;
+            z-index: 0;
 
             .input {
 
@@ -147,6 +150,7 @@ main {
 
             transition: 0.6s;
             opacity: 1;
+            z-index: 1;
         }
     }
 }

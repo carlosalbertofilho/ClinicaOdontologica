@@ -55,10 +55,12 @@ main .container_main .cadastrar_cliente {
   margin: 0 32px;
   opacity: 0;
   transition: 0.6s;
+  z-index: 0;
 }
 main .container_main .show_cadastrar_cliente {
   transition: 0.6s;
   opacity: 1;
+  z-index: 1;
 }
 main .container_main h2 {
   font-size: 18px;
@@ -94,6 +96,7 @@ main .container_main .agenda_clientes {
   gap: 32px;
   transition: 0.6s;
   opacity: 0;
+  z-index: 0;
 }
 main .container_main .agenda_clientes .input {
   width: 100%;
@@ -141,6 +144,7 @@ main .container_main .agenda_clientes .card_cliente_consult .icons {
 main .container_main .show_agenda_cliente {
   transition: 0.6s;
   opacity: 1;
+  z-index: 1;
 }
 
 * {
