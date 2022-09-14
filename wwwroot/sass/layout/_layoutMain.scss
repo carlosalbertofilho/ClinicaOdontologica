@@ -41,6 +41,8 @@ body {
 
     main {
 
+        width: 100%;
+        overflow: hidden;
         grid-area: main;
         background: #D9CECE;
         .container_main {
@@ -49,6 +51,7 @@ body {
             margin: 8px;
             height: calc(100vh - 118px);
             border-radius: 16px;
+            
         }
     }
 

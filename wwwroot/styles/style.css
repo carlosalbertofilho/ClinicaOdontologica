@@ -1,8 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 main {
@@ -10,7 +9,6 @@ main {
   height: 100vh;
   background: linear-gradient(270.17deg, #14EFF5 -4.99%, rgba(20, 239, 245, 0.35) 41.73%, rgba(20, 239, 245, 0.444283) 64.92%, rgba(20, 239, 245, 0) 102.22%);
 }
-
 main .container {
   position: absolute;
   width: 33rem;
@@ -20,146 +18,107 @@ main .container {
   background-color: #fff;
   border-radius: 0.25rem;
 }
-
 main .container header {
   margin-top: 3rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
-
 main .container header .paragraph {
   text-align: center;
 }
-
 main .container header .paragraph .p1 {
-  color: #299194;
+  color: hsl(182deg, 57%, 37%);
   font-size: 1.126rem;
   line-height: 1.45rem;
-  font-family: 'PT Sans Narrow';
+  font-family: "PT Sans Narrow";
   font-style: normal;
   font-weight: 400;
 }
-
 main .container header .paragraph .p2 {
-  color: #272525;
+  color: hsl(0deg, 3%, 15%);
   font-size: 1.126rem;
-  font-family: 'PT Sans Narrow';
+  font-family: "PT Sans Narrow";
   font-style: normal;
   font-weight: 400;
 }
-
 main .container .title {
   text-align: center;
   margin-top: 2rem;
 }
-
 main .container .title h2 {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 1.126rem;
   letter-spacing: 0.03em;
 }
-
 main .container .title p {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 0.75rem;
   letter-spacing: 0.03em;
   line-height: 1.31rem;
 }
-
 main .container form {
   margin-top: 2rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   gap: 1.5rem;
 }
-
 main .container form #input-email {
   width: 25rem;
   height: 2.5rem;
   padding: 0.8rem;
   border-radius: 0.25rem;
   border: none;
-  -webkit-box-shadow: 1px 1px 5px 1px;
-          box-shadow: 1px 1px 5px 1px;
+  box-shadow: 1px 1px 5px 1px;
 }
-
 main .container form #input-password {
   width: 25rem;
   height: 2.5rem;
   padding: 0.8rem;
   border-radius: 0.25rem;
   border: none;
-  -webkit-box-shadow: 1px 1px 5px 1px;
-          box-shadow: 1px 1px 5px 1px;
+  box-shadow: 1px 1px 5px 1px;
 }
-
 main .container form #btn {
   width: 25rem;
   height: 2.5rem;
   padding: 0.8rem;
   border-radius: 0.25rem;
   border: none;
-  -webkit-box-shadow: 1px 1px 5px 1px;
-          box-shadow: 1px 1px 5px 1px;
-  font-family: 'Roboto';
+  box-shadow: 1px 1px 5px 1px;
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  background: #14eef5;
+  background: hsl(182deg, 92%, 52%);
   font-size: 0.875rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
-
 main .container .sign-up {
   margin-top: 3rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   gap: 0.6rem;
 }
-
 main .container .sign-up p {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
 }
-
 main .container .sign-up a {
   text-decoration: none;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 0.75rem;
-  color: black;
-}
-/*# sourceMappingURL=style.css.map */
+  color: hsl(0deg, 0%, 0%);
+}/*# sourceMappingURL=style.css.map */
