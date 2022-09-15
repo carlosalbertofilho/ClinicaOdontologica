@@ -44,18 +44,20 @@ aside ul .lista_aside .link_nav p {
 }
 
 main .container_main {
+  width: 100%;
   padding: 32px 0;
+  position: relative;
 }
 main .container_main .cadastrar_cliente {
-  display: flex;
   position: absolute;
+  display: flex;
   flex-direction: column;
-  max-width: 500px;
   gap: 16px;
   margin: 0 32px;
   opacity: 0;
   transition: 0.6s;
   z-index: 0;
+  overflow: hidden;
 }
 main .container_main .show_cadastrar_cliente {
   transition: 0.6s;
@@ -88,7 +90,8 @@ main .container_main ::placeholder {
   opacity: 50%;
 }
 main .container_main .agenda_clientes {
-  position: relative;
+  position: absolute;
+  width: 94%;
   margin: 0 32px;
   overflow: hidden;
   display: flex;
@@ -146,6 +149,21 @@ main .container_main .show_agenda_cliente {
   opacity: 1;
   z-index: 1;
 }
+main .container_main .cadastrar_dentista {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  z-index: 0;
+  transition: 0.6s;
+}
+main .container_main .show_cadastrar_dentista {
+  opacity: 1;
+  z-index: 1;
+  transition: 0.6s;
+}
 
 * {
   margin: 0;
@@ -192,6 +210,7 @@ body aside .container_aside {
 }
 body main {
   width: 100%;
+  display: flex;
   overflow: hidden;
   grid-area: main;
   background: #D9CECE;

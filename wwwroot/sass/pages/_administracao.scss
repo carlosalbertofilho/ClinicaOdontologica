@@ -46,23 +46,25 @@ aside {
 }
 
 main {
+    // position: absolute;
 
     .container_main {
-
+            width: 100%;
             padding: 32px 0;
+            position: relative;
 
         .cadastrar_cliente {
 
-            // position: relative;
+            position: absolute;
             display: flex;
-            position:absolute;
             flex-direction: column;
-            max-width: 500px;
+            // width: 100%;
             gap: 16px;
             margin: 0 32px;
             opacity: 0;
             transition: 0.6s;
             z-index: 0;
+            overflow:hidden;
         }
 
         .show_cadastrar_cliente {
@@ -99,7 +101,8 @@ main {
 
         .agenda_clientes {
 
-            position: relative;
+            position: absolute;
+            width: 94%;
             margin: 0 32px;
             overflow: hidden;
             display: flex;
@@ -108,6 +111,7 @@ main {
             transition: 0.6s;
             opacity: 0;
             z-index: 0;
+    
 
             .input {
 
@@ -151,6 +155,25 @@ main {
             transition: 0.6s;
             opacity: 1;
             z-index: 1;
+        }
+
+        .cadastrar_dentista {
+            
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            position: absolute;
+            top: 0;
+            opacity: 0;
+            z-index: 0;
+            transition: 0.6s;
+        }
+
+        .show_cadastrar_dentista {
+
+            opacity: 1;
+            z-index: 1;
+            transition: 0.6s;
         }
     }
 }

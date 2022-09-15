@@ -51,6 +51,7 @@
     </aside>
     <main>
         <div class="container_main">
+            <!-- Cadastrar novo cliente -->
             <form class="cadastrar_cliente" id="showCadastrarCliente" action="">
                 <h2>Cadastrar novo cliente</h2>
                 <input type="text" id="name" placeholder="Nome">
@@ -61,7 +62,7 @@
                 <input type="text" id="address" placeholder="Endereço">
                 <button class="btn_submit" id="submitClient">Cadastrar Cliente</button>
             </form>
-
+            <!-- Listar clientes cadastrados -->
             <div class="agenda_clientes" id="showAgendaDeClients">
                 <input class="input" type="text" placeholder="Busque um cliente pelo nome completo ou email informado">
                 <h2>Lista de clientes</h2>
@@ -76,6 +77,22 @@
                     </div>
                 </div>
             </div>
+            <form class="cadastrar_dentista" id="showCadastrarDentista">
+                <h2>Cadastrar Dentista</h2>
+                <input type="text" id="nameDentista" placeholder="Nome">
+                <input type="text" id="lastNameDentis" placeholder="Sobrenome">
+                <input type="email" id="emailDentis" placeholder="Email">
+                <input type="password" id="passwordDentis" placeholder="Senha" >
+                <input type="text" id="registrationDentist" placeholder="CRO">
+                <div class="is_admin">
+                    <p>Possui perfil adminstrador</p>
+                    <select name="" id="isAdministrator">
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                    </select>
+                </div>
+                <button class="btn_submit" id="submitDentist">Cadastrar Cliente</button>
+            </form>
         </div>
 
         
