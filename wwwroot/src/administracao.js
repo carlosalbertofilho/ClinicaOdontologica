@@ -5,6 +5,7 @@ const btnCalenderDentistRef = document.querySelector("#openCalenderDentist")
 const btnCalenderConsultsRef = document.querySelector("#openCalendeConsults")
 const AddNewUserRef = document.querySelector("#showCadastrarCliente")
 const calendaClientRef = document.querySelector("#showAgendaDeClients")
+const calendaDentistRef = document.querySelector("#showAgendaDeDentists")
 const addNewDentisRef = document.querySelector("#showCadastrarDentista")
 
 
@@ -32,6 +33,7 @@ const showAddNewUser = () => {
         btnAddNewUserRef.classList.add('active')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
         calendaClientRef.classList.remove('show_agenda_cliente')
+        calendaDentistRef.classList.remove('show_dentista_cliente')
         btnCalenderClientsRef.classList.remove('active')
         btnAddNewDentisRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
@@ -75,6 +77,7 @@ const showCalendarClients = () => {
         calendaClientRef.classList.add('show_agenda_cliente')
         AddNewUserRef.classList.remove('show_cadastrar_cliente')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
+        calendaDentistRef.classList.remove('show_dentista_cliente')
         btnAddNewDentisRef.classList.remove('active')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
@@ -118,6 +121,7 @@ const showAddNewdentist = () => {
         addNewDentisRef.classList.add('show_cadastrar_dentista')
         AddNewUserRef.classList.remove('show_cadastrar_cliente')
         calendaClientRef.classList.remove('show_agenda_cliente')
+        calendaDentistRef.classList.remove('show_dentista_cliente')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderClientsRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
@@ -129,6 +133,7 @@ const showCalendarDentists = () => {
     if(btnAddNewDentisRef.click){
 
         btnCalenderDentistRef.classList.add('active')
+        calendaDentistRef.classList.add('show_dentista_cliente')
         AddNewUserRef.classList.remove('show_cadastrar_cliente')
         calendaClientRef.classList.remove('show_agenda_cliente')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
@@ -146,6 +151,7 @@ const showCalendarConsults = () => {
         AddNewUserRef.classList.remove('show_cadastrar_cliente')
         calendaClientRef.classList.remove('show_agenda_cliente')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
+        calendaDentistRef.classList.remove('show_dentista_cliente')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderClientsRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')

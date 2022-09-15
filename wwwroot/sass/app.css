@@ -52,7 +52,7 @@ main .container_main .cadastrar_cliente {
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
   margin: 0 32px;
   opacity: 0;
   transition: 0.6s;
@@ -78,73 +78,85 @@ main .container_main input {
   padding: 12px 16px;
 }
 main .container_main ::-moz-placeholder {
+  font-size: 14;
+  font-family: "Roboto";
+  font-weight: 400;
+  letter-spacing: 1px;
   color: #4D4949;
   opacity: 50%;
 }
 main .container_main :-ms-input-placeholder {
+  font-size: 14;
+  font-family: "Roboto";
+  font-weight: 400;
+  letter-spacing: 1px;
   color: #4D4949;
   opacity: 50%;
 }
 main .container_main ::placeholder {
+  font-size: 14;
+  font-family: "Roboto";
+  font-weight: 400;
+  letter-spacing: 1px;
   color: #4D4949;
   opacity: 50%;
 }
-main .container_main .agenda_clientes {
+main .container_main .agenda_clientes, main .container_main .agenda_dentistas {
   position: absolute;
   width: 94%;
   margin: 0 32px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   transition: 0.6s;
   opacity: 0;
   z-index: 0;
 }
-main .container_main .agenda_clientes .input {
+main .container_main .agenda_clientes .input, main .container_main .agenda_dentistas .input {
   width: 100%;
 }
-main .container_main .agenda_clientes ::-moz-placeholder {
-  font-size: 12px;
-  font-weight: 500;
+main .container_main .agenda_clientes ::-moz-placeholder, main .container_main .agenda_dentistas ::-moz-placeholder {
+  font-size: 14px;
+  font-weight: 400;
   font-family: "Roboto";
   letter-spacing: 1px;
   color: #4D4949;
   opacity: 50%;
 }
-main .container_main .agenda_clientes :-ms-input-placeholder {
-  font-size: 12px;
-  font-weight: 500;
+main .container_main .agenda_clientes :-ms-input-placeholder, main .container_main .agenda_dentistas :-ms-input-placeholder {
+  font-size: 14px;
+  font-weight: 400;
   font-family: "Roboto";
   letter-spacing: 1px;
   color: #4D4949;
   opacity: 50%;
 }
-main .container_main .agenda_clientes ::placeholder {
-  font-size: 12px;
-  font-weight: 500;
+main .container_main .agenda_clientes ::placeholder, main .container_main .agenda_dentistas ::placeholder {
+  font-size: 14px;
+  font-weight: 400;
   font-family: "Roboto";
   letter-spacing: 1px;
   color: #4D4949;
   opacity: 50%;
 }
-main .container_main .agenda_clientes .card_cliente_consult {
+main .container_main .agenda_clientes .card_cliente_consult, main .container_main .agenda_clientes .card_dentista_consult, main .container_main .agenda_dentistas .card_cliente_consult, main .container_main .agenda_dentistas .card_dentista_consult {
   display: flex;
   justify-content: space-between;
   background-color: #F2F2F2;
   padding: 32px 64px;
   border-radius: 8px;
 }
-main .container_main .agenda_clientes .card_cliente_consult .client {
+main .container_main .agenda_clientes .card_cliente_consult .client, main .container_main .agenda_clientes .card_dentista_consult .client, main .container_main .agenda_dentistas .card_cliente_consult .client, main .container_main .agenda_dentistas .card_dentista_consult .client {
   display: flex;
   gap: 32px;
   justify-content: space-between;
 }
-main .container_main .agenda_clientes .card_cliente_consult .icons {
+main .container_main .agenda_clientes .card_cliente_consult .icons, main .container_main .agenda_clientes .card_dentista_consult .icons, main .container_main .agenda_dentistas .card_cliente_consult .icons, main .container_main .agenda_dentistas .card_dentista_consult .icons {
   display: flex;
   gap: 32px;
 }
-main .container_main .show_agenda_cliente {
+main .container_main .show_agenda_cliente, main .container_main .show_dentista_cliente {
   transition: 0.6s;
   opacity: 1;
   z-index: 1;
@@ -152,12 +164,50 @@ main .container_main .show_agenda_cliente {
 main .container_main .cadastrar_dentista {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   position: absolute;
   top: 0;
   opacity: 0;
   z-index: 0;
   transition: 0.6s;
+  margin: 32px;
+}
+main .container_main .cadastrar_dentista .is_admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(217, 206, 206, 0.3568627451);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+main .container_main .cadastrar_dentista .is_admin label {
+  font-size: 14px;
+  font-family: "Roboto";
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #4D4949;
+  opacity: 50%;
+}
+main .container_main .cadastrar_dentista .is_admin select {
+  border: none;
+  width: 150px;
+  color: #4d4949;
+  font-size: 14px;
+  font-family: "Roboto";
+  letter-spacing: 1px;
+  font-weight: bold;
+  background-color: #EB8C50;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+main .container_main .cadastrar_dentista .is_admin select option {
+  font-size: 14px;
+  font-family: "Roboto";
+  letter-spacing: 1px;
+  color: #262424;
+  background-color: rgba(217, 206, 206, 0.3568627451);
 }
 main .container_main .show_cadastrar_dentista {
   opacity: 1;

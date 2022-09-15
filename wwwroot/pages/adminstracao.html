@@ -77,6 +77,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Cadastrar novo dentista -->
             <form class="cadastrar_dentista" id="showCadastrarDentista">
                 <h2>Cadastrar Dentista</h2>
                 <input type="text" id="nameDentista" placeholder="Nome">
@@ -85,14 +86,29 @@
                 <input type="password" id="passwordDentis" placeholder="Senha" >
                 <input type="text" id="registrationDentist" placeholder="CRO">
                 <div class="is_admin">
-                    <p>Possui perfil adminstrador</p>
+                    <label>Possui perfil adminstrador</label>
                     <select name="" id="isAdministrator">
-                        <option value="true">Sim</option>
                         <option value="false">Não</option>
+                        <option value="true">Sim</option>
                     </select>
                 </div>
                 <button class="btn_submit" id="submitDentist">Cadastrar Cliente</button>
             </form>
+            <!-- Listar dentistas cadastrados -->
+            <div class="agenda_dentistas" id="showAgendaDeDentists">
+                <input class="input" type="text" placeholder="Busque um cliente pelo nome completo ou email informado">
+                <h2>Lista de clientes</h2>
+                <div class="card_dentista_consult">
+                    <div class="client">
+                        <img src="../img/Medical Doctor.png" alt="">
+                        <p>Drº Eduardo Ananias da Silva</p>
+                    </div>
+                    <div class="icons">
+                        <img src="..//img/Edit.png" alt="">
+                        <img src="..//img/Delete.png" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
 
         

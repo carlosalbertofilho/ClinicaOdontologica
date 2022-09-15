@@ -58,8 +58,7 @@ main {
             position: absolute;
             display: flex;
             flex-direction: column;
-            // width: 100%;
-            gap: 16px;
+            gap: 24px;
             margin: 0 32px;
             opacity: 0;
             transition: 0.6s;
@@ -95,11 +94,16 @@ main {
 
         ::placeholder {
 
+            font-size: 14;
+            font-family: 'Roboto';
+            font-weight: 400;
+            letter-spacing: 1px;
             color: #4D4949;
             opacity: 50%;
         }
+        // agenda cliente
 
-        .agenda_clientes {
+        .agenda_clientes, .agenda_dentistas{
 
             position: absolute;
             width: 94%;
@@ -107,7 +111,7 @@ main {
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 24px;
             transition: 0.6s;
             opacity: 0;
             z-index: 0;
@@ -119,8 +123,8 @@ main {
             }
             ::placeholder {
 
-                font-size: 12px;
-                font-weight: 500;
+                font-size: 14px;
+                font-weight: 400;
                 font-family: 'Roboto';
                 letter-spacing: 1px;
                 color: #4D4949;
@@ -128,7 +132,7 @@ main {
 
             }
 
-            .card_cliente_consult {
+            .card_cliente_consult, .card_dentista_consult {
 
                 display: flex;
                 justify-content: space-between;
@@ -150,7 +154,7 @@ main {
                 }
             }
         }
-        .show_agenda_cliente {
+        .show_agenda_cliente, .show_dentista_cliente {
 
             transition: 0.6s;
             opacity: 1;
@@ -161,12 +165,66 @@ main {
             
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 24px;
             position: absolute;
             top: 0;
             opacity: 0;
             z-index: 0;
             transition: 0.6s;
+            margin: 32px;
+
+
+            .is_admin {
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #d9cece5b;
+                border: none;
+                border-radius: 8px;
+                padding: 12px 16px;
+
+                label {
+
+                    font-size: 14px;
+                    font-family: 'Roboto';
+                    font-weight: 400;
+                    letter-spacing: 1px;
+                    color: #4D4949;
+                    opacity: 50%;
+                    
+
+                }
+
+                select {
+
+                    border: none;
+                    width: 150px;
+                    color: #4d4949;
+                    font-size: 14px;
+                    font-family: 'Roboto';
+                    letter-spacing: 1px;
+                    font-weight: bold;
+                    background-color: #EB8C50;
+                    padding: 4px 8px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    // background-color: #14EFF5;
+
+                    option {
+
+                        font-size: 14px;
+                        font-family: 'Roboto';
+                        letter-spacing: 1px;
+                        color: #262424;
+                        background-color: #d9cece5b;
+    
+                    }
+                    
+
+                }
+                
+            }
         }
 
         .show_cadastrar_dentista {
