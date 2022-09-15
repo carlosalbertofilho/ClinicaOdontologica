@@ -6,6 +6,13 @@ const btnCalenderConsultsRef = document.querySelector("#openCalendeConsults")
 const AddNewUserRef = document.querySelector("#showCadastrarCliente")
 const calendaClientRef = document.querySelector("#showAgendaDeClients")
 
+const inputNameRef = document.querySelector("#name");
+const inputLastNameRef = document.querySelector("#lastName");
+const inputEmailRef = document.querySelector("#email");
+const inputPasswordRef = document.querySelector("#password");
+const inputRgRef = document.querySelector("#register");
+const inputAddressRef = document.querySelector("#address");
+const btnSubmitRef = document.querySelector("#submitClient")
 
 const showAddNewUser = () => {
     if(btnAddNewUserRef.click){
@@ -18,6 +25,36 @@ const showAddNewUser = () => {
         btnCalenderConsultsRef.classList.remove('active')
     }
 }
+
+
+// POST CLIENTES
+
+const createNewClient = () => {
+    let client = {
+        name: inputNameRef.value,
+        lastName: inputLastNameRef.value,
+        login: inputEmailRef.value,
+        password: inputPasswordRef.value,
+        rg: inputRgRef.value,
+        address: inputAddressRef.value,
+    }
+
+    let requestHeaders = {
+        'Content-Type': 'application/json'
+    }
+
+    let requestConfig = {
+        method: 'POST',
+        body: JSON.stringify(client),
+        headers: requestHeaders
+    }
+    fetch('http://localhost:8080/api/cliente',requestConfig)
+    .then(response =>{
+        response.json()
+    })
+}
+
+
 
 const showCalendarClients = () => {
     if(btnCalenderClientsRef.click){
@@ -76,3 +113,8 @@ btnCalenderClientsRef.addEventListener('click', showCalendarClients)
 btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
 btnCalenderDentistRef.addEventListener('click', showCalendarDentists)
 btnCalenderConsultsRef.addEventListener('click', showCalendarConsults)
+
+btnSubmitRef.addEventListener('click', e => {
+    e.preventDefault();
+    createNewClient();
+})
