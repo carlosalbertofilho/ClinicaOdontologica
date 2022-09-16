@@ -1,60 +1,72 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.http.HttpStatus;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
+import br.com.dh.ClinicaOdontologica.service.ClientService;
+import io.restassured.http.ContentType;
 
-import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
-import net.minidev.json.JSONObject;
 
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
-@WebMvcTest(ClientControllerTest.class)
+@WebMvcTest(ClientController.class)
 public class ClientControllerTest
 {
   @Autowired
-  private MockMvc mockMvc;
-
-  @Autowired
-  private ObjectMapper objectMapper;
-
+  private ClientController clientController;
 
   @MockBean
-  ClientRepository clientRepository;
+  private ClientService clientService;
+
+  @MockBean
+  private ConsultationController consultationController;
+
+  @BeforeEach
+  public void setup()
+  {
+    standaloneSetup(this.clientController);
+  }
 
   @Test
-  @DisplayName("Testa salvar Cliente e testa lista de cliente")
-  public void itShouldSaveClientAndListThen() throws Exception
+  @DisplayName("Testa listar Clientes")
+  public void itShouldListClients()
   {
+    List<ClientDTO> value = new ArrayList<>();
+    value.add(new ClientDTO(Long.valueOf("1")
+        , "Carlos"
+        , "Filho"
+        , "carlos.filho@teste.com"
+        , "123456"
+        , "123456"
+        , "Rua 01"
+        , LocalDate.now()
+        , LocalDate.now()));
 
-    JSONObject resquest = new JSONObject();
-    resquest.put("name", "Drogo");
-    resquest.put("lastName", "Cachorroso");
-    resquest.put("login", "drogo@teste.com");
-    resquest.put("password", "Teste@1234");
-    resquest.put("rg", "11.222.333-6");
-    resquest.put("address", "rua 10");
+    // MAKE A MOCK
+    when(this.clientService.FindAll())
+      .thenReturn(value);
 
-
-    mockMvc.perform(MockMvcRequestBuilders
-      .post("/api/cliente")
-      .content(objectMapper.writeValueAsString(resquest))
-      .contentType(MediaType.APPLICATION_JSON)
-      .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isCreated())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.name").exists());
+    // MAKE A TEST
+    given()
+      .accept(ContentType.JSON)
+    .when()
+      .get("/api/cliente")
+    .then()
+      .statusCode(HttpStatus.OK.value());
   }
+
 }
+
