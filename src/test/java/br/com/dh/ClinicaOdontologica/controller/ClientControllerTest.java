@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
+import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
 
 @ExtendWith(SpringExtension.class)
@@ -79,5 +81,48 @@ public class ClientControllerTest
         .accept(MediaType.APPLICATION_JSON))
       .andExpect(MockMvcResultMatchers.status().isCreated());
   }
+
+  @Test
+  @DisplayName("Testar Busca por ID")
+  public void itShouldFindClientById() throws Exception
+  {
+    Optional<Client> value =
+    Optional.of(new Client(Long.valueOf("1")
+        , "Carlos"
+        , "Filho"
+        , "carlos.filho@teste.com"
+        , "123456"
+        , "123456"
+        , "Rua 01"
+        , LocalDate.now()
+        , LocalDate.now()));
+
+    //Make a Mock
+    when(this.clientService.findById(Long.valueOf("1")))
+      .thenReturn(value);
+
+    mockMvc.perform(MockMvcRequestBuilders
+      .get("/api/cliente/{id}", 1)
+      .accept(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.name").exists());
+  }
+
+  @Test
+  @DisplayName("Retorna 'Not Found' quando não acha o ID do Cliente")
+  public void itShouldNotFoundClientById() throws Exception
+  {
+    Optional<Client> value = Optional.empty();
+
+    //Make a mock
+    when(this.clientService.findById(Long.valueOf("1")))
+      .thenReturn(value);
+
+    mockMvc.perform(MockMvcRequestBuilders
+      .get("/api/cliente/{id}", 1)
+      .accept(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.status().isNotFound());
+  }
+
 
 }
