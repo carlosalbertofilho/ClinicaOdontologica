@@ -150,7 +150,7 @@ main .container_main .agenda_clientes .card_cliente_consult, main .container_mai
 }
 main .container_main .agenda_clientes .card_cliente_consult .client, main .container_main .agenda_clientes .card_dentista_consult .client, main .container_main .agenda_dentistas .card_cliente_consult .client, main .container_main .agenda_dentistas .card_dentista_consult .client {
   display: flex;
-  width: 40%;
+  width: 50%;
   align-items: center;
   gap: 32px;
 }

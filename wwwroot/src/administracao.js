@@ -9,6 +9,7 @@ const calendaDentistRef = document.querySelector("#showAgendaDeDentists")
 const addNewDentisRef = document.querySelector("#showCadastrarDentista")
 
 const listClientsRef = document.querySelector("#list_client")
+const listDentistRef = document.querySelector("#list_dentist")
 
 
 // inputs id cadastrar cliente
@@ -180,6 +181,71 @@ const createNewDentist = () => {
     })
 }
 
+// GET DENTISTAS
+
+const showDentists = () => {
+
+    let requestHeaders = {
+        headers: {
+            "Content-Type":'application/json',
+        }
+    }
+    fetch('http://localhost:8080/api/dentista',requestHeaders)
+    .then(response => {
+        response.json()
+        .then(data => {
+            let dados = data
+            for(let dado of dados){
+                if(!dado.completed){
+                    console.log("passou")
+                    listDentistRef.innerHTML += `
+                        <li class="item_client">
+                            <div class="card_cliente_consult">
+                                 <div class="client">
+                                    <img src="../img/User.png" alt="">
+                                    <p>${dado.name} ${dado.lastName}</p>
+                                    <p>Cro: ${dado.registration}</p>
+                                </div>
+                                <div class="icons">
+                                    <img src="..//img/Edit.png" alt="">
+                                    <img onclick = "deleteDentist(${dado.id})" src="..//img/Delete.png" alt="">
+                                </div>
+                            </div>
+                        </li>
+                        `
+                }else{
+                    console.log('nao passou')
+                }
+            }
+        })
+    })
+}
+
+// DELETE Dentista
+
+const deleteDentist = (id) => {
+    let requestHeaders = {
+        "Content-Type": "application/json"
+    }
+    let requestConfig = {
+
+        method: 'DELETE',
+        headers: requestHeaders
+
+    }
+
+    fetch(`http://localhost:8080/api/dentista/${id}`, requestConfig)
+    .then(response => {
+        response.json()
+        if(response.ok){
+            console.log("Deletado")
+        }else {
+            console.log("Sem dados")
+        }
+    })
+    
+}
+
 
 const showAddNewdentist = () => {
     if(btnAddNewDentisRef.click){
@@ -227,6 +293,7 @@ const showCalendarConsults = () => {
 }
 
 showClients()
+showDentists()
 btnAddNewUserRef.addEventListener('click', showAddNewUser)
 btnCalenderClientsRef.addEventListener('click', showCalendarClients)
 btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
