@@ -8,6 +8,8 @@ const calendaClientRef = document.querySelector("#showAgendaDeClients")
 const calendaDentistRef = document.querySelector("#showAgendaDeDentists")
 const addNewDentisRef = document.querySelector("#showCadastrarDentista")
 
+const listClientsRef = document.querySelector("#list_client")
+
 
 // inputs id cadastrar cliente
 const inputNameRef = document.querySelector("#name");
@@ -26,6 +28,7 @@ const inputPasswordDentistaRef = document.querySelector("#passwordDentis");
 const inputRegistrationDentistaRef = document.querySelector("#registrationDentist");
 const selectAdminRef = document.querySelector('#isAdministrator');
 const btnSubmitDentistaRef = document.querySelector("#submitDentist");
+
 
 const showAddNewUser = () => {
     if(btnAddNewUserRef.click){
@@ -86,8 +89,49 @@ const showCalendarClients = () => {
     }
 }
 
+// GET CLIENTES
 
-// POST CLIENTES
+const showClients = () => {
+
+    let requestHeaders = {
+        headers: {
+            "Content-Type":'application/json',
+        }
+    }
+    fetch('http://localhost:8080/api/cliente',requestHeaders)
+    .then(response => {
+        response.json()
+        .then(data => {
+            let dados = data
+            for(let dado of dados){
+                if(!dado.completed){
+                    console.log("passou")
+                    listClientsRef.innerHTML += `
+                        <li class="item_client">
+                            <div class="card_cliente_consult">
+                                 <div class="client">
+                                    <img src="../img/User.png" alt="">
+                                    <p>${dado.name} ${dado.lastName}</p>
+                                </div>
+                                <div class="icons">
+                                    <img src="..//img/Edit.png" alt="">
+                                    <img src="..//img/Delete.png" alt="">
+                                </div>
+                            </div>
+                        </li>
+                        `
+                }else{
+                    console.log('nao passou')
+                }
+            }
+        })
+    })
+
+
+
+}
+
+// POST DENTISTAS
 
 const createNewDentist = () => {
     let client = {
@@ -165,6 +209,7 @@ btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
 btnCalenderDentistRef.addEventListener('click', showCalendarDentists)
 btnCalenderConsultsRef.addEventListener('click', showCalendarConsults)
 
+showClients()
 btnSubmitRef.addEventListener('click', e => {
     e.preventDefault();
     createNewClient();
