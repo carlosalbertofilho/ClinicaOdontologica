@@ -115,7 +115,7 @@ const showClients = () => {
                                 </div>
                                 <div class="icons">
                                     <img src="..//img/Edit.png" alt="">
-                                    <img src="..//img/Delete.png" alt="">
+                                    <img onclick = "deleteClient(${dado.id})" src="..//img/Delete.png" alt="">
                                 </div>
                             </div>
                         </li>
@@ -126,9 +126,31 @@ const showClients = () => {
             }
         })
     })
+}
 
+// DELETE CLIENTE
 
+const deleteClient = (id) => {
+    let requestHeaders = {
+        "Content-Type": "application/json"
+    }
+    let requestConfig = {
 
+        method: 'DELETE',
+        headers: requestHeaders
+
+    }
+
+    fetch(`http://localhost:8080/api/cliente/${id}`, requestConfig)
+    .then(response => {
+        response.json()
+        if(response.ok){
+            console.log("Deletado")
+        }else {
+            console.log("Sem dados")
+        }
+    })
+    
 }
 
 // POST DENTISTAS
@@ -157,6 +179,7 @@ const createNewDentist = () => {
         response.json()
     })
 }
+
 
 const showAddNewdentist = () => {
     if(btnAddNewDentisRef.click){
@@ -203,13 +226,13 @@ const showCalendarConsults = () => {
     }
 }
 
+showClients()
 btnAddNewUserRef.addEventListener('click', showAddNewUser)
 btnCalenderClientsRef.addEventListener('click', showCalendarClients)
 btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
 btnCalenderDentistRef.addEventListener('click', showCalendarDentists)
 btnCalenderConsultsRef.addEventListener('click', showCalendarConsults)
 
-showClients()
 btnSubmitRef.addEventListener('click', e => {
     e.preventDefault();
     createNewClient();
