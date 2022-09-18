@@ -155,5 +155,35 @@ public class ClientControllerTest
       .andExpect(MockMvcResultMatchers.status().isNoContent());
   }
 
+  @Test
+  @DisplayName("Testa atualizar um cliente")
+  public void itShouldUpdateClient() throws Exception
+  {
+    Client user = new Client(Long.valueOf("1")
+    , "Carlos"
+    , "Filho"
+    , "carlos.filho@teste.com"
+    , "123456"
+    , "123456"
+    , "Rua 01"
+    , LocalDate.now()
+    , LocalDate.now());
 
+    //Make a Mock
+    when(this.clientService.save(ClientUtil.convertToDTO(user)))
+      .thenReturn(ClientUtil.convertToDTO(user));
+
+    //Update user
+    user.setPassword("654321");
+    user.setRg("654321");
+
+    //Make a Test
+    mockMvc.perform( MockMvcRequestBuilders
+    .put("/api/cliente/{id}", 1)
+    .contentType(MediaType.APPLICATION_JSON)
+    .accept(MediaType.APPLICATION_JSON)
+    .content(objectMapper.writeValueAsString(user)))
+    .andExpect( MockMvcResultMatchers.status().isNoContent() );
+
+  }
 }
