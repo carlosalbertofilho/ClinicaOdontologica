@@ -21,12 +21,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
-import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ClientController.class)
@@ -38,8 +35,6 @@ public class ClientControllerTest
   @Autowired
   MockMvc mockMvc;
 
-  @Autowired
-  ObjectMapper objectMapper;
 
   @Test
   @DisplayName("Teste de lista de Clientes")
@@ -159,31 +154,34 @@ public class ClientControllerTest
   @DisplayName("Testa atualizar um cliente")
   public void itShouldUpdateClient() throws Exception
   {
-    Client user = new Client(Long.valueOf("1")
-    , "Carlos"
-    , "Filho"
-    , "carlos.filho@teste.com"
-    , "123456"
-    , "123456"
-    , "Rua 01"
-    , LocalDate.now()
-    , LocalDate.now());
+    Optional<Client> value =
+    Optional.of(new Client(Long.valueOf("1")
+        , "Carlos"
+        , "Filho"
+        , "carlos.filho@teste.com"
+        , "123456"
+        , "123456"
+        , "Rua 01"
+        , LocalDate.now()
+        , LocalDate.now()));
 
     //Make a Mock
-    when(this.clientService.save(ClientUtil.convertToDTO(user)))
-      .thenReturn(ClientUtil.convertToDTO(user));
+    when(this.clientService.findById(Long.valueOf("1")))
+      .thenReturn(value);
 
-    //Update user
-    user.setPassword("654321");
-    user.setRg("654321");
+    JSONObject resquest = new JSONObject();
+    resquest.put("name", "Tchotchoza");
+    resquest.put("lastName", "Cachorrosa");
+    resquest.put("login", "drogo@teste.com");
+    resquest.put("password", "Teste@1234");
+    resquest.put("rg", "66.222.333-6");
+    resquest.put("address", "rua 50");
 
-    //Make a Test
-    mockMvc.perform( MockMvcRequestBuilders
-    .put("/api/cliente/{id}", 1)
-    .contentType(MediaType.APPLICATION_JSON)
-    .accept(MediaType.APPLICATION_JSON)
-    .content(objectMapper.writeValueAsString(user)))
-    .andExpect( MockMvcResultMatchers.status().isNoContent() );
-
+    mockMvc.perform(MockMvcRequestBuilders
+        .put("/api/cliente/{id}", 1)
+        .content(resquest.toString())
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(MockMvcResultMatchers.status().isNoContent());
   }
 }
