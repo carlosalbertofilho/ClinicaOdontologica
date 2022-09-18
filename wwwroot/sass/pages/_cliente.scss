@@ -1,0 +1,64 @@
+main {
+
+    .container_main {
+
+        .cadastrar_consulta {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin: 0 32px;
+            // opacity: 0;
+            transition: 0.6s;
+            z-index: 0;
+            overflow:hidden;
+            width: 600px;
+
+            .select_dentista {
+
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #d9cece5b;
+                padding: 12px 16px;
+                gap: 8px;
+                border-radius: 8px;
+
+                p {
+
+                    font-size: 14;
+                    font-family: 'Roboto';
+                    font-weight: 400;
+                    letter-spacing: 1px;
+                    color: #4D4949;
+                    opacity: 50%;
+
+                }
+
+                select {
+
+                    border-radius: 8px;
+                    border: none;
+                    font-size: 16px;
+                    font-family: 'Roboto';
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    color: #4D4949;
+
+                    option {
+
+                        font-size: 16px;
+                        font-family: 'Roboto';
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                        color: #4D4949;
+                        background-color: #14eef521;
+                        
+                    }
+                }
+            }
+
+        }
+    }
+}

@@ -292,8 +292,8 @@ const showCalendarConsults = () => {
     }
 }
 
-showClients()
-showDentists()
+// showClients()
+// showDentists()
 btnAddNewUserRef.addEventListener('click', showAddNewUser)
 btnCalenderClientsRef.addEventListener('click', showCalendarClients)
 btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
