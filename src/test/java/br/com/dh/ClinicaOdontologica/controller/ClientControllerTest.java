@@ -21,9 +21,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
+import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ClientController.class)
@@ -34,6 +37,9 @@ public class ClientControllerTest
 
   @Autowired
   MockMvc mockMvc;
+
+  @Autowired
+  ObjectMapper objectMapper;
 
   @Test
   @DisplayName("Teste de lista de Clientes")
@@ -117,11 +123,36 @@ public class ClientControllerTest
     //Make a mock
     when(this.clientService.findById(Long.valueOf("1")))
       .thenReturn(value);
-
+    //make a test
     mockMvc.perform(MockMvcRequestBuilders
       .get("/api/cliente/{id}", 1)
       .accept(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.status().isNotFound());
+  }
+
+  @Test
+  @DisplayName("Testa deletar um Cliente")
+  public void itShouldDeleteClient() throws Exception
+  {
+    Client user = new Client(Long.valueOf("1")
+    , "Carlos"
+    , "Filho"
+    , "carlos.filho@teste.com"
+    , "123456"
+    , "123456"
+    , "Rua 01"
+    , LocalDate.now()
+    , LocalDate.now());
+
+    //Make a Mock
+    when(this.clientService.findById(Long.valueOf("1")))
+      .thenReturn(Optional.of(user));
+    this.clientService.deleteById(user.getId());
+
+    //make a test
+    mockMvc.perform(MockMvcRequestBuilders
+      .delete("/api/cliente/{id}", 1))
+      .andExpect(MockMvcResultMatchers.status().isNoContent());
   }
 
 
