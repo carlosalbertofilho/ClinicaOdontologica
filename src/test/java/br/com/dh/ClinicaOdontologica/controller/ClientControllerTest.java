@@ -151,6 +151,20 @@ public class ClientControllerTest
   }
 
   @Test
+  @DisplayName("Retorna 'Not Found' quando não acha o ID do Cliente no Delete")
+  public void itShoudNotFoundDeleteClientById() throws Exception
+  {
+    //make a Mock
+    when(this.clientService.findById(Long.valueOf("1")))
+      .thenReturn(Optional.empty());
+
+    //make a test
+    mockMvc.perform(MockMvcRequestBuilders
+      .delete("/api/cliente/{id}", 1))
+      .andExpect(MockMvcResultMatchers.status().isNotFound());
+  }
+
+  @Test
   @DisplayName("Testa atualizar um cliente")
   public void itShouldUpdateClient() throws Exception
   {
@@ -183,5 +197,29 @@ public class ClientControllerTest
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON))
       .andExpect(MockMvcResultMatchers.status().isNoContent());
+  }
+
+  @Test
+  @DisplayName("Retorna 'Not Found' quando não acha o ID do Cliente no Update")
+  public void itShouldNotFoundUpdateClient() throws Exception
+  {
+    //make a Mock
+    when(this.clientService.findById(Long.valueOf("1")))
+      .thenReturn(Optional.empty());
+
+      JSONObject resquest = new JSONObject();
+      resquest.put("name", "Tchotchoza");
+      resquest.put("lastName", "Cachorrosa");
+      resquest.put("login", "drogo@teste.com");
+      resquest.put("password", "Teste@1234");
+      resquest.put("rg", "66.222.333-6");
+      resquest.put("address", "rua 50");
+
+      mockMvc.perform(MockMvcRequestBuilders
+          .put("/api/cliente/{id}", 1)
+          .content(resquest.toString())
+          .contentType(MediaType.APPLICATION_JSON)
+          .accept(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.status().isNotFound());
   }
 }
