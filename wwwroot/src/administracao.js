@@ -7,9 +7,11 @@ const AddNewUserRef = document.querySelector("#showCadastrarCliente")
 const calendaClientRef = document.querySelector("#showAgendaDeClients")
 const calendaDentistRef = document.querySelector("#showAgendaDeDentists")
 const addNewDentisRef = document.querySelector("#showCadastrarDentista")
+const calendaConsultRef = document.querySelector("#showAgendaDeConsultas")
 
 const listClientsRef = document.querySelector("#list_client")
 const listDentistRef = document.querySelector("#list_dentist")
+const listConsultRef = document.querySelector("#list_consult")
 
 
 // inputs id cadastrar cliente
@@ -38,6 +40,7 @@ const showAddNewUser = () => {
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
         calendaClientRef.classList.remove('show_agenda_cliente')
         calendaDentistRef.classList.remove('show_dentista_cliente')
+        calendaConsultRef.classList.remove('show_agenda_consulta')
         btnCalenderClientsRef.classList.remove('active')
         btnAddNewDentisRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
@@ -82,6 +85,7 @@ const showCalendarClients = () => {
         AddNewUserRef.classList.remove('show_cadastrar_cliente')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
         calendaDentistRef.classList.remove('show_dentista_cliente')
+        calendaConsultRef.classList.remove('show_agenda_consulta')
         btnAddNewDentisRef.classList.remove('active')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
@@ -129,6 +133,8 @@ const showClients = () => {
     })
 }
 
+showClients()
+
 // DELETE CLIENTE
 
 const deleteClient = (id) => {
@@ -152,6 +158,22 @@ const deleteClient = (id) => {
         }
     })
     
+}
+
+const showAddNewdentist = () => {
+    if(btnAddNewDentisRef.click){
+
+        btnAddNewDentisRef.classList.add('active')
+        addNewDentisRef.classList.add('show_cadastrar_dentista')
+        AddNewUserRef.classList.remove('show_cadastrar_cliente')
+        calendaClientRef.classList.remove('show_agenda_cliente')
+        calendaDentistRef.classList.remove('show_dentista_cliente')
+        calendaConsultRef.classList.remove('show_agenda_consulta')
+        btnAddNewUserRef.classList.remove('active')
+        btnCalenderClientsRef.classList.remove('active')
+        btnCalenderDentistRef.classList.remove('active')
+        btnCalenderConsultsRef.classList.remove('active')
+    }
 }
 
 // POST DENTISTAS
@@ -179,6 +201,22 @@ const createNewDentist = () => {
     .then(response =>{
         response.json()
     })
+}
+
+const showCalendarDentists = () => {
+    if(btnAddNewDentisRef.click){
+
+        btnCalenderDentistRef.classList.add('active')
+        calendaDentistRef.classList.add('show_dentista_cliente')
+        AddNewUserRef.classList.remove('show_cadastrar_cliente')
+        calendaClientRef.classList.remove('show_agenda_cliente')
+        addNewDentisRef.classList.remove('show_cadastrar_dentista')
+        calendaConsultRef.classList.remove('show_agenda_consulta')
+        btnAddNewUserRef.classList.remove('active')
+        btnCalenderClientsRef.classList.remove('active')
+        btnAddNewDentisRef.classList.remove('active')
+        btnCalenderConsultsRef.classList.remove('active')
+    }
 }
 
 // GET DENTISTAS
@@ -221,6 +259,8 @@ const showDentists = () => {
     })
 }
 
+showDentists()
+
 // DELETE Dentista
 
 const deleteDentist = (id) => {
@@ -247,40 +287,11 @@ const deleteDentist = (id) => {
 }
 
 
-const showAddNewdentist = () => {
-    if(btnAddNewDentisRef.click){
-
-        btnAddNewDentisRef.classList.add('active')
-        addNewDentisRef.classList.add('show_cadastrar_dentista')
-        AddNewUserRef.classList.remove('show_cadastrar_cliente')
-        calendaClientRef.classList.remove('show_agenda_cliente')
-        calendaDentistRef.classList.remove('show_dentista_cliente')
-        btnAddNewUserRef.classList.remove('active')
-        btnCalenderClientsRef.classList.remove('active')
-        btnCalenderDentistRef.classList.remove('active')
-        btnCalenderConsultsRef.classList.remove('active')
-    }
-}
-
-const showCalendarDentists = () => {
-    if(btnAddNewDentisRef.click){
-
-        btnCalenderDentistRef.classList.add('active')
-        calendaDentistRef.classList.add('show_dentista_cliente')
-        AddNewUserRef.classList.remove('show_cadastrar_cliente')
-        calendaClientRef.classList.remove('show_agenda_cliente')
-        addNewDentisRef.classList.remove('show_cadastrar_dentista')
-        btnAddNewUserRef.classList.remove('active')
-        btnCalenderClientsRef.classList.remove('active')
-        btnAddNewDentisRef.classList.remove('active')
-        btnCalenderConsultsRef.classList.remove('active')
-    }
-}
-
 const showCalendarConsults = () => {
     if(btnAddNewDentisRef.click){
 
         btnCalenderConsultsRef.classList.add('active')
+        calendaConsultRef.classList.add('show_agenda_consulta')
         AddNewUserRef.classList.remove('show_cadastrar_cliente')
         calendaClientRef.classList.remove('show_agenda_cliente')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
@@ -292,10 +303,85 @@ const showCalendarConsults = () => {
     }
 }
 
-// showClients()
-// showDentists()
+// GET CONSULTAS
+
+const showConsults = () => {
+
+    let requestHeaders = {
+        headers: {
+            "Content-Type":'application/json',
+        }
+    }
+    fetch('http://localhost:8080/api/consulta',requestHeaders)
+    .then(response => {
+        response.json()
+        .then(data => {
+            let dados = data
+            for(let dado of dados){
+                if(!dado.completed){
+                    console.log(dado)
+                    listConsultRef.innerHTML += `
+                            <li class="item_client">
+                                 <div class="card_dentista_consult">
+                                    <div class="client">
+                                        <img src="../img/Medical Doctor.png" alt="">
+                                         <p>${dado.dentist.name} ${dado.dentist.lastName}</p>
+                                    </div>
+                                    <div class="client">
+                                        <img src="../img/User.png" alt="">
+                                        <p>${dado.client.name} ${dado.client.lastName}</p>
+                                    </div>
+                                    <div class="client">
+                                        <img src="../img/Schedule.png" alt="">
+                                        <p>${dado.scheduledDate} ${dado.scheduledTime}</p>
+                                    </div>
+                                    <div class="icons">
+                                        <img src="..//img/Edit.png" alt="">
+                                         <img onclick = "deleteConsult(${dado.id})" src="..//img/Delete.png" alt="">
+                                    </div>
+                                </div>
+                            </li>
+                        `
+                }else{
+                    console.log('nao passou')
+                }
+            }
+        })
+    })
+}
+
+// DELETE Dentista
+
+const deleteConsult = (id) => {
+    let requestHeaders = {
+        "Content-Type": "application/json"
+    }
+    let requestConfig = {
+
+        method: 'DELETE',
+        headers: requestHeaders
+
+    }
+
+    fetch(`http://localhost:8080/api/consulta/${id}`, requestConfig)
+    .then(response => {
+        response.json()
+        if(response.ok){
+            console.log("Deletado")
+        }else {
+            console.log("Sem dados")
+        }
+    })
+    
+}
+
+showConsults()
 btnAddNewUserRef.addEventListener('click', showAddNewUser)
-btnCalenderClientsRef.addEventListener('click', showCalendarClients)
+btnCalenderClientsRef.addEventListener('click', e =>{
+    e.preventDefault()
+    showCalendarClients()
+    // showClients()
+})
 btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
 btnCalenderDentistRef.addEventListener('click', showCalendarDentists)
 btnCalenderConsultsRef.addEventListener('click', showCalendarConsults)
