@@ -26,7 +26,7 @@ main .container_main .cadastrar_consulta {
   overflow: hidden;
   width: 600px;
 }
-main .container_main .cadastrar_consulta .select_dentista {
+main .container_main .cadastrar_consulta .select_dentista, main .container_main .cadastrar_consulta .select_data, main .container_main .cadastrar_consulta .select_hour {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -36,7 +36,7 @@ main .container_main .cadastrar_consulta .select_dentista {
   gap: 8px;
   border-radius: 8px;
 }
-main .container_main .cadastrar_consulta .select_dentista p {
+main .container_main .cadastrar_consulta .select_dentista p, main .container_main .cadastrar_consulta .select_data p, main .container_main .cadastrar_consulta .select_hour p {
   font-size: 14;
   font-family: "Roboto";
   font-weight: 400;
@@ -44,7 +44,7 @@ main .container_main .cadastrar_consulta .select_dentista p {
   color: #4D4949;
   opacity: 50%;
 }
-main .container_main .cadastrar_consulta .select_dentista select {
+main .container_main .cadastrar_consulta .select_dentista select, main .container_main .cadastrar_consulta .select_data select, main .container_main .cadastrar_consulta .select_hour select {
   border-radius: 8px;
   border: none;
   font-size: 16px;
@@ -53,13 +53,21 @@ main .container_main .cadastrar_consulta .select_dentista select {
   letter-spacing: 1px;
   color: #4D4949;
 }
-main .container_main .cadastrar_consulta .select_dentista select option {
+main .container_main .cadastrar_consulta .select_dentista select option, main .container_main .cadastrar_consulta .select_data select option, main .container_main .cadastrar_consulta .select_hour select option {
   font-size: 16px;
   font-family: "Roboto";
   font-weight: bold;
   letter-spacing: 1px;
   color: #4D4949;
   background-color: rgba(20, 238, 245, 0.1294117647);
+}
+main .container_main .cadastrar_consulta .select_dentista input, main .container_main .cadastrar_consulta .select_data input, main .container_main .cadastrar_consulta .select_hour input {
+  font-size: 16px;
+  font-family: "Roboto";
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #4D4949;
+  background-color: transparent;
 }
 
 aside ul .active {

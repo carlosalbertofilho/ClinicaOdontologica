@@ -40,14 +40,19 @@
     <main>
         <div class="container_main">
             <form class="cadastrar_consulta" action="">
-                <h2>Adicionar Consulta</h2>
                 <div class="select_dentista" id="btnSelect">
                     <p>Escolha um dentista</p>
-                    <select name="" class="select_dentistaOption" id="dentista">
+                    <select name="" class="select_dentistaOption" onchange="teste(this)" id="dentista">
                         <option value=""></option>
                     </select>
-
-                    <!-- <input type="text" placeholder="dentista" id="dentista"> -->
+                </div>
+                <div class="select_data">
+                    <p>Seleciona a data da consulta</p>
+                    <input type="date" name="" id="hourConsulta">
+                </div>
+                <div class="select_hour">
+                    <p>Seleciona a data da consulta</p>
+                    <input type="time" name="" id="dataConsulta" step="2">
                 </div>
                 <button id="btnSubmit">Enviar consulta</button>
             </form>

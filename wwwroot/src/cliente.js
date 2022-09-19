@@ -2,10 +2,14 @@ const inputSelectDentistRef = document.querySelector(".select_dentistaOption")
 
 const btnSubmitRef = document.querySelector("#btnSubmit")
 
-const inputDentist = document.querySelector("option")
+const select = document.querySelector("#dentista")
 
+const option = document.querySelector('option')
 
-console.log(inputDentist)
+const dataConsultRef = document.querySelector('input[type="date"]')
+const hourConsultRef = document.querySelector('input[type="time"]')
+
+// console.dir(dataConsultRef)
 
 const showSelectDentist = () => {
     let requestHeaders = {
@@ -18,64 +22,66 @@ const showSelectDentist = () => {
         response.json()
         .then(data => {
             let dados = data
-           
-                    
-                    dados.forEach(element => {
-                        // let op = document.createElement("select")
-                        let op1 = document.createElement("option")
-                        op1.innerText = element;
-                        op1.value = element.id
-                        op1.innerText = `Dentista ${element.name} ${element.lastName} Cro: ${element.registration}` 
-                        inputDentist.after(op1)
-                        console.log(op1)
-                    });
-                    
-                  
+
+              for(let dado of dados) {
+                    select.innerHTML += 
+                    // '<option value="' + dado.id + '">' + dado.name + '</option>';
+                    `<option value="${dado.id}">Dentista ${dado.name} ${dado.lastName} Cro: ${dado.registration}</option>`                  
+              }                                     
         })
         
     }) 
+
 }
 
 
-// const createConsult = () => {
+const teste = (select) => {
+    
+    // let tets = option.innerHTML
+    // option.innerHTML = select.options[select.selectedIndex].value 
+    // 'ID: <b>' + select.value + '</b>';
 
-//     let consult = {
-//         dentist: {
-//             id: inputDentist.value,
-//         },
-//         client: {
-//             id: inputDentist.value,
-//         },
-//         updateAt : "2022-09-30",
-//         scheduledDate : "2022-10-01",
-//         scheduledTime : "10:00:00"
+}
+showSelectDentist()
+const createConsult = () => {
 
-//     }
-//     let requestHeaders = {
-//         'Content-Type': 'application/json'
-//     }
+    let consult = {
+        dentist: {
+            id: option.innerHTML = select.options[select.selectedIndex].value,
+        },
+        client: {
+            id: 1,
+        },
+        updateAt : "",
+        scheduledDate : dataConsultRef.value,
+        scheduledTime : hourConsultRef.value
 
-//     let requestConfig = {
-//         method: 'POST',
-//         body: JSON.stringify(consult),
-//         headers: requestHeaders
-//     }
-//     fetch('http://localhost:8080/api/consulta',requestConfig)
-//     .then(response =>{
-//         response.json()
-//     })
-// }
+    }
+    let requestHeaders = {
+        'Content-Type': 'application/json'
+    }
+
+    let requestConfig = {
+        method: 'POST',
+        body: JSON.stringify(consult),
+        headers: requestHeaders
+    }
+    fetch('http://localhost:8080/api/consulta',requestConfig)
+    .then(response =>{
+        response.json()
+    })
+}
 
 // btnSelectRef.addEventListener('click', e => {
-    // e.preventDefault()
-    showSelectDentist()
+//     e.preventDefault()
+  
 
 // })
 
-// btnSubmitRef.addEventListener('click', e => {
-//     e.preventDefault()
-//     createConsult()
-// } )
+btnSubmitRef.addEventListener('click', e => {
+    e.preventDefault()
+    createConsult()
+} )
 
 
 //resolver questoa para async await ao criar o elemnto option
