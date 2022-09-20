@@ -14,18 +14,19 @@
   cursor: pointer;
 }
 
-main .container_main .cadastrar_consulta {
+main .container_main .cadastrar_consulta, main .container_main .agenda_cliente {
   position: absolute;
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin: 0 32px;
+  opacity: 0;
   transition: 0.6s;
   z-index: 0;
   overflow: hidden;
   width: 600px;
 }
-main .container_main .cadastrar_consulta .select_dentista, main .container_main .cadastrar_consulta .select_data, main .container_main .cadastrar_consulta .select_hour {
+main .container_main .cadastrar_consulta .select_dentista, main .container_main .cadastrar_consulta .select_data, main .container_main .cadastrar_consulta .select_hour, main .container_main .agenda_cliente .select_dentista, main .container_main .agenda_cliente .select_data, main .container_main .agenda_cliente .select_hour {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -35,7 +36,7 @@ main .container_main .cadastrar_consulta .select_dentista, main .container_main 
   gap: 8px;
   border-radius: 8px;
 }
-main .container_main .cadastrar_consulta .select_dentista p, main .container_main .cadastrar_consulta .select_data p, main .container_main .cadastrar_consulta .select_hour p {
+main .container_main .cadastrar_consulta .select_dentista p, main .container_main .cadastrar_consulta .select_data p, main .container_main .cadastrar_consulta .select_hour p, main .container_main .agenda_cliente .select_dentista p, main .container_main .agenda_cliente .select_data p, main .container_main .agenda_cliente .select_hour p {
   font-size: 14;
   font-family: "Roboto";
   font-weight: 400;
@@ -43,7 +44,7 @@ main .container_main .cadastrar_consulta .select_dentista p, main .container_mai
   color: #4D4949;
   opacity: 50%;
 }
-main .container_main .cadastrar_consulta .select_dentista select, main .container_main .cadastrar_consulta .select_data select, main .container_main .cadastrar_consulta .select_hour select {
+main .container_main .cadastrar_consulta .select_dentista select, main .container_main .cadastrar_consulta .select_data select, main .container_main .cadastrar_consulta .select_hour select, main .container_main .agenda_cliente .select_dentista select, main .container_main .agenda_cliente .select_data select, main .container_main .agenda_cliente .select_hour select {
   border-radius: 8px;
   border: none;
   font-size: 16px;
@@ -52,7 +53,7 @@ main .container_main .cadastrar_consulta .select_dentista select, main .containe
   letter-spacing: 1px;
   color: #4D4949;
 }
-main .container_main .cadastrar_consulta .select_dentista select option, main .container_main .cadastrar_consulta .select_data select option, main .container_main .cadastrar_consulta .select_hour select option {
+main .container_main .cadastrar_consulta .select_dentista select option, main .container_main .cadastrar_consulta .select_data select option, main .container_main .cadastrar_consulta .select_hour select option, main .container_main .agenda_cliente .select_dentista select option, main .container_main .agenda_cliente .select_data select option, main .container_main .agenda_cliente .select_hour select option {
   font-size: 16px;
   font-family: "Roboto";
   font-weight: bold;
@@ -60,13 +61,18 @@ main .container_main .cadastrar_consulta .select_dentista select option, main .c
   color: #4D4949;
   background-color: rgba(20, 238, 245, 0.1294117647);
 }
-main .container_main .cadastrar_consulta .select_dentista input, main .container_main .cadastrar_consulta .select_data input, main .container_main .cadastrar_consulta .select_hour input {
+main .container_main .cadastrar_consulta .select_dentista input, main .container_main .cadastrar_consulta .select_data input, main .container_main .cadastrar_consulta .select_hour input, main .container_main .agenda_cliente .select_dentista input, main .container_main .agenda_cliente .select_data input, main .container_main .agenda_cliente .select_hour input {
   font-size: 16px;
   font-family: "Roboto";
   font-weight: bold;
   letter-spacing: 1px;
   color: #4D4949;
   background-color: transparent;
+}
+main .container_main .show_cadastrar_consult, main .container_main .show_consult_cliente {
+  opacity: 1;
+  z-index: 1;
+  transition: 0.6s;
 }
 
 aside ul .active {

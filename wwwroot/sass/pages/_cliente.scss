@@ -2,13 +2,13 @@ main {
 
     .container_main {
 
-        .cadastrar_consulta {
+        .cadastrar_consulta, .agenda_cliente {
             position: absolute;
             display: flex;
             flex-direction: column;
             gap: 24px;
             margin: 0 32px;
-            // opacity: 0;
+            opacity: 0;
             transition: 0.6s;
             z-index: 0;
             overflow:hidden;
@@ -72,5 +72,12 @@ main {
             }
 
         }
+        .show_cadastrar_consult, .show_consult_cliente {
+
+            opacity: 1;
+            z-index: 1;
+            transition: 0.6s;
+        }
     }
+    
 }

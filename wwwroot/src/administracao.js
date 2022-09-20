@@ -350,7 +350,7 @@ const showConsults = () => {
     })
 }
 
-// DELETE Dentista
+// DELETE consulta
 
 const deleteConsult = (id) => {
     let requestHeaders = {

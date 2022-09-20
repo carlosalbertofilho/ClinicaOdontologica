@@ -1,15 +1,50 @@
+const btnAddNewConsultRef = document.querySelector("#openAddNewConsult")
+const btnConsultsRef = document.querySelector("#openCalenderConsults")
+const btnAllConsultsRef = document.querySelector("#openAllConsults")
+
+const showCadastrarConsultRef = document.querySelector("#showCadastrarConsult")
+const showConsultClientRef = document.querySelector("#showConsultClient")
+
+
 const inputSelectDentistRef = document.querySelector(".select_dentistaOption")
-
 const btnSubmitRef = document.querySelector("#btnSubmit")
-
 const select = document.querySelector("#dentista")
-
 const option = document.querySelector('option')
-
 const dataConsultRef = document.querySelector('input[type="date"]')
 const hourConsultRef = document.querySelector('input[type="time"]')
 
-// console.dir(dataConsultRef)
+
+const showAddConsult = () => {
+    if(btnAddNewConsultRef.click) {
+        showCadastrarConsultRef.classList.add('show_cadastrar_consult')
+        btnAddNewConsultRef.classList.add('active')
+        btnAllConsultsRef.classList.remove('active')
+        btnConsultsRef.classList.remove('active')
+        showConsultClientRef.classList.remove('show_consult_cliente')
+    }
+}
+
+const showConsultsById = () => {
+    if(btnConsultsRef.click) {
+
+        showConsultClientRef.classList.add('show_consult_cliente')
+        btnConsultsRef.classList.add('active')
+        showCadastrarConsultRef.classList.remove('show_cadastrar_consult')
+        btnAllConsultsRef.classList.remove('active')
+        btnAddNewConsultRef.classList.remove('active')
+
+    }
+}
+
+const showHistoricConsult = () => {
+    if(btnAllConsultsRef.click){
+        showCadastrarConsultRef.classList.remove('show_cadastrar_consult')
+        btnAllConsultsRef.classList.add('active')
+        btnAddNewConsultRef.classList.remove('active')
+        showConsultClientRef.classList.remove('show_consult_cliente')
+        btnConsultsRef.classList.remove('active')
+    }
+}
 
 const showSelectDentist = () => {
     let requestHeaders = {
@@ -42,7 +77,7 @@ const teste = (select) => {
     // 'ID: <b>' + select.value + '</b>';
 
 }
-showSelectDentist()
+//showSelectDentist()
 const createConsult = () => {
 
     let consult = {
@@ -77,6 +112,11 @@ const createConsult = () => {
   
 
 // })
+
+
+btnAddNewConsultRef.addEventListener('click', showAddConsult)
+btnConsultsRef.addEventListener('click', showConsultsById)
+btnAllConsultsRef.addEventListener('click', showHistoricConsult)
 
 btnSubmitRef.addEventListener('click', e => {
     e.preventDefault()
