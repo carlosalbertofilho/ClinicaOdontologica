@@ -69,7 +69,7 @@ main {
                  
                 }       
                 
-            }
+            }    
 
         }
         .show_cadastrar_consult, .show_consult_cliente {
@@ -77,6 +77,34 @@ main {
             opacity: 1;
             z-index: 1;
             transition: 0.6s;
+        }
+
+        .card_consult {
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            background-color: #F2F2F2;
+            padding: 32px 64px;
+            border-radius: 8px;
+
+            .client {
+
+                display: flex;
+                align-items: center;
+                gap: 32px;
+
+                p {
+                    
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-family: 'Roboto';
+                    color: #262424;
+                    letter-spacing: 1px;
+
+                }
+            }
         }
     }
     

@@ -13,6 +13,8 @@ const option = document.querySelector('option')
 const dataConsultRef = document.querySelector('input[type="date"]')
 const hourConsultRef = document.querySelector('input[type="time"]')
 
+const cardConsultRef = document.querySelector("#cardConsult")
+
 
 const showAddConsult = () => {
     if(btnAddNewConsultRef.click) {
@@ -46,6 +48,7 @@ const showHistoricConsult = () => {
     }
 }
 
+//GET de dentistas
 const showSelectDentist = () => {
     let requestHeaders = {
         headers: {
@@ -77,7 +80,9 @@ const teste = (select) => {
     // 'ID: <b>' + select.value + '</b>';
 
 }
-//showSelectDentist()
+showSelectDentist()
+
+// POST consulta
 const createConsult = () => {
 
     let consult = {
@@ -107,12 +112,39 @@ const createConsult = () => {
     })
 }
 
-// btnSelectRef.addEventListener('click', e => {
-//     e.preventDefault()
-  
+//GET consulta by id
 
-// })
+const showConsultClient = (id=1) => { //falta token para rever o id
+    let requestHeaders = {
+        headers: {
+            "Content-Type":'application/json',
+        }
+    }
+    fetch(`http://localhost:8080/api/consulta/${id}`,requestHeaders)
+    .then(response => {
+        response.json()
+        .then(data => {
+            let dados = data
+              cardConsultRef.innerHTML += `
+                    <div class="client">
+                        <img src="../img/User_icon_black.png" alt="">
+                        <p>${dados.client.name} ${dados.client.lastName}</p>
+                    </div>
+                    <div class="client">
+                        <img src="../img/Medical Doctor_icon_black.png" alt="">
+                        <p>Dentista ${dados.dentist.name} ${dados.dentist.lastName} Cro: ${dados.dentist.registration}</p>
+                    </div>
+                    <div class="client">
+                    <img src="../img/Schedule_icon_black.png" alt="">
+                    <p>${dados.scheduledDate} - ${dados.scheduledTime}</p>
+                    </div>
+              `                                    
+        })
+        
+    }) 
+}
 
+showConsultClient()
 
 btnAddNewConsultRef.addEventListener('click', showAddConsult)
 btnConsultsRef.addEventListener('click', showConsultsById)
