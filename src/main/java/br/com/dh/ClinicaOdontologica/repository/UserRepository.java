@@ -1,12 +1,12 @@
 package br.com.dh.ClinicaOdontologica.repository;
 
-import br.com.dh.ClinicaOdontologica.entity.User;
+import br.com.dh.ClinicaOdontologica.entity.UserAdmin;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.Optional;
 
-  User findByUsername(String username);
+@Repository
+public interface UserRepository extends JpaRepository<UserAdmin, Long> {
+  Optional<UserAdmin> findByUsername(String username);
 }
