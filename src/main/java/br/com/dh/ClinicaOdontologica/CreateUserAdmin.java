@@ -28,6 +28,9 @@ public class CreateUserAdmin implements ApplicationRunner {
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     String password = bCryptPasswordEncoder.encode("123456");
 
-    userRepository.save(new UserAdmin("teste", password, Role.ROLE_ADMIN));
+    userRepository.save(UserAdmin.builder()
+                  .username("Teste")
+                  .password(password)
+                  .role(Role.ROLE_ADMIN).build());
   }
 }
