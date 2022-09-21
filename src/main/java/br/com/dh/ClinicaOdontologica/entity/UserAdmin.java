@@ -1,6 +1,7 @@
 package br.com.dh.ClinicaOdontologica.entity;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
@@ -19,25 +21,30 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "user")
-
-public class User implements UserDetails{
-
+@Entity
+public class UserAdmin implements UserDetails{
   @Id
+  @SequenceGenerator(name = "user_sequence",sequenceName = "user_sequence", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @NotNull
-  @Size(min = 6, max = 20)
-  private String username;
-  @NotNull
-  @Size(min = 6, max = 100)
-  private String password;
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private List<Role> roles;
+  private String username;
+
+  private String password;
+  @Enumerated(EnumType.STRING)
+  private Role role;
+
+
+  public UserAdmin(String username, String password, Role role) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
+  }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return this.roles;
+    SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.name());
+    return Collections.singleton(simpleGrantedAuthority);
   }
 
   @Override

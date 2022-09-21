@@ -1,6 +1,8 @@
 package br.com.dh.ClinicaOdontologica.service;
 
 import br.com.dh.ClinicaOdontologica.repository.UserRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,19 +11,18 @@ import org.springframework.stereotype.Service;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 
+@Getter
+@Setter
 @Service
 public class UserAuThService implements UserDetailsService {
-
+  private final UserRepository repository;
   @Autowired
-  private UserRepository repository;
+  public UserAuThService(UserRepository repository) {
+    this.repository = repository;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    try {
-      return repository.findByUsername(username);
-
-    }catch (UsernameNotFoundException e){
-      throw new UsernameNotFoundException("Usuario não cadastrado em nossas bases de dados!");
-    }
+    return repository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Usuario não encontrado"));
   }
 }
