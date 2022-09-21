@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.util;
 
+import java.sql.Time;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.dh.ClinicaOdontologica.entity.Client;
+import br.com.dh.ClinicaOdontologica.entity.Consultation;
 import br.com.dh.ClinicaOdontologica.entity.Dentist;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
+import br.com.dh.ClinicaOdontologica.repository.ConsultationRepository;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
 
 @Configuration
@@ -20,54 +23,78 @@ public class AddDataOnDB implements ApplicationRunner
 
   @Autowired private DentistRepository dentistRepository;
 
+  @Autowired private ConsultationRepository consultationRepository;
+
   @Override
   public void run(ApplicationArguments args) throws Exception {
 
-    Client client = new Client();
-    client.setName("Carlos");
-    client.setLastName("Filho");
-    client.setLogin("carlos.filho@teste.com");
-    client.setPassword("teste@12345");
-    client.setRg("12.123.123-12");
-    client.setAddress("Rua 01");
-    client.setCreatedAt(LocalDate.now());
-    client.setUpdateAt(LocalDate.now());
-    clientRepository.save(client);
+    clientRepository.save(Client.builder()
+      .name("Eduardo")
+      .lastName("Ananias")
+      .login("eduardo.ananias@teste.com")
+      .password("teste@12345")
+      .rg("32.123.123-12")
+      .address("Rua 50")
+      .createdAt(LocalDate.of(2022, 9, 19))
+      .updateAt(LocalDate.now()).build());
 
-    Client client2 = new Client();
-    client2.setName("Luna");
-    client2.setLastName("Tchotchoza");
-    client2.setLogin("luna@teste.com");
-    client2.setPassword("teste@12345");
-    client2.setRg("22.123.123-12");
-    client2.setAddress("Rua 10");
-    client2.setCreatedAt(LocalDate.now());
-    client2.setUpdateAt(LocalDate.now());
-    clientRepository.save(client2);
+    dentistRepository.save(Dentist.builder()
+      .name("Salomão")
+      .lastName("Santos")
+      .login("salomao.santos@teste.com")
+      .password("teste@123456")
+      .registration("7654321")
+      .isAdmin(false)
+      .createdAt(LocalDate.of(2022, 3, 15))
+      .updateAt(LocalDate.now()).build());
 
+    consultationRepository.save(Consultation.builder()
+      .client(Client.builder()
+                .name("Carlos")
+                .lastName("Filho")
+                .login("carlos.filho@teste.com")
+                .password("teste@12345")
+                .rg("12.123.123-12")
+                .address("Rua 10")
+                .createdAt(LocalDate.of(2022, 9, 22))
+                .updateAt(LocalDate.now()).build())
+      .dentist(Dentist.builder()
+                .name("Denis")
+                .lastName("Carbone")
+                .login("denis.carbone@teste.com")
+                .password("teste@123456")
+                .registration("1234567")
+                .isAdmin(true)
+                .createdAt(LocalDate.now())
+                .updateAt(LocalDate.now()).build())
+      .createdAt(LocalDate.now())
+      .updateAt(LocalDate.now())
+      .scheduledDate(LocalDate.of(2022, 9, 22))
+      .scheduledTime(Time.valueOf("10:30:00")).build());
 
-    Dentist dentist = new Dentist();
-    dentist.setName("Denis");
-    dentist.setLastName("Carbone");
-    dentist.setLogin("denis.carbone@teste.com");
-    dentist.setPassword("teste@12345");
-    dentist.setRegistration("123456");
-    dentist.setIsAdmin(true);
-    dentist.setCreatedAt(LocalDate.now());
-    dentist.setUpdateAt(LocalDate.now());
-    dentistRepository.save(dentist);
-
-    Dentist dentist2 = new Dentist();
-    dentist2.setName("Denis");
-    dentist2.setLastName("Carbone");
-    dentist2.setLogin("denis.carbone@teste.com");
-    dentist2.setPassword("teste@12345");
-    dentist2.setRegistration("123456");
-    dentist2.setIsAdmin(false);
-    dentist2.setCreatedAt(LocalDate.now());
-    dentist2.setUpdateAt(LocalDate.now());
-    dentistRepository.save(dentist2);
-
+    consultationRepository.save(Consultation.builder()
+      .client(Client.builder()
+                .name("Luna")
+                .lastName("Tchotchoza")
+                .login("luna@teste.com")
+                .password("teste@12345")
+                .rg("23.123.123-12")
+                .address("Rua 12")
+                .createdAt(LocalDate.now())
+                .updateAt(LocalDate.now()).build())
+      .dentist(Dentist.builder()
+                .name("Lucas")
+                .lastName("Guimarães")
+                .login("lucas@teste.com")
+                .password("teste@123456")
+                .registration("25364795")
+                .isAdmin(false)
+                .createdAt(LocalDate.now())
+                .updateAt(LocalDate.now()).build())
+      .createdAt(LocalDate.now())
+      .updateAt(LocalDate.now())
+      .scheduledDate(LocalDate.of(2022, 9, 22))
+      .scheduledTime(Time.valueOf("15:30:00")).build());
 
   }
 
