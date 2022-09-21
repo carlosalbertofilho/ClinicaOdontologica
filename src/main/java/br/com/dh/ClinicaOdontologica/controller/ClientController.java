@@ -75,8 +75,8 @@ public class ClientController
         clientService.deleteById(id);
         return Void.TYPE;
       }).orElseThrow(() ->
-      new ResponseStatusException(HttpStatus.NOT_FOUND
-        , "Client not found"));
+        new ResponseStatusException(HttpStatus.NOT_FOUND
+          ,"Client not found"));
   }
 
   @PutMapping("/{id}")

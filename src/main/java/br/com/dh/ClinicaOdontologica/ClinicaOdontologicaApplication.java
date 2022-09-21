@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
 public class ClinicaOdontologicaApplication {
@@ -13,6 +14,7 @@ public class ClinicaOdontologicaApplication {
 	 * @return ModelMapper set to skip Null Enable
 	 */
 	@Bean
+	@CrossOrigin("*")
 	public ModelMapper modelMapper()
 	{
 		ModelMapper modelMapper = new ModelMapper();
