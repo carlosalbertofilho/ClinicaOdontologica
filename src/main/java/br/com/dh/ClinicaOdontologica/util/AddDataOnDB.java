@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.entity.Consultation;
 import br.com.dh.ClinicaOdontologica.entity.Dentist;
+import br.com.dh.ClinicaOdontologica.entity.Role;
+import br.com.dh.ClinicaOdontologica.entity.UserAdmin;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.repository.ConsultationRepository;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
+import br.com.dh.ClinicaOdontologica.repository.UserRepository;
 
 @Configuration
 public class AddDataOnDB implements ApplicationRunner
@@ -25,8 +29,18 @@ public class AddDataOnDB implements ApplicationRunner
 
   @Autowired private ConsultationRepository consultationRepository;
 
+  @Autowired private UserRepository userRepository;
+
+  @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
+
   @Override
   public void run(ApplicationArguments args) throws Exception {
+
+    userRepository.save(UserAdmin.builder()
+                  .username("Teste")
+                  .password(bCryptPasswordEncoder
+                    .encode("123456"))
+                  .role(Role.ROLE_ADMIN).build());
 
     clientRepository.save(Client.builder()
       .name("Eduardo")
