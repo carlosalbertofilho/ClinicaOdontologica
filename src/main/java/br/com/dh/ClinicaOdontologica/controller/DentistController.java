@@ -45,6 +45,8 @@ public class DentistController
     {
       log.info("Creating Dentist: %s".formatted(dentistDTO.getLogin()));
       dentistDTO.setCreatedAt(LocalDate.now());
+      dentistDTO.setPassword(bCryptPasswordEncoder
+        .encode(dentistDTO.getPassword()));
       return dentistService.save(dentistDTO);
     }
 
