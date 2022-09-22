@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 
@@ -24,6 +25,7 @@ public class ClientService
   {
       Client client = clientRepository
         .save(ClientUtil.convertToEntity(clientDTO));
+      client.setRole(Role.ROLE_CLIENT);
       return ClientUtil.convertToDTO(client);
   }
   public List<ClientDTO> FindAll()

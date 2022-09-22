@@ -74,6 +74,7 @@ public class ClientControllerTest
     request.put("password", "Teste@1234");
     request.put("rg", "11.222.333-6");
     request.put("address", "rua 10");
+    request.put("Role", "ROLE_CLIENT");
 
 
     mockMvc.perform(MockMvcRequestBuilders
@@ -194,6 +195,7 @@ public class ClientControllerTest
     request.put("password", "Teste@1234");
     request.put("rg", "66.222.333-6");
     request.put("address", "rua 50");
+    request.put("Role", "ROLE_CLIENT");
 
     mockMvc.perform(MockMvcRequestBuilders
         .put("/api/cliente/{id}", 1)
@@ -218,6 +220,7 @@ public class ClientControllerTest
       request.put("password", "Teste@1234");
       request.put("rg", "66.222.333-6");
       request.put("address", "rua 50");
+      request.put("Role", "ROLE_CLIENT");
 
       mockMvc.perform(MockMvcRequestBuilders
           .put("/api/cliente/{id}", 1)

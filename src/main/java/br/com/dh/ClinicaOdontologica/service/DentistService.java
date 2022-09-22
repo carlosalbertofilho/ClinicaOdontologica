@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dh.ClinicaOdontologica.dto.DentistDTO;
 import br.com.dh.ClinicaOdontologica.entity.Dentist;
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
 import br.com.dh.ClinicaOdontologica.util.DentistUtil;
 
@@ -27,6 +28,7 @@ public class DentistService implements UserDetailsService
     {
       Dentist dentist = dentistRepository
         .save(DentistUtil.convertToEntity(dentistDTO));
+      dentist.setRole(Role.ROLE_DENTIST);
       return DentistUtil.convertToDTO(dentist);
     }
     public List<DentistDTO> findAll()
