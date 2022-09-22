@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
 
 @ExtendWith(SpringExtension.class)
@@ -66,18 +67,18 @@ public class ClientControllerTest
   @DisplayName("Testa salvar Cliente")
   public void itShouldSaveClientAndListThen() throws Exception
   {
-    JSONObject resquest = new JSONObject();
-    resquest.put("name", "Drogo");
-    resquest.put("lastName", "Cachorroso");
-    resquest.put("login", "drogo@teste.com");
-    resquest.put("password", "Teste@1234");
-    resquest.put("rg", "11.222.333-6");
-    resquest.put("address", "rua 10");
+    JSONObject request = new JSONObject();
+    request.put("name", "Drogo");
+    request.put("lastName", "Cachorroso");
+    request.put("login", "drogo@teste.com");
+    request.put("password", "Teste@1234");
+    request.put("rg", "11.222.333-6");
+    request.put("address", "rua 10");
 
 
     mockMvc.perform(MockMvcRequestBuilders
         .post("/api/cliente")
-        .content(resquest.toString())
+        .content(request.toString())
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON))
       .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -95,6 +96,7 @@ public class ClientControllerTest
         , "123456"
         , "123456"
         , "Rua 01"
+        , Role.ROLE_CLIENT
         , LocalDate.now()
         , LocalDate.now()));
 
@@ -136,6 +138,7 @@ public class ClientControllerTest
     , "123456"
     , "123456"
     , "Rua 01"
+    , Role.ROLE_CLIENT
     , LocalDate.now()
     , LocalDate.now());
 
@@ -176,6 +179,7 @@ public class ClientControllerTest
         , "123456"
         , "123456"
         , "Rua 01"
+        , Role.ROLE_CLIENT
         , LocalDate.now()
         , LocalDate.now()));
 
@@ -183,17 +187,17 @@ public class ClientControllerTest
     when(this.clientService.findById(Long.valueOf("1")))
       .thenReturn(value);
 
-    JSONObject resquest = new JSONObject();
-    resquest.put("name", "Tchotchoza");
-    resquest.put("lastName", "Cachorrosa");
-    resquest.put("login", "drogo@teste.com");
-    resquest.put("password", "Teste@1234");
-    resquest.put("rg", "66.222.333-6");
-    resquest.put("address", "rua 50");
+    JSONObject request = new JSONObject();
+    request.put("name", "Tchotchoza");
+    request.put("lastName", "Cachorrosa");
+    request.put("login", "drogo@teste.com");
+    request.put("password", "Teste@1234");
+    request.put("rg", "66.222.333-6");
+    request.put("address", "rua 50");
 
     mockMvc.perform(MockMvcRequestBuilders
         .put("/api/cliente/{id}", 1)
-        .content(resquest.toString())
+        .content(request.toString())
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON))
       .andExpect(MockMvcResultMatchers.status().isNoContent());
@@ -207,17 +211,17 @@ public class ClientControllerTest
     when(this.clientService.findById(Long.valueOf("1")))
       .thenReturn(Optional.empty());
 
-      JSONObject resquest = new JSONObject();
-      resquest.put("name", "Tchotchoza");
-      resquest.put("lastName", "Cachorrosa");
-      resquest.put("login", "drogo@teste.com");
-      resquest.put("password", "Teste@1234");
-      resquest.put("rg", "66.222.333-6");
-      resquest.put("address", "rua 50");
+      JSONObject request = new JSONObject();
+      request.put("name", "Tchotchoza");
+      request.put("lastName", "Cachorrosa");
+      request.put("login", "drogo@teste.com");
+      request.put("password", "Teste@1234");
+      request.put("rg", "66.222.333-6");
+      request.put("address", "rua 50");
 
       mockMvc.perform(MockMvcRequestBuilders
           .put("/api/cliente/{id}", 1)
-          .content(resquest.toString())
+          .content(request.toString())
           .contentType(MediaType.APPLICATION_JSON)
           .accept(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.status().isNotFound());
