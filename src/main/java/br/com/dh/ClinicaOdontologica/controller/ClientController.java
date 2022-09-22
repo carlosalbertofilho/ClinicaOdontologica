@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,12 +37,17 @@ public class ClientController
   @Autowired
   private ModelMapper modelMapper;
 
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ClientDTO save(@Valid @RequestBody ClientDTO clientDTO)
   {
     log.info("Creating Client: %s".formatted(clientDTO.getLogin()));
     clientDTO.setCreatedAt(LocalDate.now());
+    clientDTO.setPassword(bCryptPasswordEncoder
+      .encode(clientDTO.getPassword()));
     return clientService.save(clientDTO);
   }
 

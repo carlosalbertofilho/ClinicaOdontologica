@@ -42,15 +42,17 @@ public class AddDataOnDB implements ApplicationRunner
                     .encode("123456"))
                   .role(Role.ROLE_ADMIN).build());
 
-    // clientRepository.save(Client.builder()
-    //   .name("Eduardo")
-    //   .lastName("Ananias")
-    //   .login("eduardo.ananias@teste.com")
-    //   .password("teste@12345")
-    //   .rg("32.123.123-12")
-    //   .address("Rua 50")
-    //   .createdAt(LocalDate.of(2022, 9, 19))
-    //   .updateAt(LocalDate.now()).build());
+     clientRepository.save(Client.builder()
+       .name("Eduardo")
+       .lastName("Ananias")
+       .login("eduardo.ananias@teste.com")
+       .password(bCryptPasswordEncoder
+         .encode("teste@12345"))
+       .rg("32.123.123-12")
+       .address("Rua 50")
+       .role(Role.ROLE_CLIENT)
+       .createdAt(LocalDate.of(2022, 9, 19))
+       .updateAt(LocalDate.now()).build());
 
     dentistRepository.save(Dentist.builder()
       .name("Salomão")
