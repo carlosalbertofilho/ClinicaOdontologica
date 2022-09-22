@@ -1,5 +1,7 @@
 package br.com.dh.ClinicaOdontologica.security;
 
+import br.com.dh.ClinicaOdontologica.controller.AutenticationController;
+import br.com.dh.ClinicaOdontologica.repository.UserRepository;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
 import br.com.dh.ClinicaOdontologica.service.DentistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.com.dh.ClinicaOdontologica.service.UserAuThService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +30,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private ClientService clientService;
   @Autowired
+  private TokenService tokenService;
+  @Autowired
+  private UserRepository userRepository;
+  @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
@@ -38,8 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
     provider.setPasswordEncoder(bCryptPasswordEncoder);
     provider.setUserDetailsService(auThService);
-    provider.setUserDetailsService(dentistService);
-    provider.setUserDetailsService(clientService);
+    //provider.setUserDetailsService(dentistService);
+    //provider.setUserDetailsService(clientService);
     return provider;
   }
 
@@ -50,10 +58,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .antMatchers("/api/cliente").hasRole("ADMIN")
       .antMatchers("/api/consulta").hasRole("ADMIN")
       .antMatchers("/h2/**").permitAll()
-//      .antMatchers("/api/consulta/{id}").hasAnyAuthority("ADMIN")
-      .anyRequest()
-      .authenticated().and()
-      .formLogin();
+      //.antMatchers("/api/consulta/{id}").hasAnyAuthority("ADMIN")
+      .anyRequest().authenticated()
+      .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //adiciona para autenticar no front
+      .and().addFilterBefore(new TokenAutotication(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+
+    //.formLogin();
     // this will ignore only h2-console csrf, spring security 4+
     // http.csrf().ignoringAntMatchers("/h2/**");
     http.csrf().disable();
