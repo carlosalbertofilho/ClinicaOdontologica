@@ -9,6 +9,6 @@ import br.com.dh.ClinicaOdontologica.entity.Dentist;
 
 public interface DentistRepository extends JpaRepository<Dentist, Long>
 {
-  @Query("FROM Dentist AS d WHERE d.login = 1")
+//  @Query("FROM Dentist AS d WHERE d.login = 1")
   Optional<Dentist> findByLogin(String login);
 }

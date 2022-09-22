@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Long>
 {
-  @Query("FROM Client AS c WHERE  c.login = 1")
+//  @Query("FROM Client AS c WHERE  c.login = 1")
   Optional<Client> findByLogin(String login);
 
 }

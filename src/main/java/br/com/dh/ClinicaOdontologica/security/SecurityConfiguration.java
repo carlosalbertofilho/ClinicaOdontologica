@@ -1,7 +1,10 @@
 package br.com.dh.ClinicaOdontologica.security;
 
+import br.com.dh.ClinicaOdontologica.service.DentistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,10 +20,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private UserAuThService auThService;
 
+  @Autowired
+  private DentistService dentistService;
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(auThService)
-      .passwordEncoder(new BCryptPasswordEncoder());
+    auth.authenticationProvider(daoAuthenticationProvider());
+  }
+
+  @Bean
+  public DaoAuthenticationProvider daoAuthenticationProvider(){
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setPasswordEncoder(bCryptPasswordEncoder);
+    provider.setUserDetailsService(auThService);
+    provider.setUserDetailsService(dentistService);
+    return provider;
   }
 
   @Override
