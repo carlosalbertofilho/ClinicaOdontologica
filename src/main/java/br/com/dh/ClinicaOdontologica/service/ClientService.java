@@ -5,6 +5,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
@@ -12,11 +16,12 @@ import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
 @Service
-public class ClientService
+public class ClientService implements UserDetailsService
 {
   @Autowired
   private ClientRepository clientRepository;
@@ -44,4 +49,11 @@ public class ClientService
       clientRepository.deleteById(id);
   }
 
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return clientRepository.findByLogin(username)
+      .orElseThrow(()
+        -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+        "User Not Found"));
+  }
 }

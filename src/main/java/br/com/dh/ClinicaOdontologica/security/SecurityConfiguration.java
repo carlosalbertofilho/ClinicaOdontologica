@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.security;
 
+import br.com.dh.ClinicaOdontologica.service.ClientService;
 import br.com.dh.ClinicaOdontologica.service.DentistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private DentistService dentistService;
   @Autowired
+  private ClientService clientService;
+  @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
@@ -36,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     provider.setPasswordEncoder(bCryptPasswordEncoder);
     provider.setUserDetailsService(auThService);
     provider.setUserDetailsService(dentistService);
+    provider.setUserDetailsService(clientService);
     return provider;
   }
 
