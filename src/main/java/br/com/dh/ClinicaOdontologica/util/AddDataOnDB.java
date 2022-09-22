@@ -58,6 +58,7 @@ public class AddDataOnDB implements ApplicationRunner
       .login("salomao.santos@teste.com")
       .password("teste@123456")
       .registration("7654321")
+        .role(Role.ROLE_DENTIST)
       .createdAt(LocalDate.of(2022, 3, 15))
       .updateAt(LocalDate.now()).build());
 
@@ -77,6 +78,7 @@ public class AddDataOnDB implements ApplicationRunner
                 .login("denis.carbone@teste.com")
                 .password("teste@123456")
                 .registration("1234567")
+        .role(Role.ROLE_DENTIST)
                 .createdAt(LocalDate.now())
                 .updateAt(LocalDate.now()).build())
       .createdAt(LocalDate.now())
@@ -100,6 +102,7 @@ public class AddDataOnDB implements ApplicationRunner
                 .login("lucas@teste.com")
                 .password("teste@123456")
                 .registration("25364795")
+        .role(Role.ROLE_DENTIST)
                 .createdAt(LocalDate.now())
                 .updateAt(LocalDate.now()).build())
       .createdAt(LocalDate.now())

@@ -31,7 +31,7 @@ public class DentistControllerTest
     request.put("login", "salomao@teste.com");
     request.put("password", "123456");
     request.put("registration", "123456");
-    request.put("isAdmin", "true");
+    request.put("role", "ROLE_DENTIST");
     request.put("createdAt", "2022-09-21");
     request.put("updateAt", "2022-09-21");
 

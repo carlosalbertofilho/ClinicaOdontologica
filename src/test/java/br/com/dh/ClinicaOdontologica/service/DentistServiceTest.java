@@ -3,6 +3,7 @@ package br.com.dh.ClinicaOdontologica.service;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,8 @@ public class DentistServiceTest {
     dentist.setLastName("Duarte");
     dentist.setLogin("claudio.duarte");
     dentist.setPassword("cd1234");
-    dentist.setIsAdmin(true);
+    dentist.setRole(Role.ROLE_DENTIST);
+//    dentist.setIsAdmin(true);
   }
 
   @Test

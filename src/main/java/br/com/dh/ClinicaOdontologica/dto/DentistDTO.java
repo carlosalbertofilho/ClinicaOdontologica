@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -37,7 +38,7 @@ public class DentistDTO
   @NotBlank(message = "Registration is mandatory to fill")
   private String registration;
 
-  private Boolean isAdmin;
+  private Role role;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate createdAt;
