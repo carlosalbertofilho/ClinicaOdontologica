@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="container_header">
-            <img src="../assets/logo.svg" alt="Logotipo da clinica dente azul, desenho com contornos de um dente na cor azul.">
+            <img src="../img/logo.png" alt="Logotipo da clinica dente azul, desenho com contornos de um dente na cor azul.">
         </div>
     </header>
     <aside>
@@ -38,6 +38,12 @@
                     <div class="link_nav">
                         <img src="../img/img_list_view.png" alt="">
                         <p>Agenda de dentista</p>
+                    </div>
+                </li>
+                <li class="lista_aside" id="openAddNewConsult">
+                    <div class="link_nav">
+                        <img src="../img/img_add.png" alt="">
+                        <p>Adionar Consulta</p>
                     </div>
                 </li>
                 <li class="lista_aside" id="openCalendeConsults">
@@ -101,13 +107,7 @@
                 <input type="email" id="emailDentis" placeholder="Email">
                 <input type="password" id="passwordDentis" placeholder="Senha" >
                 <input type="text" id="registrationDentist" placeholder="CRO">
-                <div class="is_admin">
-                    <label>Possui perfil adminstrador</label>
-                    <select name="" id="isAdministrator">
-                        <option value="false">Não</option>
-                        <option value="true">Sim</option>
-                    </select>
-                </div>
+
                 <button class="btn_submit" id="submitDentist">Cadastrar Cliente</button>
             </form>
             <!-- Listar dentistas cadastrados -->
@@ -130,6 +130,29 @@
                     </li>
                 </ul>
             </div>
+            <form class="cadastrar_consulta" id="showCadastrarConsult" action="">
+                <div class="select_dentista" id="btnSelect">
+                    <p>Escolha um dentista</p>
+                    <select name="" class="select_dentistaOption" onchange="teste(this)" id="dentista">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="select_dentista" id="btnSelect">
+                    <p>Escolha um cliente</p>
+                    <select name="" class="select_dentistaOption" onchange="teste(this)" id="cliente">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="select_data">
+                    <p>Seleciona a data da consulta</p>
+                    <input type="date" name="" id="hourConsulta">
+                </div>
+                <div class="select_hour">
+                    <p>Seleciona a data da consulta</p>
+                    <input type="time" name="" id="dataConsulta" step="2">
+                </div>
+                <button class="btn_submit" id="btnSubmit">Enviar consulta</button>
+            </form>
             <!-- Listar consultas cadastrados -->
             <div class="agenda_consultas" id="showAgendaDeConsultas">
                 <input class="input" type="text" placeholder="Busque um cliente pelo nome completo ou email informado">

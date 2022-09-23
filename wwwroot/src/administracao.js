@@ -1,3 +1,4 @@
+//Referencias vindo do Aside, para abrir e fechar o conteudo da main e deixar o link ativo
 const btnAddNewUserRef = document.querySelector("#openAddNewUser");
 const btnCalenderClientsRef = document.querySelector("#openCalenderClients")
 const btnAddNewDentisRef = document.querySelector("#openAddNewDentist");
@@ -8,7 +9,8 @@ const calendaClientRef = document.querySelector("#showAgendaDeClients")
 const calendaDentistRef = document.querySelector("#showAgendaDeDentists")
 const addNewDentisRef = document.querySelector("#showCadastrarDentista")
 const calendaConsultRef = document.querySelector("#showAgendaDeConsultas")
-
+const btnAddNewConsultRef = document.querySelector("#openAddNewConsult")
+const showCadastrarConsultRef = document.querySelector("#showCadastrarConsult")
 const listClientsRef = document.querySelector("#list_client")
 const listDentistRef = document.querySelector("#list_dentist")
 const listConsultRef = document.querySelector("#list_consult")
@@ -29,10 +31,20 @@ const inputLastNameDentistaRef = document.querySelector("#lastNameDentis");
 const inputEmailDentistaRef = document.querySelector("#emailDentis");
 const inputPasswordDentistaRef = document.querySelector("#passwordDentis");
 const inputRegistrationDentistaRef = document.querySelector("#registrationDentist");
-const selectAdminRef = document.querySelector('#isAdministrator');
+// const selectAdminRef = document.querySelector('#isAdministrator');
 const btnSubmitDentistaRef = document.querySelector("#submitDentist");
 
+//Inputs id cadastrar consulta
+const inputSelectDentistRef = document.querySelector(".select_dentistaOption")
+const selectDentistRef = document.querySelector("#dentista")
+const selectClientRef = document.querySelector("#cliente")
+const optionDentisRef = document.querySelector('option')
+const optionClientRef = document.querySelector('option')
+const dataConsultRef = document.querySelector('input[type="date"]')
+const hourConsultRef = document.querySelector('input[type="time"]')
+const btnSubmitConsultRef = document.querySelector("#btnSubmit")
 
+// Mostrar conteudo adionar cliente
 const showAddNewUser = () => {
     if(btnAddNewUserRef.click){
         AddNewUserRef.classList.add('show_cadastrar_cliente')
@@ -41,16 +53,15 @@ const showAddNewUser = () => {
         calendaClientRef.classList.remove('show_agenda_cliente')
         calendaDentistRef.classList.remove('show_dentista_cliente')
         calendaConsultRef.classList.remove('show_agenda_consulta')
+        showCadastrarConsultRef.classList.remove('show_cadastrar_consult')
         btnCalenderClientsRef.classList.remove('active')
         btnAddNewDentisRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
         btnCalenderConsultsRef.classList.remove('active')
+        btnAddNewConsultRef.classList.remove('active')
     }
 }
-
-
-// POST CLIENTES
-
+// POST cliente
 const createNewClient = () => {
     let client = {
         name: inputNameRef.value,
@@ -76,8 +87,7 @@ const createNewClient = () => {
     })
 }
 
-
-
+// GET CLIENTES
 const showCalendarClients = () => {
     if(btnCalenderClientsRef.click){
         btnCalenderClientsRef.classList.add('active')
@@ -86,16 +96,16 @@ const showCalendarClients = () => {
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
         calendaDentistRef.classList.remove('show_dentista_cliente')
         calendaConsultRef.classList.remove('show_agenda_consulta')
+        showCadastrarConsultRef.classList.remove('show_cadastrar_consult')
         btnAddNewDentisRef.classList.remove('active')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
         btnCalenderConsultsRef.classList.remove('active')
+        btnAddNewConsultRef.classList.remove('active')
         
     }
 }
-
-// GET CLIENTES
-
+// Mostrar lista de clintes
 const showClients = () => {
 
     let requestHeaders = {
@@ -159,7 +169,7 @@ const deleteClient = (id) => {
     })
     
 }
-
+// Mostrar conteudo adionar dentista
 const showAddNewdentist = () => {
     if(btnAddNewDentisRef.click){
 
@@ -169,15 +179,16 @@ const showAddNewdentist = () => {
         calendaClientRef.classList.remove('show_agenda_cliente')
         calendaDentistRef.classList.remove('show_dentista_cliente')
         calendaConsultRef.classList.remove('show_agenda_consulta')
+        showCadastrarConsultRef.classList.remove('show_cadastrar_consult')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderClientsRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
         btnCalenderConsultsRef.classList.remove('active')
+        btnAddNewConsultRef.classList.remove('active')
     }
 }
 
 // POST DENTISTAS
-
 const createNewDentist = () => {
     let client = {
         name: inputNameDentistaRef.value,
@@ -185,7 +196,7 @@ const createNewDentist = () => {
         login: inputEmailDentistaRef.value,
         password: inputPasswordDentistaRef.value,
         registration: inputRegistrationDentistaRef.value,
-        isAdmin: selectAdminRef.value,
+        // isAdmin: selectAdminRef.value,
     }
 
     let requestHeaders = {
@@ -202,7 +213,7 @@ const createNewDentist = () => {
         response.json()
     })
 }
-
+// Mostrar conteudo lista de dentistas
 const showCalendarDentists = () => {
     if(btnAddNewDentisRef.click){
 
@@ -212,15 +223,16 @@ const showCalendarDentists = () => {
         calendaClientRef.classList.remove('show_agenda_cliente')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
         calendaConsultRef.classList.remove('show_agenda_consulta')
+        showCadastrarConsultRef.classList.remove('show_cadastrar_consult')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderClientsRef.classList.remove('active')
         btnAddNewDentisRef.classList.remove('active')
         btnCalenderConsultsRef.classList.remove('active')
+        btnAddNewConsultRef.classList.remove('active')
     }
 }
 
 // GET DENTISTAS
-
 const showDentists = () => {
 
     let requestHeaders = {
@@ -262,7 +274,6 @@ const showDentists = () => {
 showDentists()
 
 // DELETE Dentista
-
 const deleteDentist = (id) => {
     let requestHeaders = {
         "Content-Type": "application/json"
@@ -285,8 +296,113 @@ const deleteDentist = (id) => {
     })
     
 }
+// Mostrar conteudo adionar consulta
+const showAddConsult = () => {
+    if(btnAddNewConsultRef.click) {
+        showCadastrarConsultRef.classList.add('show_cadastrar_consult')
+        btnAddNewConsultRef.classList.add('active')
+        AddNewUserRef.classList.remove('show_cadastrar_cliente')
+        calendaClientRef.classList.remove('show_agenda_cliente')
+        addNewDentisRef.classList.remove('show_cadastrar_dentista')
+        calendaDentistRef.classList.remove('show_dentista_cliente')
+        calendaConsultRef.classList.remove('show_agenda_consulta')
+        btnAddNewUserRef.classList.remove('active')
+        btnCalenderClientsRef.classList.remove('active')
+        btnCalenderDentistRef.classList.remove('active')
+        btnAddNewDentisRef.classList.remove('active')
+        btnCalenderConsultsRef.classList.remove('active')
+        
+    }
+}
+//GET de dentistas
+const showSelectDentist = () => {
+    let requestHeaders = {
+        headers: {
+            "Content-Type":'application/json',
+        }
+    }
+    fetch('http://localhost:8080/api/dentista',requestHeaders)
+    .then(response => {
+        response.json()
+        .then(data => {
+            let dados = data
+
+              for(let dado of dados) {
+                selectDentistRef.innerHTML += 
+                    // '<option value="' + dado.id + '">' + dado.name + '</option>';
+                    `<option value="${dado.id}">Dentista ${dado.name} ${dado.lastName} Cro: ${dado.registration}</option>`                  
+              }                                     
+        })
+        
+    }) 
+
+}
+//GET de dentistas
+const showSelectClient = () => {
+    let requestHeaders = {
+        headers: {
+            "Content-Type":'application/json',
+        }
+    }
+    fetch('http://localhost:8080/api/cliente',requestHeaders)
+    .then(response => {
+        response.json()
+        .then(data => {
+            let dados = data
+
+              for(let dado of dados) {
+                selectClientRef.innerHTML += 
+                    // '<option value="' + dado.id + '">' + dado.name + '</option>';
+                    `<option value="${dado.id}"> ${dado.name} ${dado.lastName} </option>`                  
+              }                                     
+        })
+        
+    }) 
+
+}
 
 
+const teste = (select) => {
+    
+    // let tets = option.innerHTML
+    // option.innerHTML = select.options[select.selectedIndex].value 
+    // 'ID: <b>' + select.value + '</b>';
+
+}
+showSelectClient()
+showSelectDentist()
+
+// POST consulta
+const createConsult = () => {
+
+    let consult = {
+        dentist: {
+            id: optionDentisRef.innerHTML = selectDentistRef.options[selectDentistRef.selectedIndex].value,
+        },
+        client: {
+            id: optionClientRef.innerHTML = selectClientRef.options[selectClientRef.selectedIndex].value,
+        },
+        updateAt : "",
+        scheduledDate : dataConsultRef.value,
+        scheduledTime : hourConsultRef.value
+
+    }
+    let requestHeaders = {
+        'Content-Type': 'application/json'
+    }
+
+    let requestConfig = {
+        method: 'POST',
+        body: JSON.stringify(consult),
+        headers: requestHeaders
+    }
+    fetch('http://localhost:8080/api/consulta',requestConfig)
+    .then(response =>{
+        response.json()
+    })
+}
+
+// Mostrar conteudo lista dentista
 const showCalendarConsults = () => {
     if(btnAddNewDentisRef.click){
 
@@ -296,15 +412,16 @@ const showCalendarConsults = () => {
         calendaClientRef.classList.remove('show_agenda_cliente')
         addNewDentisRef.classList.remove('show_cadastrar_dentista')
         calendaDentistRef.classList.remove('show_dentista_cliente')
+        showCadastrarConsultRef.classList.remove('show_cadastrar_consult')
         btnAddNewUserRef.classList.remove('active')
         btnCalenderClientsRef.classList.remove('active')
         btnCalenderDentistRef.classList.remove('active')
         btnAddNewDentisRef.classList.remove('active')
+        btnAddNewConsultRef.classList.remove('active')
     }
 }
 
 // GET CONSULTAS
-
 const showConsults = () => {
 
     let requestHeaders = {
@@ -374,24 +491,29 @@ const deleteConsult = (id) => {
     })
     
 }
-
 showConsults()
+
 btnAddNewUserRef.addEventListener('click', showAddNewUser)
-btnCalenderClientsRef.addEventListener('click', e =>{
-    e.preventDefault()
-    showCalendarClients()
-    // showClients()
-})
 btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
 btnCalenderDentistRef.addEventListener('click', showCalendarDentists)
+btnAddNewConsultRef.addEventListener('click', showAddConsult)
 btnCalenderConsultsRef.addEventListener('click', showCalendarConsults)
 
 btnSubmitRef.addEventListener('click', e => {
     e.preventDefault();
     createNewClient();
 })
+btnCalenderClientsRef.addEventListener('click', e =>{
+    e.preventDefault()
+    showCalendarClients()
+})
 
 btnSubmitDentistaRef.addEventListener('click', e => {
     e.preventDefault();
     createNewDentist();
+})
+
+btnSubmitConsultRef.addEventListener('click', e => {
+    e.preventDefault()
+    createConsult()
 })

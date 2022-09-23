@@ -37,7 +37,7 @@ public class DentistDTO
   @NotBlank(message = "Registration is mandatory to fill")
   private String registration;
 
-  private Boolean isAdmin;
+  // private Boolean isAdmin;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate createdAt;

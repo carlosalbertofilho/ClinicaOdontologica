@@ -42,8 +42,8 @@ public class Dentist implements Serializable
   @Column(nullable = false)
   private String registration;
 
-  @Column(nullable = false)
-  private Boolean isAdmin;
+  // @Column(nullable = false)
+  // private Boolean isAdmin;
 
   @JsonFormat(pattern="yyyy-MM-dd")
   private LocalDate createdAt;
