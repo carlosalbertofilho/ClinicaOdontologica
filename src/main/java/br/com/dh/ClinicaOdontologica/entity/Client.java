@@ -52,7 +52,6 @@ public class Client implements UserDetails
   @Column(nullable = false)
   private String address;
 
-  @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   private Role role;
 

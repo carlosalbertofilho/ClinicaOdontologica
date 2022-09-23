@@ -28,10 +28,12 @@ public class ClientService implements UserDetailsService
 
   public ClientDTO save(@Valid ClientDTO clientDTO)
   {
-      Client client = clientRepository
-        .save(ClientUtil.convertToEntity(clientDTO));
+      Client client = ClientUtil.convertToEntity(clientDTO);
       client.setRole(Role.ROLE_CLIENT);
-      return ClientUtil.convertToDTO(client);
+      ClientDTO response = ClientUtil.convertToDTO(clientRepository.save(client));
+      response.setPassword("");
+      response.setRg("");
+      return response;
   }
   public List<ClientDTO> FindAll()
   {

@@ -49,7 +49,6 @@ public class Dentist implements UserDetails
   @Column(nullable = false)
   private String registration;
 
-  @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   private Role role;
 

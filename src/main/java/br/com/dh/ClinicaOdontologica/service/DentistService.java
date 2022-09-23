@@ -26,10 +26,13 @@ public class DentistService implements UserDetailsService
 
     public DentistDTO save(DentistDTO dentistDTO)
     {
-      Dentist dentist = dentistRepository
-        .save(DentistUtil.convertToEntity(dentistDTO));
+      Dentist dentist = DentistUtil.convertToEntity(dentistDTO);
       dentist.setRole(Role.ROLE_DENTIST);
-      return DentistUtil.convertToDTO(dentist);
+      DentistDTO response = DentistUtil
+        .convertToDTO(dentistRepository.save(dentist));
+      response.setPassword("");
+      response.setRegistration("");
+      return response;
     }
     public List<DentistDTO> findAll()
     {

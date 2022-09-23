@@ -1,6 +1,5 @@
 package br.com.dh.ClinicaOdontologica.security;
 
-import br.com.dh.ClinicaOdontologica.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import br.com.dh.ClinicaOdontologica.service.UserAuThService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import br.com.dh.ClinicaOdontologica.repository.UserRepository;
+import br.com.dh.ClinicaOdontologica.service.UserAuThService;
 
 @Configuration
 @EnableWebSecurity
@@ -25,8 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   private TokenService tokenService;
   @Autowired
   private UserRepository userRepository;
-  @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
   @Bean
@@ -57,6 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // http.csrf().ignoringAntMatchers("/h2/**");
 
     //this will allow frames with same origin which is much more safe
-//    http.headers().frameOptions().sameOrigin();
+    http.headers().frameOptions().sameOrigin();
   }
 }
