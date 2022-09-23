@@ -433,6 +433,15 @@ const showCalendarConsults = () => {
     }
 }
 
+//Format date
+let date = new Date()
+let formatDate =
+  date.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+
 // GET CONSULTAS
 const showConsults = () => {
 
@@ -447,6 +456,11 @@ const showConsults = () => {
         .then(data => {
             let dados = data
             for(let dado of dados){
+                let formatDate = new Date(dado.scheduledDate).toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                  })
                 if(!dado.completed){
                     console.log(dado)
                     listConsultRef.innerHTML += `
@@ -462,7 +476,7 @@ const showConsults = () => {
                                     </div>
                                     <div class="client">
                                         <img src="../img/Schedule.png" alt="">
-                                        <p>${dado.scheduledDate} ${dado.scheduledTime}</p>
+                                        <p>${formatDate} ${dado.scheduledTime}</p>
                                     </div>
                                     <div class="icons">
                                         <img src="..//img/Edit.png" alt="">
