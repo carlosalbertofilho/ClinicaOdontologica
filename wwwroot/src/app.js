@@ -28,7 +28,7 @@ const loginUser = () =>{
         // console.log(response)
         .then(data =>{
             console.log(data)
-          localStorage.setItem('nome', data.jwt)
+          localStorage.setItem('token', data.jwt)
           setTimeout(()=>{window.location.assign('./pages/adminstracao.html')},2000)
       })
   

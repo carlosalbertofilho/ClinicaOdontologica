@@ -15,6 +15,18 @@ const listClientsRef = document.querySelector("#list_client")
 const listDentistRef = document.querySelector("#list_dentist")
 const listConsultRef = document.querySelector("#list_consult")
 
+//input btn close app
+
+const btnCloseAppRef = document.querySelector("#closeApp")
+
+const logoutApp = () => {
+    if (btnCloseAppRef.click) {
+        localStorage.removeItem('token')
+        window.location.assign('../index.html')
+        console.log("fechado")
+    }
+  }
+
 
 // inputs id cadastrar cliente
 const inputNameRef = document.querySelector("#name");
@@ -498,6 +510,8 @@ btnAddNewDentisRef.addEventListener('click', showAddNewdentist)
 btnCalenderDentistRef.addEventListener('click', showCalendarDentists)
 btnAddNewConsultRef.addEventListener('click', showAddConsult)
 btnCalenderConsultsRef.addEventListener('click', showCalendarConsults)
+
+btnCloseAppRef.addEventListener('click', logoutApp)
 
 btnSubmitRef.addEventListener('click', e => {
     e.preventDefault();

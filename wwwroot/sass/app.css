@@ -14,6 +14,21 @@
   cursor: pointer;
 }
 
+.btn-signout {
+  background-color: #eb8b50;
+  border: none;
+  border-radius: 8px;
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0px 32px;
+  height: 40px;
+  color: rgba(12, 11, 11, 0.4666666667);
+  cursor: pointer;
+}
+
 main .container_main .cadastrar_consulta, main .container_main .agenda_cliente {
   position: absolute;
   display: flex;
@@ -332,7 +347,10 @@ body header {
   top: 0;
 }
 body header .container_header {
-  margin: 14px 64px;
+  display: flex;
+  padding: 14px 64px;
+  align-items: center;
+  justify-content: space-between;
 }
 body header .container_header img {
   width: 300px;

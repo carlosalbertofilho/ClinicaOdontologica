@@ -13,8 +13,11 @@ body {
         top: 0;
 
         .container_header {
-
-            margin: 14px 64px;
+            display: flex;
+            padding: 14px 64px;
+            align-items: center;
+            justify-content: space-between;
+            // margin: 14px 64px;
 
             img {
 
