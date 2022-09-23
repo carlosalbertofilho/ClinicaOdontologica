@@ -37,9 +37,9 @@ public class AddDataOnDB implements ApplicationRunner
   public void run(ApplicationArguments args) throws Exception {
 
     userRepository.save(UserAdmin.builder()
-                  .username("Teste")
+                  .username("teste123")
                   .password(bCryptPasswordEncoder
-                    .encode("123456"))
+                    .encode("12345678"))
                   .role(Role.ROLE_ADMIN).build());
 
      clientRepository.save(Client.builder()

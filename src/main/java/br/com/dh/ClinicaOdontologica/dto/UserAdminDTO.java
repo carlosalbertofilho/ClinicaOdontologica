@@ -17,13 +17,13 @@ public class UserAdminDTO {
 
   @NotEmpty
   @Size(min = 6)
-  private String Username;
+  private String username;
   @NotEmpty
   @Size(min = 6)
   private String password;
 
   public UsernamePasswordAuthenticationToken convertUser(){
-    return new UsernamePasswordAuthenticationToken(this.Username, this.password);
+    return new UsernamePasswordAuthenticationToken(this.username, this.password);
   }
 
 }

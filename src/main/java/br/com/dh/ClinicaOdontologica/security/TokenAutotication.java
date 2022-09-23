@@ -15,11 +15,11 @@ import java.util.Optional;
 
 public class TokenAutotication extends OncePerRequestFilter {
   TokenService tokenService;
-  UserRepository usuarioRespository;
+  UserRepository userRespository;
 
-  public TokenAutotication(TokenService tokenService, UserRepository usuarioRespository) {
+  public TokenAutotication(TokenService tokenService, UserRepository userRepository) {
     this.tokenService = tokenService;
-    this.usuarioRespository = usuarioRespository;
+    this.userRespository = userRepository;
   }
 
   @Override
@@ -37,8 +37,8 @@ public class TokenAutotication extends OncePerRequestFilter {
 
   private void autenticateUser(String token){
     String username = tokenService.getUserName(token);
-    UserAdmin usuario = usuarioRespository.findByUsername(username);
-    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(usuario,null, usuario.getAuthorities());
+    UserAdmin user = userRespository.findByUsername(username);
+    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
   }
 

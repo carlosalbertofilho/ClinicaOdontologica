@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,12 +30,12 @@ import lombok.NoArgsConstructor;
 public class UserAdmin implements UserDetails
 {
   @Id
-  @SequenceGenerator(name = "user_sequence",sequenceName = "user_sequence", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
+  @Size(min = 6, max = 13)
   private String username;
-
+  @NotNull
+  @Size(min = 6, max = 100)
   private String password;
 
   @Enumerated(EnumType.STRING)
