@@ -20,6 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
+import javax.validation.Valid;
+
 @Service
 public class ClientService implements UserDetailsService
 {
