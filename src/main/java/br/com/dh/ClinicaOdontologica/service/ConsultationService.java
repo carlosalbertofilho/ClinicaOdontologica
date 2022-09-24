@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 
 import br.com.dh.ClinicaOdontologica.dto.ConsultationDTO;
 import br.com.dh.ClinicaOdontologica.entity.Consultation;
+import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.repository.ConsultationRepository;
 import br.com.dh.ClinicaOdontologica.util.ConsultationUtil;
 
 @Service
 public class ConsultationService
 {
-  @Autowired
-  private ConsultationRepository consultationRepository;
+  @Autowired private ConsultationRepository consultationRepository;
+  @Autowired private ClientRepository clientRepository;
 
   public ConsultationDTO save(ConsultationDTO consultationDTO)
   {
@@ -28,8 +29,17 @@ public class ConsultationService
   {
     return consultationRepository.findAll()
       .stream()
-      .map(ConsultationUtil::convertToDTO)
+      .map(ConsultationUtil::convertToResponse)
       .collect(Collectors.toList());
+  }
+
+  public List<ConsultationDTO> findByClientId(Long id)
+  {
+    return consultationRepository.findByClient(clientRepository.findById(id).get())
+          .stream()
+          .map(ConsultationUtil::convertToResponse)
+          .collect(Collectors.toList());
+
   }
   public Optional<Consultation> findById(Long id)
   {

@@ -42,15 +42,7 @@ public class ClientControllerTest
   public void itShouldListClients() throws Exception
   {
     List<ClientDTO> value = new ArrayList<>();
-    value.add(new ClientDTO(Long.valueOf("1")
-        , "Carlos"
-        , "Filho"
-        , "carlos.filho@teste.com"
-        , "123456"
-        , "123456"
-        , "Rua 01"
-        , LocalDate.now()
-        , LocalDate.now()));
+    value.add(new ClientDTO());
 
     // MAKE A MOCK
     when(this.clientService.FindAll())

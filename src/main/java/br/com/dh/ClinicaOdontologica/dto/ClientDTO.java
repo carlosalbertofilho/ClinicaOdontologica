@@ -9,12 +9,15 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientDTO
@@ -43,6 +46,8 @@ public class ClientDTO
 
   @NotBlank(message = "Address is mandatory to fill")
   private String address;
+
+  private Role role;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate createdAt;

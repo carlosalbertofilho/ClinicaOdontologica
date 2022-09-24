@@ -58,10 +58,18 @@ public class ConsultationController
   {
     log.info("Find consultation by id: %d".formatted(id));
     return consultationService.findById(id)
-      .map(ConsultationUtil::convertToDTO)
+      .map(ConsultationUtil::convertToResponse)
       .orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND
           , "Consultation not found"));
+  }
+
+  @GetMapping("/buscarPorClient/{clientID}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<ConsultationDTO> findConsultationByClient(@PathVariable Long clientID)
+  {
+    log.info("Find consultation by Client of the id: %d".formatted(clientID));
+    return consultationService.findByClientId(clientID);
   }
 
   @DeleteMapping("/{id}")

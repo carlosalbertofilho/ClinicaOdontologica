@@ -5,22 +5,22 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.com.dh.ClinicaOdontologica.entity.Client;
-import br.com.dh.ClinicaOdontologica.entity.Dentist;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConsultationDTO
 {
   private Long id;
 
-  private Dentist dentist;
+  private DentistDTO dentist;
 
-  private Client client;
+  private ClientDTO client;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate createdAt;
