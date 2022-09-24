@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +38,17 @@ public class ClientController
   @Autowired
   private ModelMapper modelMapper;
 
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ClientDTO save(@Valid @RequestBody ClientDTO clientDTO)
   {
     log.info("Creating Client: %s".formatted(clientDTO.getLogin()));
     clientDTO.setCreatedAt(LocalDate.now());
+    clientDTO.setPassword(bCryptPasswordEncoder
+      .encode(clientDTO.getPassword()));
     return clientService.save(clientDTO);
   }
 
@@ -77,8 +83,8 @@ public class ClientController
         clientService.deleteById(id);
         return Void.TYPE;
       }).orElseThrow(() ->
-      new ResponseStatusException(HttpStatus.NOT_FOUND
-        , "Client not found"));
+        new ResponseStatusException(HttpStatus.NOT_FOUND
+          ,"Client not found"));
   }
 
   @PutMapping("/{id}")
