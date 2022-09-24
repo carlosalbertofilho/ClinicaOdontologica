@@ -19,8 +19,11 @@ atendidos são os seguintes:
 
 ## Autor
 Carlos Alberto Filho
+
 Eduardo Ananias da silva
+
 Denis Carbone
+
 Salomão Lopes Dos Santos
 
 Turma 07 - DH - CTD 2022
