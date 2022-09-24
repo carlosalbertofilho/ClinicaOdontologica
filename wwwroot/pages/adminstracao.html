@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração</title>
+    <link rel="stylesheet" href="/wwwroot/sass/app.css">
+</head>
+<body>
+    <header>
+        <div class="container_header">
+            <img src="../img/logo.png" alt="Logotipo da clinica dente azul, desenho com contornos de um dente na cor azul.">
+            <button id="closeApp" class="btn-signout">Sair</button>
+        </div>
+        
+    </header>
+    <aside>
+        <div class="container_aside">
+            <ul>
+                <li class="lista_aside" id="openAddNewUser">
+                    <div class="link_nav">
+                        <img src="../img/img_add.png" alt="">
+                        <p>Cadastrar cliente</p>
+                    </div>
+                </li>
+                <li class="lista_aside" id="openCalenderClients">
+                    <div class="link_nav">
+                        <img src="../img/img_list_view.png" alt="">
+                        <p>Agenda de clientes</p>
+                    </div>
+                </li>
+                <li class="lista_aside" id="openAddNewDentist">
+                    <div class="link_nav">
+                        <img src="../img/img_add.png" alt="">
+                        <p>Cadastrar dentista</p>
+                    </div>
+                </li>
+                <li class="lista_aside" id="openCalenderDentist">
+                    <div class="link_nav">
+                        <img src="../img/img_list_view.png" alt="">
+                        <p>Agenda de dentista</p>
+                    </div>
+                </li>
+                <li class="lista_aside" id="openAddNewConsult">
+                    <div class="link_nav">
+                        <img src="../img/img_add.png" alt="">
+                        <p>Adionar Consulta</p>
+                    </div>
+                </li>
+                <li class="lista_aside" id="openCalendeConsults">
+                    <div class="link_nav">
+                        <img src="../img/img_list.png" alt="">
+                        <p>Todas as consultas</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <main>
+        <div class="container_main">
+            <!-- Cadastrar novo cliente -->
+            <form class="cadastrar_cliente" id="showCadastrarCliente" action="">
+                <h2>Cadastrar novo cliente</h2>
+                <input type="text" id="name" placeholder="Nome">
+                <input type="text" id="lastName" placeholder="Sobrenome">
+                <input type="email" id="email" placeholder="Email">
+                <input type="password" id="password" placeholder="Senha" >
+                <input type="text" id="register" placeholder="RG">
+                <input type="text" id="address" placeholder="Endereço">
+                <button class="btn_submit" id="submitClient">Cadastrar Cliente</button>
+            </form>
+            <!-- Listar clientes cadastrados -->
+            <div class="agenda_clientes" id="showAgendaDeClients">
+                <input class="input" type="text" placeholder="Busque um cliente pelo nome completo ou email informado">
+                <h2>Lista de clientes</h2>
+                <ul id="list_client">
+                    <!-- <li class="item_client">
+                        <div class="card_cliente_consult">
+                            <div class="client">
+                                <img src="../img/User.png" alt="">
+                                <p>Eduardo Ananias da Silva</p>
+                            </div>
+                            <div class="icons">
+                                <img src="..//img/Edit.png" alt="">
+                                <img src="..//img/Delete.png" alt="">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card_cliente_consult">
+                            <div class="client">
+                                <img src="../img/User.png" alt="">
+                                <p>Eduardo Ananias da Silva</p>
+                            </div>
+                            <div class="icons">
+                                <img src="..//img/Edit.png" alt="">
+                                <img src="..//img/Delete.png" alt="">
+                            </div>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- Cadastrar novo dentista -->
+            <form class="cadastrar_dentista" id="showCadastrarDentista">
+                <h2>Cadastrar Dentista</h2>
+                <input type="text" id="nameDentista" placeholder="Nome">
+                <input type="text" id="lastNameDentis" placeholder="Sobrenome">
+                <input type="email" id="emailDentis" placeholder="Email">
+                <input type="password" id="passwordDentis" placeholder="Senha" >
+                <input type="text" id="registrationDentist" placeholder="CRO">
+
+                <button class="btn_submit" id="submitDentist">Cadastrar Cliente</button>
+            </form>
+            <!-- Listar dentistas cadastrados -->
+            <div class="agenda_dentistas" id="showAgendaDeDentists">
+                <input class="input" type="text" placeholder="Busque um cliente pelo nome completo ou email informado">
+                <h2>Lista de clientes</h2>
+                <ul id="list_dentist">
+                    <li>
+                        <!-- <div class="card_dentista_consult">
+                    <div class="client">
+                        <img src="../img/Medical Doctor.png" alt="">
+                        <p>Drº Eduardo Ananias da Silva</p>
+                        <p>CRO: 22222222</p>
+                    </div>
+                    <div class="icons">
+                        <img src="..//img/Edit.png" alt="">
+                        <img src="..//img/Delete.png" alt="">
+                    </div>
+                </div> -->
+                    </li>
+                </ul>
+            </div>
+            <form class="cadastrar_consulta" id="showCadastrarConsult" action="">
+                <div class="select_dentista" id="btnSelect">
+                    <p>Escolha um dentista</p>
+                    <select name="" class="select_dentistaOption" onchange="teste(this)" id="dentista">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="select_dentista" id="btnSelect">
+                    <p>Escolha um cliente</p>
+                    <select name="" class="select_dentistaOption" onchange="teste(this)" id="cliente">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="select_data">
+                    <p>Seleciona a data da consulta</p>
+                    <input type="date" name="" id="hourConsulta">
+                </div>
+                <div class="select_hour">
+                    <p>Seleciona a data da consulta</p>
+                    <input type="time" name="" id="dataConsulta" step="2">
+                </div>
+                <button class="btn_submit" id="btnSubmit">Enviar consulta</button>
+            </form>
+            <!-- Listar consultas cadastrados -->
+            <div class="agenda_consultas" id="showAgendaDeConsultas">
+                <input class="input" type="text" placeholder="Busque um cliente pelo nome completo ou email informado">
+                <h2>Lista de clientes</h2>
+                <ul id="list_consult">
+                    <li>
+                        <!-- <div class="card_dentista_consult">
+                    <div class="client">
+                        <img src="../img/Medical Doctor.png" alt="">
+                        <p>Drº Eduardo Ananias da Silva</p>
+                    </div>
+                    <div class="client">
+                        <img src="../img/User.png" alt="">
+                        <p>Eduardo Ananias da Silva</p>
+                    </div>
+                    <div class="client">
+                        <img src="../img/Schedule.png" alt="">
+                        <p>Eduardo Ananias da Silva</p>
+                    </div>
+                    <div class="icons">
+                        <img src="..//img/Edit.png" alt="">
+                        <img src="..//img/Delete.png" alt="">
+                    </div>
+                    
+                </div> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        
+    </main>
+
+   <script src="../src/administracao.js"></script>
+</body>
+</html>

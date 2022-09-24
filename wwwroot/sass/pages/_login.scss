@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  @mixin input {
+    width: 25rem;
+    height: 2.5rem;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 1px 1px 5px 1px;
+    cursor: pointer;
+  }
+  
+  @mixin font {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+  }
+  
+  body {
+
+    display: flex;
+
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(270.17deg, #14EFF5 -4.99%, rgba(20, 239, 245, 0.35) 41.73%, rgba(20, 239, 245, 0.444283) 64.92%, rgba(20, 239, 245, 0) 102.22%);
+      
+        .container{
+
+          background-color: #fff;
+          border-radius: 1rem;
+          padding: 64px;
+      
+          header {
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+      
+            .paragraph{
+              text-align: center;
+      
+              .p1 {
+                color: hsla(182, 57%, 37%, 1);
+                font-size: 1.126rem;
+                line-height: 1.45rem;
+                font-family: 'PT Sans Narrow';
+                font-style: normal;
+                font-weight: 400;
+              }
+              .p2 {
+                color: hsla(0, 3%, 15%, 1);
+                font-size: 1.126rem;
+                font-family: 'PT Sans Narrow';
+                font-style: normal;
+                font-weight: 400;
+              }
+            }
+      
+          }
+      
+          .title {
+            text-align: center;
+            margin-top: 2rem;
+      
+            h2 {
+              @include font();
+              font-size: 1.126rem;
+              letter-spacing: 0.03em;
+            }
+      
+            p {
+              font-family: 'Roboto';
+              font-style: normal;
+              font-weight: 500;
+              font-size: 0.75rem;
+              letter-spacing: 0.03em;
+              line-height: 1.31rem;
+            }
+          }
+      
+          form {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1.5rem;
+      
+            #input-email {
+              @include input();
+            }
+      
+            #input-password {
+              @include input();
+            }
+      
+            #btn {
+              @include input();
+              @include font();
+              background: hsla(182, 92%, 52%, 1);
+              font-size: 0.875rem;
+              letter-spacing: 0.03em;
+              text-transform: uppercase;
+            }
+            
+          }
+      
+          .sign-up {
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+      
+            p {
+              font-family: 'Roboto';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 12px;
+            }
+      
+            a {
+              text-decoration: none;
+              font-family: 'Roboto';
+              font-style: normal;
+              font-weight: 700;
+              font-size: 0.75rem;
+              color: hsla(0, 0%, 0%, 1);
+            }
+          }
+          
+        }
+        
+        }
+  }
+  
