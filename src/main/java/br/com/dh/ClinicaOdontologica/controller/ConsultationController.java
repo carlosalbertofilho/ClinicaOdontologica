@@ -72,6 +72,14 @@ public class ConsultationController
     return consultationService.findByClientId(clientID);
   }
 
+  @GetMapping("/buscarPorDentist/{dentistID}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<ConsultationDTO> findConsultationByDentist(@PathVariable Long dentistID)
+  {
+    log.info("Find consultation by Dentist of the id: %d".formatted(dentistID));
+    return consultationService.findByDentistId(dentistID);
+  }
+
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteConsultation(@PathVariable("id") Long id)
