@@ -5,26 +5,37 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 
 import javax.validation.Valid;
 
 @Service
-public class ClientService
+public class ClientService implements UserDetailsService
 {
   @Autowired
   private ClientRepository clientRepository;
 
   public ClientDTO save(@Valid ClientDTO clientDTO)
   {
-      Client client = clientRepository
-        .save(ClientUtil.convertToEntity(clientDTO));
-      return ClientUtil.convertToDTO(client);
+      Client client = ClientUtil.convertToEntity(clientDTO);
+      client.setRole(Role.ROLE_CLIENT);
+      ClientDTO response = ClientUtil.convertToDTO(clientRepository.save(client));
+      response.setPassword("");
+      response.setRg("");
+      return response;
   }
   public List<ClientDTO> FindAll()
   {
@@ -40,5 +51,13 @@ public class ClientService
   public void deleteById(Long id)
   {
       clientRepository.deleteById(id);
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return clientRepository.findByLogin(username)
+      .orElseThrow(()
+        -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+        "User Not Found"));
   }
 }

@@ -1,4 +1,4 @@
-# Projeto Integrador
+# Projeto Integrador 
 
 ## Objetivos
 Implementar um sistema que permita administrar a reserva/marcação
@@ -21,6 +21,5 @@ atendidos são os seguintes:
 Carlos Alberto Filho
 Eduardo Ananias da silva
 Denis Carbone
-Salomão Lopes Dos Santos
 
 Turma 07 - DH - CTD 2022

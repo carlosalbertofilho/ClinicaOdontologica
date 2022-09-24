@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,12 +36,17 @@ public class DentistController
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DentistDTO save(@Valid @RequestBody DentistDTO dentistDTO)
     {
       log.info("Creating Dentist: %s".formatted(dentistDTO.getLogin()));
       dentistDTO.setCreatedAt(LocalDate.now());
+      dentistDTO.setPassword(bCryptPasswordEncoder
+        .encode(dentistDTO.getPassword()));
       return dentistService.save(dentistDTO);
     }
 

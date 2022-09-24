@@ -1,22 +1,20 @@
 package br.com.dh.ClinicaOdontologica.entity;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,48 +22,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-public class Dentist implements UserDetails
+public class UserAdmin implements UserDetails
 {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  @Column(nullable = false)
-  private String name;
-
-  @Column(name = "last_name", nullable = false)
-  private String lastName;
-
-  @Column(nullable = false)
-  private String login;
-
-  @Column(nullable = false)
+  @Size(min = 6, max = 13)
+  private String username;
+  @NotNull
+  @Size(min = 6, max = 100)
   private String password;
-
-  @Column(nullable = false)
-  private String registration;
 
   @Enumerated(EnumType.STRING)
   private Role role;
 
-  @JsonFormat(pattern="yyyy-MM-dd")
-  private LocalDate createdAt;
-
-  @JsonFormat(pattern="yyyy-MM-dd")
-  private LocalDate updateAt;
-
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.singleton(new SimpleGrantedAuthority(role.name()));
-  }
-
-  @Override
-  public String getUsername() {
-    return login;
+    SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.name());
+    return Collections.singleton(simpleGrantedAuthority);
   }
 
   @Override

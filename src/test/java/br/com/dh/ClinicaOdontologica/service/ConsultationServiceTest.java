@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -59,7 +60,8 @@ public class ConsultationServiceTest {
     this.dentist.setLastName("Duarte");
     this.dentist.setLogin("claudio.duarte");
     this.dentist.setPassword("cd1234");
-    this.dentist.setIsAdmin(true);
+    this.dentist.setRole(Role.ROLE_DENTIST);
+//    this.dentist.setIsAdmin(true);
     this.dentist.setCreatedAt(LocalDate.now());
     this.dentist.setUpdateAt(LocalDate.now());
     dentistService.save(DentistUtil.convertToDTO(dentist));
