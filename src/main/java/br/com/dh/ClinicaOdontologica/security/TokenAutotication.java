@@ -1,30 +1,27 @@
 package br.com.dh.ClinicaOdontologica.security;
 
-import java.io.IOException;
+import br.com.dh.ClinicaOdontologica.repository.UserRepository;
+import br.com.dh.ClinicaOdontologica.service.UserAuThService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.server.ResponseStatusException;
-
-import br.com.dh.ClinicaOdontologica.entity.UserAdmin;
-import br.com.dh.ClinicaOdontologica.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
 
 @Slf4j
 public class TokenAutotication extends OncePerRequestFilter {
   TokenService tokenService;
-  UserRepository userRespository;
+  UserAuThService userAuThService;
 
-  public TokenAutotication(TokenService tokenService, UserRepository userRepository) {
+  public TokenAutotication(TokenService tokenService, UserAuThService userAuThService) {
     this.tokenService = tokenService;
-    this.userRespository = userRepository;
+    this.userAuThService = userAuThService;
   }
 
   @Override
@@ -34,7 +31,7 @@ public class TokenAutotication extends OncePerRequestFilter {
     boolean valido = tokenService.verifyToken(token);
     System.out.println(valido);
 
-    if (valido == true){
+    if (valido){
       autenticateUser(token);
     }
     filterChain.doFilter(request, response);
@@ -43,13 +40,11 @@ public class TokenAutotication extends OncePerRequestFilter {
   private void autenticateUser(String token){
     try {
       String username = tokenService.getUserName(token);
-      UserAdmin user = userRespository.findByUsername(username).get();
+      UserDetails user = userAuThService.loadUserByUsername(username);
       UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
       SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
     } catch (Exception e) {
         log.error(e.getMessage());
-        new ResponseStatusException(HttpStatus.NOT_FOUND
-          , "Client not found");
     }
   }
 

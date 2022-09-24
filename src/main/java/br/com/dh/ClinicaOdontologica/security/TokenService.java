@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ public class TokenService {
   @Value("${clinicaOdontologica.jwt.secret}")
   private String secret;
   public String generateToken(Authentication authentication){
-    UserAdmin userLogged = (UserAdmin) authentication.getPrincipal();   //fazer cast
+    UserDetails userLogged = (UserDetails) authentication.getPrincipal();
 
     Date dataHoje = new Date();
     Date dataExpiracao = new Date(dataHoje.getTime() + Long.parseLong(expiration));     //para definir a data de expiracao

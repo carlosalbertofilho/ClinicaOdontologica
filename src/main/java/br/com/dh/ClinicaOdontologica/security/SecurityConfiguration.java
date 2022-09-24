@@ -19,12 +19,9 @@ import br.com.dh.ClinicaOdontologica.service.UserAuThService;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  private UserAuThService auThService;
-  @Autowired
-  private TokenService tokenService;
-  @Autowired
-  private UserRepository userRepository;
+  @Autowired private UserAuThService auThService;
+  @Autowired private TokenService tokenService;
+  @Autowired private UserAuThService userAuThService;
 
   @Override
   @Bean
@@ -48,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       //.antMatchers("/api/consulta/{id}").hasAnyAuthority("ADMIN")
       .anyRequest().authenticated()
       .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //adiciona para autenticar no front
-      .and().addFilterBefore(new TokenAutotication(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+      .and().addFilterBefore(new TokenAutotication(tokenService, userAuThService), UsernamePasswordAuthenticationFilter.class);
 
     //.formLogin();
     // this will ignore only h2-console csrf, spring security 4+
