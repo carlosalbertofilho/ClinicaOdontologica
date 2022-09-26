@@ -1,9 +1,7 @@
 package br.com.dh.ClinicaOdontologica.controller;
 
-import br.com.dh.ClinicaOdontologica.dto.TokenDTO;
-import br.com.dh.ClinicaOdontologica.dto.UserAdminDTO;
-import br.com.dh.ClinicaOdontologica.security.TokenService;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,15 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import br.com.dh.ClinicaOdontologica.dto.TokenDTO;
+import br.com.dh.ClinicaOdontologica.dto.UserAdminDTO;
+import br.com.dh.ClinicaOdontologica.security.TokenService;
+import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/login")
+@AllArgsConstructor
 public class AutenticationController {
-  @Autowired
   private TokenService tokenService;
-  @Autowired
   private AuthenticationManager authenticationManager;
 
   @PostMapping

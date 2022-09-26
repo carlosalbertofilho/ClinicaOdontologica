@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.dh.ClinicaOdontologica.dto.ConsultationDTO;
@@ -14,13 +13,15 @@ import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.repository.ConsultationRepository;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
 import br.com.dh.ClinicaOdontologica.util.ConsultationUtil;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class ConsultationService
 {
-  @Autowired private ConsultationRepository consultationRepository;
-  @Autowired private ClientRepository clientRepository;
-  @Autowired private DentistRepository dentistRepository;
+  private ConsultationRepository consultationRepository;
+  private ClientRepository clientRepository;
+  private DentistRepository dentistRepository;
 
   public ConsultationDTO save(ConsultationDTO consultationDTO)
   {

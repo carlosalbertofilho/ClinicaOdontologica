@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,11 +17,12 @@ import br.com.dh.ClinicaOdontologica.entity.Dentist;
 import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
 import br.com.dh.ClinicaOdontologica.util.DentistUtil;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class DentistService implements UserDetailsService
 {
-    @Autowired
     private DentistRepository dentistRepository;
 
     public DentistResponseDTO save(DentistDTO dentistDTO)

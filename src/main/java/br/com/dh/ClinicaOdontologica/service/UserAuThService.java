@@ -1,22 +1,21 @@
 package br.com.dh.ClinicaOdontologica.service;
 
-import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
-import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
+import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
 import br.com.dh.ClinicaOdontologica.repository.UserRepository;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class UserAuThService implements UserDetailsService {
-  @Autowired private UserRepository userRepository;
-
-  @Autowired private ClientRepository clientRepository;
-
-  @Autowired private DentistRepository dentistRepository;
+  private UserRepository userRepository;
+  private ClientRepository clientRepository;
+  private DentistRepository dentistRepository;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

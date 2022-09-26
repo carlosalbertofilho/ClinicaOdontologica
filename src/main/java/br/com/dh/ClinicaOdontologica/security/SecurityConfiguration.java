@@ -1,9 +1,7 @@
 package br.com.dh.ClinicaOdontologica.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,14 +12,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.com.dh.ClinicaOdontologica.service.UserAuThService;
+import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  @Autowired private UserAuThService auThService;
-  @Autowired private TokenService tokenService;
-  @Autowired private UserAuThService userAuThService;
+  private UserAuThService auThService;
+  private TokenService tokenService;
+  private UserAuThService userAuThService;
 
   @Override
   @Bean

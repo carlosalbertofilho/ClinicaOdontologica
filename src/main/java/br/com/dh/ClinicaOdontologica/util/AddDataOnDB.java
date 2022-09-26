@@ -3,7 +3,6 @@ package br.com.dh.ClinicaOdontologica.util;
 import java.sql.Time;
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
@@ -18,20 +17,18 @@ import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
 import br.com.dh.ClinicaOdontologica.repository.ConsultationRepository;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
 import br.com.dh.ClinicaOdontologica.repository.UserRepository;
+import lombok.AllArgsConstructor;
 
 @Configuration
+@AllArgsConstructor
 public class AddDataOnDB implements ApplicationRunner
 {
 
-  @Autowired private ClientRepository clientRepository;
-
-  @Autowired private DentistRepository dentistRepository;
-
-  @Autowired private ConsultationRepository consultationRepository;
-
-  @Autowired private UserRepository userRepository;
-
-  @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private ClientRepository clientRepository;
+  private DentistRepository dentistRepository;
+  private ConsultationRepository consultationRepository;
+  private UserRepository userRepository;
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
