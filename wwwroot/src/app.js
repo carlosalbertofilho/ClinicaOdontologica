@@ -1,13 +1,13 @@
-const inputEmailRef = document.querySelector('#input-email');
-const inputPasswordRef = document.querySelector('#input-password');
+const inputUsernameRef = document.querySelector('#input-email');
+const inputPasswordLoginRef = document.querySelector('#input-password');
 const inputBtnAccessRef = document.querySelector('#btn');
 
 
 
 const loginUser = () =>{
     let userLogin = {
-      email: inputEmailRef.value,
-      password: inputPasswordRef.value
+      username: inputUsernameRef.value,
+      password: inputPasswordLoginRef.value
     }
   
     let requestHeaders = {
@@ -20,7 +20,7 @@ const loginUser = () =>{
       headers: requestHeaders
     }
   
-    fetch('http://localhost:8080/api/login', requestConfig)
+    fetch('http://localhost:8080/login', requestConfig)
   
      .then(response =>{
       if(response.ok) {
@@ -28,7 +28,7 @@ const loginUser = () =>{
         // console.log(response)
         .then(data =>{
             console.log(data)
-          localStorage.setItem('token', data.jwt)
+          localStorage.setItem('token', data.token)
           setTimeout(()=>{window.location.assign('./pages/adminstracao.html')},2000)
       })
   
@@ -38,8 +38,8 @@ const loginUser = () =>{
     }
     })
   }
-  loginUser();
+  
   inputBtnAccessRef.addEventListener('click', e => {
     e.preventDefault();
-    
+    loginUser();
   });

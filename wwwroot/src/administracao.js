@@ -85,7 +85,8 @@ const createNewClient = () => {
     }
 
     let requestHeaders = {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": localStorage.getItem('token')
     }
 
     let requestConfig = {
@@ -123,9 +124,17 @@ const showClients = () => {
     let requestHeaders = {
         headers: {
             "Content-Type":'application/json',
+            "Authorization": localStorage.getItem('token')
         }
     }
-    fetch('http://localhost:8080/api/cliente',requestHeaders)
+    let requestConfig = {
+
+        headers: requestHeaders
+    }
+
+
+    console.log(requestHeaders)
+    fetch('http://localhost:8080/api/cliente',requestConfig)
     .then(response => {
         response.json()
         .then(data => {
@@ -153,6 +162,7 @@ const showClients = () => {
             }
         })
     })
+    
 }
 
 showClients()
@@ -161,7 +171,8 @@ showClients()
 
 const deleteClient = (id) => {
     let requestHeaders = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
     }
     let requestConfig = {
 
@@ -212,7 +223,8 @@ const createNewDentist = () => {
     }
 
     let requestHeaders = {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": localStorage.getItem('token')
     }
 
     let requestConfig = {
@@ -250,6 +262,7 @@ const showDentists = () => {
     let requestHeaders = {
         headers: {
             "Content-Type":'application/json',
+            "Authorization": localStorage.getItem('token')
         }
     }
     fetch('http://localhost:8080/api/dentista',requestHeaders)
@@ -288,7 +301,8 @@ showDentists()
 // DELETE Dentista
 const deleteDentist = (id) => {
     let requestHeaders = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
     }
     let requestConfig = {
 
@@ -331,6 +345,7 @@ const showSelectDentist = () => {
     let requestHeaders = {
         headers: {
             "Content-Type":'application/json',
+            "Authorization": localStorage.getItem('token')
         }
     }
     fetch('http://localhost:8080/api/dentista',requestHeaders)
@@ -354,6 +369,7 @@ const showSelectClient = () => {
     let requestHeaders = {
         headers: {
             "Content-Type":'application/json',
+            "Authorization": localStorage.getItem('token')
         }
     }
     fetch('http://localhost:8080/api/cliente',requestHeaders)
@@ -400,7 +416,8 @@ const createConsult = () => {
 
     }
     let requestHeaders = {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": localStorage.getItem('token')
     }
 
     let requestConfig = {
@@ -448,6 +465,7 @@ const showConsults = () => {
     let requestHeaders = {
         headers: {
             "Content-Type":'application/json',
+            "Authorization": localStorage.getItem('token')
         }
     }
     fetch('http://localhost:8080/api/consulta',requestHeaders)
@@ -497,7 +515,8 @@ const showConsults = () => {
 
 const deleteConsult = (id) => {
     let requestHeaders = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
     }
     let requestConfig = {
 

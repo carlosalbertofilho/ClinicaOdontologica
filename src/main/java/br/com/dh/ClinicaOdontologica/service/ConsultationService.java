@@ -1,5 +1,6 @@
 package br.com.dh.ClinicaOdontologica.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,15 +24,19 @@ public class ConsultationService
 
   public ConsultationDTO save(ConsultationDTO consultationDTO)
   {
+    consultationDTO.setCreatedAt(LocalDate.now());
     Consultation consultation = consultationRepository
-      .save(ConsultationUtil.convertoToEntity(consultationDTO));
+      .save(ConsultationUtil
+        .convertoToEntity(consultationDTO
+            , clientRepository.findById(consultationDTO.getClientID()).get()
+            , dentistRepository.findById(consultationDTO.getDentistID()).get()));
     return ConsultationUtil.convertToDTO(consultation);
   }
   public List<ConsultationDTO> findAll()
   {
     return consultationRepository.findAll()
       .stream()
-      .map(ConsultationUtil::convertToResponse)
+      .map(ConsultationUtil::convertToDTO)
       .collect(Collectors.toList());
   }
 
@@ -39,7 +44,7 @@ public class ConsultationService
   {
     return consultationRepository.findByClient(clientRepository.findById(id).get())
           .stream()
-          .map(ConsultationUtil::convertToResponse)
+          .map(ConsultationUtil::convertToDTO)
           .collect(Collectors.toList());
 
   }
@@ -48,7 +53,7 @@ public class ConsultationService
   {
     return consultationRepository.findByDentist(dentistRepository.findById(id).get())
       .stream()
-      .map(ConsultationUtil::convertToResponse)
+      .map(ConsultationUtil::convertToDTO)
       .collect(Collectors.toList());
   }
 

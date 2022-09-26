@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
+import br.com.dh.ClinicaOdontologica.dto.ClientResponseDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
@@ -41,8 +41,8 @@ public class ClientControllerTest
   @DisplayName("Teste de lista de Clientes")
   public void itShouldListClients() throws Exception
   {
-    List<ClientDTO> value = new ArrayList<>();
-    value.add(new ClientDTO());
+    List<ClientResponseDTO> value = new ArrayList<>();
+    value.add(new ClientResponseDTO());
 
     // MAKE A MOCK
     when(this.clientService.FindAll())

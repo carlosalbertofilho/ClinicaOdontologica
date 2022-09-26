@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dh.ClinicaOdontologica.dto.DentistDTO;
+import br.com.dh.ClinicaOdontologica.dto.DentistResponseDTO;
 import br.com.dh.ClinicaOdontologica.entity.Dentist;
 import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.repository.DentistRepository;
@@ -24,27 +25,26 @@ public class DentistService implements UserDetailsService
     @Autowired
     private DentistRepository dentistRepository;
 
-    public DentistDTO save(DentistDTO dentistDTO)
+    public DentistResponseDTO save(DentistDTO dentistDTO)
     {
       Dentist dentist = DentistUtil.convertToEntity(dentistDTO);
       dentist.setRole(Role.ROLE_DENTIST);
-      DentistDTO response = DentistUtil
-        .convertToDTO(dentistRepository.save(dentist));
-      response.setPassword("");
-      response.setRegistration("");
-      return response;
+      return DentistUtil.convertToResponse(dentistRepository.save(dentist));
     }
-    public List<DentistDTO> findAll()
+
+    public List<DentistResponseDTO> findAll()
     {
       return dentistRepository.findAll()
         .stream()
-        .map(DentistUtil::convertToDTO)
+        .map(DentistUtil::convertToResponse)
         .collect(Collectors.toList());
     }
+
     public Optional<Dentist> findById(Long id)
     {
       return dentistRepository.findById(id);
     }
+
     public void deleteById(Long id)
     {
       dentistRepository.deleteById(id);

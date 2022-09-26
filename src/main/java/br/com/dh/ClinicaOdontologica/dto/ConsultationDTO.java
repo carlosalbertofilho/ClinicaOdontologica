@@ -18,9 +18,9 @@ public class ConsultationDTO
 {
   private Long id;
 
-  private DentistDTO dentist;
+  private Long dentistID;
 
-  private ClientDTO client;
+  private Long clientID;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate createdAt;

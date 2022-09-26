@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dh.ClinicaOdontologica.dto.DentistDTO;
+import br.com.dh.ClinicaOdontologica.dto.DentistResponseDTO;
 import br.com.dh.ClinicaOdontologica.service.DentistService;
 import br.com.dh.ClinicaOdontologica.util.DentistUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class DentistController
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DentistDTO save(@Valid @RequestBody DentistDTO dentistDTO)
+    public DentistResponseDTO save(@Valid @RequestBody DentistDTO dentistDTO)
     {
       log.info("Creating Dentist: %s".formatted(dentistDTO.getLogin()));
       dentistDTO.setCreatedAt(LocalDate.now());
@@ -54,7 +55,7 @@ public class DentistController
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<DentistDTO> listDentists()
+    public List<DentistResponseDTO> listDentists()
     {
       log.info("Find All Dentists");
       return dentistService.findAll();

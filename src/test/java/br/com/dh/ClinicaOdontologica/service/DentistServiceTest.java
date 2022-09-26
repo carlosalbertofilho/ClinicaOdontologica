@@ -3,15 +3,15 @@ package br.com.dh.ClinicaOdontologica.service;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.dh.ClinicaOdontologica.entity.Role;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.dh.ClinicaOdontologica.dto.DentistDTO;
+import br.com.dh.ClinicaOdontologica.dto.DentistResponseDTO;
 import br.com.dh.ClinicaOdontologica.entity.Dentist;
+import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.util.DentistUtil;
 
 
@@ -37,14 +37,14 @@ public class DentistServiceTest {
 
   @Test
   void successSave(){
-    DentistDTO dentistSave = service.save(DentistUtil.convertToDTO(dentist));
+    DentistResponseDTO dentistSave = service.save(DentistUtil.convertToDTO(dentist));
     Assertions.assertNotNull(dentistSave.getId());
 
   }
 
   @Test
   void findAllDentist(){
-    List<DentistDTO> resultList = service.findAll();
+    List<DentistResponseDTO> resultList = service.findAll();
     Assertions.assertNotNull(resultList);
 
   }

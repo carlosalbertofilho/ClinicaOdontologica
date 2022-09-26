@@ -60,7 +60,7 @@ public class ConsultationController
   {
     log.info("Find consultation by id: %d".formatted(id));
     return consultationService.findById(id)
-      .map(ConsultationUtil::convertToResponse)
+      .map(ConsultationUtil::convertToDTO)
       .orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND
           , "Consultation not found"));
