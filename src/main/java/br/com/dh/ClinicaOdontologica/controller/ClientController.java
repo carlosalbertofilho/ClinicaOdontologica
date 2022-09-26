@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
+import br.com.dh.ClinicaOdontologica.dto.ClientResponseDTO;
 import br.com.dh.ClinicaOdontologica.service.ClientService;
 import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class ClientController
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ClientDTO save(@Valid @RequestBody ClientDTO clientDTO)
+  public ClientResponseDTO save(@Valid @RequestBody ClientDTO clientDTO)
   {
     log.info("Creating Client: %s".formatted(clientDTO.getLogin()));
     clientDTO.setCreatedAt(LocalDate.now());
@@ -54,7 +55,7 @@ public class ClientController
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<ClientDTO> listClients()
+  public List<ClientResponseDTO> listClients()
   {
     log.info("Find All Clients");
     return clientService.FindAll();
@@ -62,11 +63,11 @@ public class ClientController
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public ClientDTO findClientById(@PathVariable("id") Long id)
+  public ClientResponseDTO findClientById(@PathVariable("id") Long id)
   {
     log.info("Find Client by ID: %d".formatted(id));
     return clientService.findById(id)
-      .map(ClientUtil::convertToDTO)
+      .map(ClientUtil::convertToResponse)
       .orElseThrow(() ->
           new ResponseStatusException(HttpStatus.NOT_FOUND,
             "Client not found")
@@ -97,7 +98,7 @@ public class ClientController
     clientService.findById(id)
       .map(foundOnBase -> {
         modelMapper.map(clientDTO, foundOnBase);
-        clientService.deleteById(id);
+        clientService.save(clientDTO);
         return Void.TYPE;
       }).orElseThrow(() ->
       new ResponseStatusException(HttpStatus.NOT_FOUND

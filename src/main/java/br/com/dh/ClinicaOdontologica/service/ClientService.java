@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
+import br.com.dh.ClinicaOdontologica.dto.ClientResponseDTO;
 import br.com.dh.ClinicaOdontologica.entity.Client;
 import br.com.dh.ClinicaOdontologica.entity.Role;
 import br.com.dh.ClinicaOdontologica.repository.ClientRepository;
@@ -26,20 +27,17 @@ public class ClientService implements UserDetailsService
   @Autowired
   private ClientRepository clientRepository;
 
-  public ClientDTO save(@Valid ClientDTO clientDTO)
+  public ClientResponseDTO save(@Valid ClientDTO clientDTO)
   {
       Client client = ClientUtil.convertToEntity(clientDTO);
       client.setRole(Role.ROLE_CLIENT);
-      ClientDTO response = ClientUtil.convertToDTO(clientRepository.save(client));
-      response.setPassword("");
-      response.setRg("");
-      return response;
+      return ClientUtil.convertToResponse(clientRepository.save(client));
   }
-  public List<ClientDTO> FindAll()
+  public List<ClientResponseDTO> FindAll()
   {
       return clientRepository.findAll()
         .stream()
-        .map(ClientUtil::convertToDTO)
+        .map(ClientUtil::convertToResponse)
         .collect(Collectors.toList());
   }
   public Optional<Client> findById(Long id)

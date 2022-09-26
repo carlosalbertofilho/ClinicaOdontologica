@@ -1,17 +1,18 @@
 package br.com.dh.ClinicaOdontologica.service;
 
-import br.com.dh.ClinicaOdontologica.dto.ClientDTO;
-import br.com.dh.ClinicaOdontologica.entity.Client;
-import br.com.dh.ClinicaOdontologica.util.ClientUtil;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import br.com.dh.ClinicaOdontologica.dto.ClientResponseDTO;
+import br.com.dh.ClinicaOdontologica.entity.Client;
+import br.com.dh.ClinicaOdontologica.util.ClientUtil;
 
 
 @SpringBootTest
@@ -37,7 +38,7 @@ public class ClientServiceTest {
 
   @Test
   void successSave(){
-    ClientDTO clientSave = service.save(ClientUtil.convertToDTO(client));
+    ClientResponseDTO clientSave = service.save(ClientUtil.convertToDTO(client));
     Assertions.assertNotNull(clientSave.getId());
 
   }
@@ -49,7 +50,7 @@ public class ClientServiceTest {
 
   @Test
   void findAllClient(){
-    List<ClientDTO> resultList = service.FindAll();
+    List<ClientResponseDTO> resultList = service.FindAll();
     Assertions.assertNotNull(resultList);
 
   }
