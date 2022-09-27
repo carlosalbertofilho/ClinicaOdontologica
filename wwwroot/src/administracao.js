@@ -404,12 +404,9 @@ showSelectDentist()
 const createConsult = () => {
 
     let consult = {
-        dentist: {
-            id: optionDentisRef.innerHTML = selectDentistRef.options[selectDentistRef.selectedIndex].value,
-        },
-        client: {
-            id: optionClientRef.innerHTML = selectClientRef.options[selectClientRef.selectedIndex].value,
-        },
+        dentistID:optionDentisRef.innerHTML = selectDentistRef.options[selectDentistRef.selectedIndex].value,
+
+        clientID: optionClientRef.innerHTML = selectClientRef.options[selectClientRef.selectedIndex].value,
         updateAt : "",
         scheduledDate : dataConsultRef.value,
         scheduledTime : hourConsultRef.value
@@ -425,10 +422,35 @@ const createConsult = () => {
         body: JSON.stringify(consult),
         headers: requestHeaders
     }
-    fetch('http://localhost:8080/api/consulta',requestConfig)
+    fetch('http://localhost:8080/buscarPorDentist/{}',requestConfig)
     .then(response =>{
         response.json()
     })
+}
+
+
+const showSelectDentistToString = (dentistID) => {
+    let requestHeaders = {
+        headers: {
+            "Content-Type":'application/json',
+            "Authorization": localStorage.getItem('token')
+        }
+    }
+
+    let responseDentist = "";
+    fetch(`http://localhost:8080/api/dentista/${dentistID}`,requestHeaders)
+    .then(response => {
+
+        response.json()
+        .then(dentista => {
+        console.log(dentista)
+            responseDentist += 
+            // '<option value="' + dado.id + '">' + dado.name + '</option>';
+            `<p> ${dentista.name} ${dentista.lastName} </p>`                                   
+        })
+    }) 
+    return responseDentist
+
 }
 
 // Mostrar conteudo lista dentista
@@ -449,6 +471,8 @@ const showCalendarConsults = () => {
         btnAddNewConsultRef.classList.remove('active')
     }
 }
+
+
 
 //Format date
 let date = new Date()
@@ -474,38 +498,42 @@ const showConsults = () => {
         .then(data => {
             let dados = data
             for(let dado of dados){
-                let formatDate = new Date(dado.scheduledDate).toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                  })
-                if(!dado.completed){
-                    console.log(dado)
-                    listConsultRef.innerHTML += `
-                            <li class="item_client">
-                                 <div class="card_dentista_consult">
-                                    <div class="client">
-                                        <img src="../img/Medical Doctor.png" alt="">
-                                         <p>${dado.dentist.name} ${dado.dentist.lastName}</p>
+                // let formatDate = new Date(dado.scheduledDate).toLocaleDateString('pt-BR', {
+                //     day: '2-digit',
+                //     month: '2-digit',
+                //     year: 'numeric',
+                //   })
+         
+                    if(!dado.completed){
+            
+                        
+                        listConsultRef.innerHTML += `
+                                <li class="item_client">
+                                     <div class="card_dentista_consult">
+                                        <div class="client">
+                                            <img src="../img/Medical Doctor.png" alt="">
+                                             
+                                        </div>
+                                        <div class="client">
+                                            <img src="../img/User.png" alt="">
+                                            ${showSelectDentistToString(dado.dentistID)}
+                                        </div>
+                                        <div class="client">
+                                            <img src="../img/Schedule.png" alt="">
+                                            <p>${formatDate} ${dado.scheduledTime}</p>
+                                        </div>
+                                        <div class="icons">
+                                            <img src="..//img/Edit.png" alt="">
+                                             <img onclick = "deleteConsult(${dado.id})" src="..//img/Delete.png" alt="">
+                                        </div>
                                     </div>
-                                    <div class="client">
-                                        <img src="../img/User.png" alt="">
-                                        <p>${dado.client.name} ${dado.client.lastName}</p>
-                                    </div>
-                                    <div class="client">
-                                        <img src="../img/Schedule.png" alt="">
-                                        <p>${formatDate} ${dado.scheduledTime}</p>
-                                    </div>
-                                    <div class="icons">
-                                        <img src="..//img/Edit.png" alt="">
-                                         <img onclick = "deleteConsult(${dado.id})" src="..//img/Delete.png" alt="">
-                                    </div>
-                                </div>
-                            </li>
-                        `
-                }else{
-                    console.log('nao passou')
-                }
+                                </li>
+                            `
+                    }else{
+                        console.log('nao passou')
+                    }
+                  
+                
             }
         })
     })

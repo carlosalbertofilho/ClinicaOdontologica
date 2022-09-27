@@ -47,6 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .antMatchers("/api/consulta/{id}").permitAll()
       .antMatchers( "/api/dentista/{id}").permitAll()
       .antMatchers( "/api/cliente/{id}").permitAll()
+      .antMatchers("/api/consulta/buscarPorDentist/{dentistID}").permitAll()
+      .antMatchers("/api/consulta/buscarPorDentist/{cliendID}").permitAll()
       // .antMatchers(HttpMethod.GET,"/api/consulta/{id}").hasAnyRole("ADMIN", "DENTIST", "CLIENT")
       .antMatchers("/h2/**").permitAll()
       //.antMatchers("/api/consulta/{id}").hasAnyAuthority("ADMIN")
